@@ -16,14 +16,14 @@ import Icon from "elevate-ui/Icon/Icon";
 import type { $Component } from "../../types";
 
 export const Components = {
-  HorizontalRule,
-  Image,
   Text,
-  Row,
+  Image,
   Video,
   Button,
+  HorizontalRule,
   Table,
   Icon,
+  Row,
 };
 
 export default function(props: $Component) {
@@ -41,6 +41,8 @@ export default function(props: $Component) {
     <div
       key={props.id}
       style={{
+        display: "flex",
+        width: "100%",
         padding: props.padding,
       }}
     >

@@ -4,6 +4,16 @@ import { Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 
+import {
+  ButtonIcon,
+  HorizontalRuleIcon,
+  IconIcon,
+  ImageIcon,
+  TableIcon,
+  TextIcon,
+  VideoIcon,
+} from "./Icons";
+
 type Props = {
   classes: Object,
   className: string,
@@ -11,18 +21,20 @@ type Props = {
   item: Object,
 };
 
-const grid = 8;
-const getItemStyle = (isDragging, draggableStyle) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: "none",
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
+const ComponentsIcons = {
+  HorizontalRule: HorizontalRuleIcon,
+  Image: ImageIcon,
+  Text: TextIcon,
+  Row: "div",
+  Video: VideoIcon,
+  Button: ButtonIcon,
+  Table: TableIcon,
+  Icon: IconIcon,
+};
 
+const getItemStyle = (isDragging, draggableStyle) => ({
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "#fafafa",
-  borderRadius: "3px",
-  borderColor: "#ddd",
-  color: "black",
+  background: isDragging ? "#d0eaff" : "#fafafa",
 
   // styles we need to apply on draggables
   ...draggableStyle,
@@ -38,7 +50,10 @@ const ToolboxItem = ({ classes, className, item: { type }, index }: Props) => (
         className={classNames(classes.root, className)}
         style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
       >
-        {type}
+        <div className={classes.icon}>
+          {React.createElement(ComponentsIcons[type])}
+        </div>
+        <div className={classes.label}>{type}</div>
       </div>
     )}
   </Draggable>
@@ -47,13 +62,31 @@ const ToolboxItem = ({ classes, className, item: { type }, index }: Props) => (
 export default withStyles((theme) => ({
   root: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     width: "100%",
-    height: "60px",
-    border: "1px solid #ccc",
+    height: "64px",
+    color: "black",
+    border: `1px solid #E0E0E0`,
+    borderRadius: "4px",
+    userSelect: "none",
+    padding: "8px",
+
     "&:hover": {
-      boxShadow: "0px 0px 1px",
+      boxShadow: theme.globalBoxShadow,
     },
+  },
+  icon: {
+    display: "flex",
+    color: "#fff",
+    background: "#BDBDBD",
+    borderRadius: "4px",
+    marginRight: "12px",
+  },
+  label: {
+    fontSize: "16px",
+    lineHeight: "1.4",
+    fontWeight: "600",
+    color: "#424242",
   },
 }))(ToolboxItem);

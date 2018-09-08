@@ -8,22 +8,12 @@ import renderComponent from "../utils/render-component";
 
 import type { $Components } from "../../types";
 
-const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: "none",
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
-
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "#fafafa",
+  background: isDragging ? "#d0eaff" : "#fff",
 
   // styles we need to apply on draggables
   ...draggableStyle,
-});
-
-const getHoverStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? "lightblue" : "#fafafa",
 });
 
 type Props = {
@@ -43,7 +33,6 @@ class Preview extends Component<Props, State> {
           <div
             ref={provided.innerRef}
             className={classNames(classes.root, className)}
-            style={getHoverStyle(snapshot.isDraggingOver)}
           >
             {content.map((props, idx) => (
               <Draggable key={props.id} draggableId={props.id} index={idx}>
@@ -80,15 +69,22 @@ class Preview extends Component<Props, State> {
 
 export default withStyles((theme) => ({
   root: {
-    width: "800px",
-    height: "auto",
-    overflowX: "hidden",
-    overflowY: "scroll",
+    width: "100%",
+    maxWidth: "600px", // todo: this should be a setting
     padding: "8px",
+    margin: "auto",
+
+    "& > * + *": {
+      marginTop: "8px",
+    },
   },
   item: {
+    display: "flex",
+    userSelect: "none",
+    border: "2px solid transparent",
+
     "&:hover": {
-      outline: "#f15953 solid 2px",
+      borderColor: "#d0eaff",
     },
   },
 }))(Preview);

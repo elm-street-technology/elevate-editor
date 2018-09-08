@@ -61,10 +61,17 @@ class Toolbox extends Component<Props> {
 
 export default withStyles((theme) => ({
   root: {
+    flexShrink: "0",
     width: "100%",
     height: "auto",
     overflowX: "hidden",
     overflowY: "scroll",
+    background: "#F5F5F5",
     padding: "8px",
+    borderLeft: "1px solid #E0E0E0",
+
+    "& > * + *": {
+      marginTop: "8px",
+    },
   },
 }))(Toolbox);

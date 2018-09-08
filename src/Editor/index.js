@@ -77,17 +77,17 @@ class Editor extends Component<Props, State> {
           { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } },
         ],
       },
-      {
-        id: generateUUID(),
-        type: "Video",
-        attrs: {
-          mp4:
-            "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
-          autoplay: true,
-          width: 200,
-          height: 200,
-        },
-      },
+      // {
+      //   id: generateUUID(),
+      //   type: "Video",
+      //   attrs: {
+      //     mp4:
+      //       "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      //     autoplay: true,
+      //     width: 200,
+      //     height: 200,
+      //   },
+      // },
       {
         id: generateUUID(),
         type: "Button",
@@ -216,9 +216,9 @@ class Editor extends Component<Props, State> {
     const { classes } = this.props;
     const { content } = this.state;
     return (
-      <div>
+      <div className={classes.root}>
         <div className={classes.topNav}>Elevate Editor</div>
-        <div className={classes.root}>
+        <div className={classes.editor}>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <div className={classes.preview}>
               <Preview
@@ -241,26 +241,32 @@ class Editor extends Component<Props, State> {
 export default withStyles((theme) => ({
   root: {
     display: "flex",
-    justifyContent: "flex-end",
-    alignpreview: "stretch",
+    flexDirection: "column",
     width: "100vw",
     height: "100vh",
+    backgroundColor: "#fff",
   },
   topNav: {
-    padding: "16px",
-    color: "#fff",
-    backgroundColor: "#f15953",
-    fontWeight: "bold",
+    width: "100%",
+    height: "64px",
     fontSize: "22px",
+    lineHeight: "32px",
+    fontWeight: "700",
+    color: "#fff",
+    backgroundColor: theme.colors.gray900,
+    padding: "16px",
+  },
+  editor: {
+    display: "flex",
   },
   preview: {
     width: "100%",
-    display: "flex",
-    justifyContent: "space-around",
+    height: "calc(100vh - 64px)",
+    overflowX: "hidden",
+    overflowY: "scroll",
   },
   toolbox: {
     width: "300px",
-    borderLeft: "1px solid #ddd",
-    backgroundColor: "#fafafa",
+    height: "calc(100vh - 64px)",
   },
 }))(Editor);
