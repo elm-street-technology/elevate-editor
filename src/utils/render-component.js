@@ -15,7 +15,7 @@ import Icon from "elevate-ui/Icon/Icon";
 
 import type { $Component } from "../../types";
 
-const Components = {
+export const Components = {
   HorizontalRule,
   Image,
   Text,

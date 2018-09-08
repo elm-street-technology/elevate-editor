@@ -16,7 +16,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
+  background: isDragging ? "lightgreen" : "#fafafa",
 
   // styles we need to apply on draggables
   ...draggableStyle,
@@ -49,6 +49,7 @@ class Preview extends Component<Props, State> {
               <Draggable key={props.id} draggableId={props.id} index={idx}>
                 {(provided, snapshot) => (
                   <div
+                    className={classes.item}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -83,5 +84,10 @@ export default withStyles((theme) => ({
     overflowX: "hidden",
     overflowY: "scroll",
     padding: "8px",
+  },
+  item: {
+    "&:hover": {
+      border: "1px solid blue",
+    },
   },
 }))(Preview);

@@ -215,10 +215,10 @@ export default withStyles((theme) => ({
   },
   preview: {
     width: "100%",
-    background: "rgba(0,0,0,0.2)",
+    // background: "rgba(0,0,0,0.2)",
   },
   toolbox: {
     width: "300px",
-    background: "rgba(0,0,0,0.3)",
+    background: "rgba(0,0,0,0.1)",
   },
 }))(Editor);

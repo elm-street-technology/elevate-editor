@@ -19,7 +19,10 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
+  background: isDragging ? "lightgreen" : "#fafafa",
+  borderRadius: "3px",
+  borderColor: "#ddd",
+  color: "black",
 
   // styles we need to apply on draggables
   ...draggableStyle,
@@ -48,6 +51,9 @@ export default withStyles((theme) => ({
     alignItems: "center",
     width: "100%",
     height: "60px",
-    background: "gray",
+    "&:hover": {
+      boxShadow: "0px 2px 1px",
+    },
+    // background: "gray",
   },
 }))(ToolboxItem);

@@ -7,23 +7,17 @@ import withStyles from "elevate-ui/withStyles";
 
 import ToolboxItem from "./ToolboxItem";
 
+import { Components } from "../utils/render-component";
+
 type Props = {
   classes: Object,
   className: string,
 };
 type State = {};
 
-const items = [
-  {
-    type: "Image",
-  },
-  {
-    type: "Text",
-  },
-  {
-    type: "HorizontalRule",
-  },
-];
+const items = Object.keys(Components).map((type) => ({
+  type,
+}));
 
 class Toolbox extends Component<Props, State> {
   render() {
@@ -35,7 +29,6 @@ class Toolbox extends Component<Props, State> {
             ref={provided.innerRef}
             className={classNames(classes.root, className)}
           >
-            <h1>Toolbox</h1>
             {items.map((item, i) => (
               <ToolboxItem key={i} item={item} index={i} />
             ))}
