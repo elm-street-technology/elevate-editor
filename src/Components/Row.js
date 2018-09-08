@@ -6,18 +6,22 @@ import renderComponent from "../utils/render-component";
 
 import type { $Component } from "../../types";
 
-const Row = ({ classes, attrs, content }: $Component) => (
+const Row = ({ id, classes, content, handleComponentClick }: $Component) => (
   <div className={classes && classes.row}>
     {content &&
-      content.map((child, idx) => (
-        <div key={idx}>
-          {renderComponent({
-            type: child.type,
-            content: child.content,
-            attrs: child.attrs,
-          })}
-        </div>
-      ))}
+      content.map((child, idx) => {
+        return (
+          <div key={idx}>
+            {renderComponent({
+              id: child.id,
+              type: child.type,
+              content: child.content,
+              ...child.attrs,
+              handleComponentClick,
+            })}
+          </div>
+        );
+      })}
   </div>
 );
 

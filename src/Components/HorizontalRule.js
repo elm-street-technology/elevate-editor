@@ -3,8 +3,8 @@ import React from "react";
 
 import type { $Component } from "../../types";
 
-const HorizontalRule = ({ attrs }: $Component) => (
-  <hr style={{ color: attrs.color || "#000" }} />
+const HorizontalRule = ({ color }: $Component) => (
+  <hr style={{ color: color || "black" }} />
 );
 
 export default HorizontalRule;

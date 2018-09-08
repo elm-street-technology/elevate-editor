@@ -1,7 +1,8 @@
 // @flow
 
 export type $Component = {
-  id?: number | string,
+  id: string,
+  handleComponentClick?: (Event, string) => void,
   attrs: Object,
   content?: Array<Object>,
   type: string,

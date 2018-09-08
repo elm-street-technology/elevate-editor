@@ -6,6 +6,8 @@ import withStyles from "elevate-ui/withStyles";
 
 import renderComponent from "../utils/render-component";
 
+import type { $Components } from "../../types";
+
 const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
@@ -27,13 +29,14 @@ const getHoverStyle = (isDraggingOver) => ({
 type Props = {
   classes: Object,
   className: string,
-  content: Array<Object>,
+  content: $Components,
+  handleComponentClick: (Event, string) => void,
 };
 type State = {};
 
 class Preview extends Component<Props, State> {
   render() {
-    const { classes, className, content } = this.props;
+    const { classes, className, content, handleComponentClick } = this.props;
     return (
       <Droppable droppableId="content">
         {(provided, snapshot) => (
@@ -42,8 +45,8 @@ class Preview extends Component<Props, State> {
             className={classNames(classes.root, className)}
             style={getHoverStyle(snapshot.isDraggingOver)}
           >
-            {content.map(({ id, type, attrs, content }, idx) => (
-              <Draggable key={idx} draggableId={id} index={idx}>
+            {content.map((props, idx) => (
+              <Draggable key={props.id} draggableId={props.id} index={idx}>
                 {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
@@ -54,7 +57,13 @@ class Preview extends Component<Props, State> {
                       provided.draggableProps.style
                     )}
                   >
-                    {renderComponent({ key: idx, type, content, attrs })}
+                    {renderComponent({
+                      id: props.id,
+                      type: props.type,
+                      content: props.content,
+                      ...props.attrs,
+                      handleComponentClick,
+                    })}
                   </div>
                 )}
               </Draggable>

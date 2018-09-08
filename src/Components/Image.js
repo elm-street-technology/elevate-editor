@@ -3,11 +3,11 @@ import React from "react";
 
 import type { $Component } from "../../types";
 
-const Image = ({ attrs }: $Component) => (
+const Image = ({ height, alt, width, title }: $Component) => (
   <img
-    src={`https://placehold.it/${attrs.width}x${attrs.height}`}
-    alt={attrs.alt}
-    title={attrs.title}
+    src={`https://placehold.it/${width}x${height}`}
+    alt={alt}
+    title={title}
   />
 );
 
