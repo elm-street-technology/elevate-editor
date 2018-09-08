@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import withStyles from "elevate-ui/withStyles";
 import { DragDropContext } from "react-beautiful-dnd";
 import Preview from "./Preview";
-import Toolbox from "./Toolbox";
+import Toolbox from "../Toolbox";
 
 type Props = {
   classes: Object,
