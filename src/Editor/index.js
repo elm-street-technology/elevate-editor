@@ -25,7 +25,6 @@ class Editor extends Component<Props, State> {
   state = {
     content: [
       {
-        id: "1",
         type: "Image",
         attrs: {
           width: 200,
@@ -34,10 +33,9 @@ class Editor extends Component<Props, State> {
           title: "Hello World",
         },
       },
-      { id: "2", type: "Text", attrs: { value: "Hello World" } },
-      { id: "3", type: "HorizontalRule", attrs: {} },
+      { type: "Text", attrs: { value: "Hello World" } },
+      { type: "HorizontalRule", attrs: {} },
       {
-        id: "4",
         type: "Row",
         attrs: {},
         content: [
@@ -55,7 +53,6 @@ class Editor extends Component<Props, State> {
         ],
       },
       {
-        id: "3",
         type: "Video",
         attrs: {
           mp4:
@@ -63,6 +60,41 @@ class Editor extends Component<Props, State> {
           autoplay: true,
           width: 200,
           height: 200,
+        },
+      },
+      {
+        type: "Button",
+        attrs: {
+          label: "Hello Button",
+        },
+      },
+      {
+        type: "Table",
+        attrs: {
+          columns: [
+            {
+              Header: "Name",
+              accessor: "name",
+              minWidth: 120,
+            },
+            {
+              Header: "Phone",
+              accessor: "phone",
+              minWidth: 120,
+            },
+          ],
+          data: [
+            { name: "Jason Walsh", phone: "(111) 222-3333" },
+            { name: "Chris Heninger", phone: "(111) 222-3333" },
+          ],
+        },
+      },
+      {
+        type: "Icon",
+        attrs: {
+          size: 24,
+          name: "AlarmOn",
+          color: "red",
         },
       },
     ],
