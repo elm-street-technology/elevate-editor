@@ -1,7 +1,9 @@
 // @flow
 import React from "react";
 
-const HorizontalRule = ({ attrs }) => (
+import type { $Component } from "../../types";
+
+const HorizontalRule = ({ attrs }: $Component) => (
   <hr style={{ color: attrs.color || "#000" }} />
 );
 

@@ -5,10 +5,12 @@ import { DragDropContext } from "react-beautiful-dnd";
 import Preview from "./Preview";
 import Toolbox from "./Toolbox";
 
+import type { $Components } from "../../types";
+
 type Props = {
   classes: Object,
 };
-type State = { content: Array<Object> };
+type State = { content: $Components };
 
 // a little function to help us with reordering the result
 function reorder(list, startIndex, endIndex) {
@@ -34,6 +36,24 @@ class Editor extends Component<Props, State> {
       },
       { id: "2", type: "Text", attrs: { value: "Hello World" } },
       { id: "3", type: "HorizontalRule", attrs: {} },
+      {
+        id: "4",
+        type: "Row",
+        attrs: {},
+        content: [
+          {
+            id: "1",
+            type: "Image",
+            attrs: {
+              width: 200,
+              height: 200,
+              alt: "Hello World",
+              title: "Hello World",
+            },
+          },
+          { id: "2", type: "Text", attrs: { value: "Hello World" } },
+        ],
+      },
     ],
   };
 
