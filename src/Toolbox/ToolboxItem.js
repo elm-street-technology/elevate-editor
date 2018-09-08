@@ -55,6 +55,5 @@ export default withStyles((theme) => ({
     "&:hover": {
       boxShadow: "0px 0px 1px",
     },
-    // background: "gray",
   },
 }))(ToolboxItem);

@@ -248,7 +248,7 @@ export default withStyles((theme) => ({
   },
   toolbox: {
     width: "300px",
-    borderLeft: "1px solid",
+    borderLeft: "1px solid #ddd",
     backgroundColor: "#fafafa",
   },
 }))(Editor);
