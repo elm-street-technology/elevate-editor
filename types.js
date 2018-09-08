@@ -1,8 +1,9 @@
 // @flow
 
 export type $Component = {
+  id?: number | string,
   attrs: Object,
-  content: Array<Object>,
+  content?: Array<Object>,
   type: string,
   classes?: Object,
 };
