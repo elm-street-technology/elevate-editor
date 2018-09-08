@@ -32,6 +32,7 @@ function addContent(list, startIndex, draggableId) {
 
   // TODO: Object attr/content should be prefilled based on draggableId (content type)
   result.splice(startIndex, 0, {
+    id: generateUUID,
     type: draggableId,
     attrs: {},
     content: [],
