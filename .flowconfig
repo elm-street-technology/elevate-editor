@@ -1,0 +1,16 @@
+[ignore]
+
+[include]
+./node_modules/react
+./node_modules/fbjs/lib
+./node_modules/immutable
+
+[options]
+module.system.node.resolve_dirname=.
+module.system.node.resolve_dirname=node_modules
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
+suppress_comment=\\(.\\|\n\\)*\\$FlowIgnore
+suppress_comment=\\(.\\|\n\\)*\\$FlowBug
+
+[version]
+^0.80.0

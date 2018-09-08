@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
@@ -21,18 +22,25 @@ const getHoverStyle = (isDraggingOver) => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
 });
 
-class Preview extends Component {
+type Props = {
+  classes: Object,
+  className: string,
+  content: Array<Object>,
+};
+type State = {};
+
+class Preview extends Component<Props, State> {
   render() {
-    const { classes, className, previewItems } = this.props;
+    const { classes, className, content } = this.props;
     return (
-      <Droppable droppableId="previewItems">
+      <Droppable droppableId="content">
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
             className={classNames(classes.root, className)}
             style={getHoverStyle(snapshot.isDraggingOver)}
           >
-            {previewItems.map((item, index) => (
+            {content.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
                 {(provided, snapshot) => (
                   <div

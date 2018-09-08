@@ -1,21 +1,27 @@
+// @flow
 import React, { Component } from "react";
 import withStyles from "elevate-ui/withStyles";
 import { DragDropContext } from "react-beautiful-dnd";
 import Preview from "./Preview";
 import Toolbox from "./Toolbox";
 
+type Props = {
+  classes: Object,
+};
+type State = { content: Array<Object> };
+
 // a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
+function reorder(list, startIndex, endIndex) {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
 
   return result;
-};
+}
 
-class Editor extends Component {
+class Editor extends Component<Props, State> {
   state = {
-    previewItems: [
+    content: [
       { id: "1", label: "Image Block" },
       { id: "2", label: "Text Block" },
       { id: "3", label: "Horizontal Line" },
@@ -31,13 +37,13 @@ class Editor extends Component {
     }
 
     if (source.droppableId === destination.droppableId) {
-      const previewItems = reorder(
+      const content = reorder(
         this.state[source.droppableId],
         source.index,
         destination.index
       );
 
-      let state = { previewItems };
+      let state = { content };
 
       this.setState(state);
     } else {
@@ -49,11 +55,11 @@ class Editor extends Component {
 
   render() {
     const { classes } = this.props;
-    const { previewItems } = this.state;
+    const { content } = this.state;
     return (
       <div className={classes.root}>
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <Preview className={classes.preview} previewItems={previewItems} />
+          <Preview className={classes.preview} content={content} />
           <Toolbox className={classes.toolbox} />
         </DragDropContext>
       </div>
