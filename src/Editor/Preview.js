@@ -80,7 +80,7 @@ class Preview extends Component<Props, State> {
 
 export default withStyles((theme) => ({
   root: {
-    width: "100%",
+    width: "800px",
     height: "auto",
     overflowX: "hidden",
     overflowY: "scroll",

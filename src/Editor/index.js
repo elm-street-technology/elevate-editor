@@ -216,19 +216,23 @@ class Editor extends Component<Props, State> {
     const { classes } = this.props;
     const { content } = this.state;
     return (
-      <div className={classes.root}>
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Preview
-            className={classes.preview}
-            content={content}
-            handleComponentClick={this.handleComponentClick.bind(this)}
-          />
-          <Toolbox
-            onSave={(id, attrs) => this.handleUpdateContent(id, attrs)}
-            className={classes.toolbox}
-            editingComponent={this.state.editingComponent}
-          />
-        </DragDropContext>
+      <div>
+        <div className={classes.topNav}>Elevate Editor</div>
+        <div className={classes.root}>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <div className={classes.preview}>
+              <Preview
+                content={content}
+                handleComponentClick={this.handleComponentClick.bind(this)}
+              />
+            </div>
+            <Toolbox
+              onSave={(id, attrs) => this.handleUpdateContent(id, attrs)}
+              className={classes.toolbox}
+              editingComponent={this.state.editingComponent}
+            />
+          </DragDropContext>
+        </div>
       </div>
     );
   }
@@ -242,9 +246,17 @@ export default withStyles((theme) => ({
     width: "100vw",
     height: "100vh",
   },
+  topNav: {
+    padding: "16px",
+    color: "#fff",
+    backgroundColor: "#f15953",
+    fontWeight: "bold",
+    fontSize: "22px",
+  },
   preview: {
     width: "100%",
-    // background: "rgba(0,0,0,0.2)",
+    display: "flex",
+    justifyContent: "space-around",
   },
   toolbox: {
     width: "300px",
