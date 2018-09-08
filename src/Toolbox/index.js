@@ -25,8 +25,14 @@ const items = Object.keys(Components).map((type) => ({
 
 class Toolbox extends Component<Props> {
   renderSidebar() {
-    const { editingComponent, onSave } = this.props;
-    return <SidebarLayout component={editingComponent} onSave={onSave} />;
+    const { editingComponent, onSave, classes, className } = this.props;
+    return (
+      <SidebarLayout
+        component={editingComponent}
+        onSave={onSave}
+        className={classNames(classes.root, className)}
+      />
+    );
   }
 
   render() {

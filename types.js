@@ -14,4 +14,5 @@ export type $SidebarProps = {
   component: $Component,
   onSave: (string, Object) => void,
   classes: Object,
+  className: string,
 };

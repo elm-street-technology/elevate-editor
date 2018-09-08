@@ -2,13 +2,14 @@
 
 import React from "react";
 import withStyles from "elevate-ui/withStyles";
+import classNames from "classnames";
 
 import renderSidebar from "../utils/render-sidebar";
 
 import type { $SidebarProps } from "../../types";
 
 const SidebarLayout = (props: $SidebarProps) => (
-  <div className={props.classes.form}>
+  <div className={classNames(props.classes.form, props.className)}>
     <h1 className={props.classes.header}>Editing {props.component.type}</h1>
     {renderSidebar(props)}
     <div className={props.classes.debug}>
