@@ -16,15 +16,25 @@ const Image = ({ component: { id, attrs }, onSave }: $SidebarProps) => (
     onSave={onSave}
     validationSchema={() =>
       Yup.object().shape({
-        src: Yup.string().required(),
+        mp4: Yup.string(),
+        ogg: Yup.string(),
+        webm: Yup.string(),
+        autoplay: Yup.boolean(),
         width: Yup.number().required(),
         height: Yup.number().required(),
-        alt: Yup.string(),
-        title: Yup.string(),
       })
     }
   >
-    <Field id="src" name="src" label="Src" component={Input} type="text" />
+    <Field id="mp4" name="mp4" label="Mp4" component={Input} type="text" />
+    <Field id="ogg" name="ogg" label="Ogg" component={Input} type="text" />
+    <Field id="webm" name="webm" label="WebM" component={Input} type="text" />
+    <Field
+      id="autoplay"
+      name="autoplay"
+      label="Autoplay"
+      component={Input}
+      type="text"
+    />
     <Field
       id="width"
       name="width"
@@ -38,14 +48,6 @@ const Image = ({ component: { id, attrs }, onSave }: $SidebarProps) => (
       label="Height"
       component={Input}
       type="number"
-    />
-    <Field id="alt" name="alt" label="Alt" component={Input} type="text" />
-    <Field
-      id="title"
-      name="title"
-      label="Title"
-      component={Input}
-      type="text"
     />
   </SidebarForm>
 );
