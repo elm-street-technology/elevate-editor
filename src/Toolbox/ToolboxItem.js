@@ -25,7 +25,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle,
 });
 
-const SidebarItem = ({ classes, className, item: { type }, index }: Props) => (
+const ToolboxItem = ({ classes, className, item: { type }, index }: Props) => (
   <Draggable key={index} draggableId={type} index={index}>
     {(provided, snapshot) => (
       <div
@@ -50,4 +50,4 @@ export default withStyles((theme) => ({
     height: "60px",
     background: "gray",
   },
-}))(SidebarItem);
+}))(ToolboxItem);
