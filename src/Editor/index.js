@@ -49,6 +49,7 @@ class Editor extends Component<Props, State> {
         id: generateUUID(),
         type: "Image",
         attrs: {
+          src: "https://placehold.it/200x200",
           width: 200,
           height: 200,
           alt: "Hello World",
@@ -66,6 +67,7 @@ class Editor extends Component<Props, State> {
             id: generateUUID(),
             type: "Image",
             attrs: {
+              src: "https://placehold.it/200x200",
               width: 200,
               height: 200,
               alt: "Hello World",

@@ -36,11 +36,14 @@ export default function(props: $Component) {
     default:
       break;
   }
-  // console.log("====> props", props);
+
   return (
     <div
       key={props.id}
       onClick={(e) => props.handleComponentClick(e, props.id)}
+      style={{
+        padding: props.padding,
+      }}
     >
       {React.createElement(Components[props.type], childProps)}
     </div>

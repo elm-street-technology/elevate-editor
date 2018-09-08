@@ -12,3 +12,10 @@
   },
 }
 ```
+
+## Adding A New Component
+
+1.  Add component render definition to /Components
+1.  In `render-component.js`, add new Component to the `Components` object
+1.  Add component sidebar definition to /Toolbar/Components
+1.  In `render-sidebar.js`, add new Sidebar Component to the `Components` object
