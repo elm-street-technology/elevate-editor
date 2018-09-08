@@ -5,17 +5,25 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 
+import ToolboxItem from "./ToolboxItem";
+
 type Props = {
   classes: Object,
   className: string,
 };
 type State = {};
 
-// const Components = [
-//   // {
-//   //   component: Button,
-//   // },
-// ];
+const items = [
+  {
+    type: "Image",
+  },
+  {
+    type: "Text",
+  },
+  {
+    type: "HorizontalRule",
+  },
+];
 
 class Toolbox extends Component<Props, State> {
   render() {
@@ -23,6 +31,7 @@ class Toolbox extends Component<Props, State> {
     return (
       <div className={classNames(classes.root, className)}>
         <h1>Toolbox</h1>
+        {items.map((item) => <ToolboxItem type={item.type} />)}
       </div>
     );
   }
@@ -34,5 +43,6 @@ export default withStyles((theme) => ({
     height: "auto",
     overflowX: "hidden",
     overflowY: "scroll",
+    padding: "8px",
   },
 }))(Toolbox);
