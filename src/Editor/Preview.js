@@ -42,8 +42,8 @@ class Preview extends Component<Props, State> {
             className={classNames(classes.root, className)}
             style={getHoverStyle(snapshot.isDraggingOver)}
           >
-            {content.map(({ id, type, attrs, content }, index) => (
-              <Draggable key={id} draggableId={id} index={index}>
+            {content.map(({ id, type, attrs, content }, idx) => (
+              <Draggable key={idx} draggableId={id} index={idx}>
                 {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
@@ -54,7 +54,7 @@ class Preview extends Component<Props, State> {
                       provided.draggableProps.style
                     )}
                   >
-                    {renderComponent({ type, content, attrs })}
+                    {renderComponent({ key: idx, type, content, attrs })}
                   </div>
                 )}
               </Draggable>

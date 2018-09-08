@@ -7,14 +7,17 @@ import renderComponent from "../utils/render-component";
 import type { $Component } from "../../types";
 
 const Row = ({ classes, attrs, content }: $Component) => (
-  <div className={classes.row}>
-    {content.map((child, idx) =>
-      renderComponent({
-        type: child.type,
-        content: child.content,
-        attrs: child.attrs,
-      })
-    )}
+  <div className={classes && classes.row}>
+    {content &&
+      content.map((child, idx) => (
+        <div key={idx}>
+          {renderComponent({
+            type: child.type,
+            content: child.content,
+            attrs: child.attrs,
+          })}
+        </div>
+      ))}
   </div>
 );
 

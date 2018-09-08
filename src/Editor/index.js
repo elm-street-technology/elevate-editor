@@ -54,6 +54,17 @@ class Editor extends Component<Props, State> {
           { id: "2", type: "Text", attrs: { value: "Hello World" } },
         ],
       },
+      {
+        id: "3",
+        type: "Video",
+        attrs: {
+          mp4:
+            "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
+          autoplay: true,
+          width: 200,
+          height: 200,
+        },
+      },
     ],
   };
 
