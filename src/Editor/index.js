@@ -22,9 +22,18 @@ function reorder(list, startIndex, endIndex) {
 class Editor extends Component<Props, State> {
   state = {
     content: [
-      { id: "1", label: "Image Block" },
-      { id: "2", label: "Text Block" },
-      { id: "3", label: "Horizontal Line" },
+      {
+        id: "1",
+        type: "Image",
+        attrs: {
+          width: 200,
+          height: 200,
+          alt: "Hello World",
+          title: "Hello World",
+        },
+      },
+      { id: "2", type: "Text", attrs: { value: "Hello World" } },
+      { id: "3", type: "HorizontalRule", attrs: {} },
     ],
   };
 

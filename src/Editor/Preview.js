@@ -4,6 +4,16 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 
+import HorizontalRule from "../Components/HorizontalRule";
+import Image from "../Components/Image";
+import Text from "../Components/Text";
+
+const Components = {
+  HorizontalRule,
+  Image,
+  Text,
+};
+
 const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
@@ -40,8 +50,8 @@ class Preview extends Component<Props, State> {
             className={classNames(classes.root, className)}
             style={getHoverStyle(snapshot.isDraggingOver)}
           >
-            {content.map((item, index) => (
-              <Draggable key={item.id} draggableId={item.id} index={index}>
+            {content.map(({ id, type, attrs, children }, index) => (
+              <Draggable key={id} draggableId={id} index={index}>
                 {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
@@ -52,7 +62,7 @@ class Preview extends Component<Props, State> {
                       provided.draggableProps.style
                     )}
                   >
-                    {item.label}
+                    {React.createElement(Components[type], { attrs }, children)}
                   </div>
                 )}
               </Draggable>
