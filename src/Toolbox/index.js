@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-// import { Draggable } from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
 import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 
@@ -29,10 +29,19 @@ class Toolbox extends Component<Props, State> {
   render() {
     const { classes, className } = this.props;
     return (
-      <div className={classNames(classes.root, className)}>
-        <h1>Toolbox</h1>
-        {items.map((item) => <ToolboxItem type={item.type} />)}
-      </div>
+      <Droppable droppableId="toolbox" isDropDisabled>
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            className={classNames(classes.root, className)}
+          >
+            <h1>Toolbox</h1>
+            {items.map((item, i) => (
+              <ToolboxItem key={i} item={item} index={i} />
+            ))}
+          </div>
+        )}
+      </Droppable>
     );
   }
 }

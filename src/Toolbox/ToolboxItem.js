@@ -1,16 +1,44 @@
 // @flow
 import React from "react";
+import { Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 
 type Props = {
   classes: Object,
   className: string,
-  type: string,
+  index: number,
+  item: Object,
 };
 
-const SidebarItem = ({ classes, className, type }: Props) => (
-  <div className={classNames(classes.root, className)}>{type}</div>
+const grid = 8;
+const getItemStyle = (isDragging, draggableStyle) => ({
+  // some basic styles to make the items look a bit nicer
+  userSelect: "none",
+  padding: grid * 2,
+  margin: `0 0 ${grid}px 0`,
+
+  // change background colour if dragging
+  background: isDragging ? "lightgreen" : "grey",
+
+  // styles we need to apply on draggables
+  ...draggableStyle,
+});
+
+const SidebarItem = ({ classes, className, item: { type }, index }: Props) => (
+  <Draggable key={index} draggableId={type} index={index}>
+    {(provided, snapshot) => (
+      <div
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        className={classNames(classes.root, className)}
+        style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
+      >
+        {type}
+      </div>
+    )}
+  </Draggable>
 );
 
 export default withStyles((theme) => ({

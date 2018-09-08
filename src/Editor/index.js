@@ -65,6 +65,7 @@ class Editor extends Component<Props, State> {
       return;
     }
 
+    // Dropping into itself should reorder the items
     if (source.droppableId === destination.droppableId) {
       const content = reorder(
         this.state[source.droppableId],
@@ -77,8 +78,8 @@ class Editor extends Component<Props, State> {
       this.setState(state);
     } else {
       // Handle dropping from toolbox into preview
-      // console.log(source, destionation);
-      // console.log(this.state);
+      console.log(source, destination);
+      console.log(this.state);
     }
   };
 
