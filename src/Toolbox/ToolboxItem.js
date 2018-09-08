@@ -51,8 +51,9 @@ export default withStyles((theme) => ({
     alignItems: "center",
     width: "100%",
     height: "60px",
+    border: "1px solid #ccc",
     "&:hover": {
-      boxShadow: "0px 2px 1px",
+      boxShadow: "0px 0px 1px",
     },
     // background: "gray",
   },

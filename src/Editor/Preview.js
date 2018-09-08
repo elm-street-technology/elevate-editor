@@ -23,7 +23,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 const getHoverStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
+  background: isDraggingOver ? "lightblue" : "#fafafa",
 });
 
 type Props = {
@@ -57,6 +57,7 @@ class Preview extends Component<Props, State> {
                       snapshot.isDragging,
                       provided.draggableProps.style
                     )}
+                    onClick={(e) => handleComponentClick(e, props.id)}
                   >
                     {renderComponent({
                       id: props.id,
@@ -87,7 +88,7 @@ export default withStyles((theme) => ({
   },
   item: {
     "&:hover": {
-      border: "1px solid blue",
+      outline: "#f15953 solid 2px",
     },
   },
 }))(Preview);

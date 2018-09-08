@@ -40,7 +40,6 @@ export default function(props: $Component) {
   return (
     <div
       key={props.id}
-      onClick={(e) => props.handleComponentClick(e, props.id)}
       style={{
         padding: props.padding,
       }}

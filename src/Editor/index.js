@@ -137,8 +137,19 @@ class Editor extends Component<Props, State> {
       return;
     }
 
+    const component = this.findComponentById(destination.droppableId);
+    const draggableIdIsUUID = draggableId.length === 36;
+
     // Dropping into itself should reorder the items
-    if (source.droppableId === destination.droppableId) {
+    if (component) {
+      component.content = reorderContent(
+        component.content,
+        source.index,
+        destination.index
+      );
+      this.setState({ content: this.state.content }); // mutates state directly, @todo refactor
+    } else if (source.droppableId === destination.droppableId) {
+      // Root page re-order
       const content = reorderContent(
         this.state.content,
         source.index,
@@ -147,6 +158,11 @@ class Editor extends Component<Props, State> {
 
       this.setState({ content });
     } else {
+      if (draggableIdIsUUID) {
+        console.log("Noop: Functionality not yet supported");
+        return; // invariant error, trying to addContent content, but content already exists and was just dragged outside draggable area
+      }
+
       // Handle dropping from toolbox into preview
       // console.log(source, destination, draggableId);
       const content = addContent(
@@ -232,6 +248,7 @@ export default withStyles((theme) => ({
   },
   toolbox: {
     width: "300px",
-    background: "rgba(0,0,0,0.1)",
+    borderLeft: "1px solid",
+    backgroundColor: "#fafafa",
   },
 }))(Editor);

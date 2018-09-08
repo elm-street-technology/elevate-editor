@@ -11,6 +11,9 @@ const SidebarLayout = (props: $SidebarProps) => (
   <div className={props.classes.form}>
     <h1 className={props.classes.header}>Editing {props.component.type}</h1>
     {renderSidebar(props)}
+    <div className={props.classes.debug}>
+      component ID: {props.component.id}
+    </div>
   </div>
 );
 
@@ -25,5 +28,13 @@ export default withStyles((theme) => ({
     fontSize: "20px",
     fontWeight: "bold",
     marginBottom: "8px",
+  },
+  debug: {
+    position: "absolute",
+    bottom: "0",
+    marginBottom: "8px",
+    fontStyle: "italic",
+    fontSize: "12px",
+    color: "#333",
   },
 }))(SidebarLayout);
