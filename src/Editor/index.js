@@ -13,10 +13,24 @@ type Props = {
 type State = { content: $Components };
 
 // a little function to help us with reordering the result
-function reorder(list, startIndex, endIndex) {
+function reorderContent(list, startIndex, endIndex) {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
+
+  return result;
+}
+
+// a little function to help us with reordering the result
+function addContent(list, startIndex, draggableId) {
+  const result = Array.from(list);
+
+  // TODO: Object attr/content should be prefilled based on draggableId (content type)
+  result.splice(startIndex, 0, {
+    type: draggableId,
+    attrs: {},
+    content: [],
+  });
 
   return result;
 }
@@ -101,7 +115,7 @@ class Editor extends Component<Props, State> {
   };
 
   onDragEnd = (result) => {
-    const { source, destination } = result;
+    const { source, destination, draggableId } = result;
 
     // dropped outside the list
     if (!destination) {
@@ -110,19 +124,22 @@ class Editor extends Component<Props, State> {
 
     // Dropping into itself should reorder the items
     if (source.droppableId === destination.droppableId) {
-      const content = reorder(
-        this.state[source.droppableId],
+      const content = reorderContent(
+        this.state.content,
         source.index,
         destination.index
       );
 
-      let state = { content };
-
-      this.setState(state);
+      this.setState({ content });
     } else {
       // Handle dropping from toolbox into preview
-      console.log(source, destination);
-      console.log(this.state);
+      // console.log(source, destination, draggableId);
+      const content = addContent(
+        this.state.content,
+        destination.index,
+        draggableId
+      );
+      this.setState({ content });
     }
   };
 
