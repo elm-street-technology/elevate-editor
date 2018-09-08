@@ -9,3 +9,9 @@ export type $Component = {
   classes?: Object,
 };
 export type $Components = $Component[];
+
+export type $SidebarProps = {
+  component: $Component,
+  onSave: (string, Object) => void,
+  classes: Object,
+};

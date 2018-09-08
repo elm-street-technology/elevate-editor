@@ -175,13 +175,23 @@ class Editor extends Component<Props, State> {
     );
   }
 
+  findComponentById(id: string) {
+    const allContent = this.flattenDeep(this.state.content);
+    return find(allContent, { id });
+  }
+
   handleComponentClick(e: Event, id: string) {
     e.stopPropagation();
-    const allContent = this.flattenDeep(this.state.content);
-    const editingComponent = find(allContent, { id });
+
     this.setState({
-      editingComponent,
+      editingComponent: this.findComponentById(id),
     });
+  }
+
+  handleUpdateContent(id: string, attrs: Object) {
+    const component = this.findComponentById(id);
+    component.attrs = attrs; // mutates this.state.content directly, not ideal
+    this.setState({ editingComponent: null, content: this.state.content });
   }
 
   render() {
@@ -196,6 +206,7 @@ class Editor extends Component<Props, State> {
             handleComponentClick={this.handleComponentClick.bind(this)}
           />
           <Toolbox
+            onSave={(id, attrs) => this.handleUpdateContent(id, attrs)}
             className={classes.toolbox}
             editingComponent={this.state.editingComponent}
           />

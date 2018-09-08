@@ -6,22 +6,36 @@ import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 
 import ToolboxItem from "./ToolboxItem";
+import SidebarLayout from "./SidebarLayout";
 
 import { Components } from "../utils/render-component";
+
+import type { $Component } from "../../types";
 
 type Props = {
   classes: Object,
   className: string,
+  editingComponent: null | $Component,
+  onSave: Function,
 };
-type State = {};
 
 const items = Object.keys(Components).map((type) => ({
   type,
 }));
 
-class Toolbox extends Component<Props, State> {
+class Toolbox extends Component<Props> {
+  renderSidebar() {
+    const { editingComponent, onSave } = this.props;
+    return <SidebarLayout component={editingComponent} onSave={onSave} />;
+  }
+
   render() {
-    const { classes, className } = this.props;
+    const { classes, className, editingComponent } = this.props;
+
+    if (editingComponent) {
+      return this.renderSidebar();
+    }
+
     return (
       <Droppable droppableId="toolbox" isDropDisabled>
         {(provided, snapshot) => (
