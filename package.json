@@ -9,6 +9,7 @@
     "react": "^16.5.0",
     "react-beautiful-dnd": "^9.0.2",
     "react-dom": "^16.5.0",
+    "uploadcare-widget": "^3.6.0",
     "yup": "^0.26.3"
   },
   "devDependencies": {

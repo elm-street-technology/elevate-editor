@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import Input from "elevate-ui/Input";
 
 import SidebarForm from "../Common/SidebarForm";
+import Uploader from "../Common/Uploader";
 
 import type { $SidebarProps } from "../../../types";
 
@@ -17,6 +18,7 @@ const Image = ({ component: { id, attrs }, onSave }: $SidebarProps) => (
     validationSchema={() =>
       Yup.object().shape({
         src: Yup.string().required(),
+        upload: Yup.string(),
         width: Yup.number().required(),
         height: Yup.number().required(),
         alt: Yup.string(),
@@ -25,6 +27,13 @@ const Image = ({ component: { id, attrs }, onSave }: $SidebarProps) => (
     }
   >
     <Field id="src" name="src" label="Src" component={Input} type="text" />
+    <Field
+      id="upload"
+      name="upload"
+      label="Upload a file"
+      component={Uploader}
+      type="hidden"
+    />
     <Field
       id="width"
       name="width"
