@@ -54,6 +54,7 @@ class Editor extends Component<Props, State> {
           height: 200,
           alt: "Hello World",
           title: "Hello World",
+          upload: "",
         },
       },
       { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } },
