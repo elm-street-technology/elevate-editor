@@ -19,7 +19,8 @@ const HorizontalRule = ({
     onSave={onSave}
     validationSchema={() =>
       Yup.object().shape({
-        color: Yup.string(),
+        color: Yup.string().required(),
+        thickness: Yup.number().required(),
       })
     }
   >
@@ -29,6 +30,13 @@ const HorizontalRule = ({
       label="Color"
       component={Input}
       type="color"
+    />
+    <Field
+      id="thickness"
+      name="thickness"
+      label="Thickness"
+      component={Input}
+      type="number"
     />
   </SidebarForm>
 );

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
-    "elevate-ui": "^0.10.0",
+    "elevate-ui": "^0.13.1",
     "formik": "^1.2.0",
     "react": "^16.5.0",
     "react-beautiful-dnd": "^9.0.2",

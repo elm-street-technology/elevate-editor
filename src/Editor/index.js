@@ -26,16 +26,79 @@ function reorderContent(list, startIndex, endIndex) {
   return result;
 }
 
+// function to fill dummy attrs based on component
+function populateAttrs(draggableId) {
+  const attrs = {};
+
+  switch (draggableId) {
+    case "Image":
+      attrs.src = "https://picsum.photos/600/400/?random";
+      attrs.width = 600;
+      attrs.height = 400;
+      break;
+    case "Text":
+      attrs.value = "Click here to edit text";
+      break;
+    case "Video":
+      attrs.mp4 =
+        "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4";
+      attrs.autoplay = false;
+      attrs.width = 800;
+      attrs.height = 400;
+      break;
+    case "Button":
+      attrs.children = "Click To Edit";
+      attrs.url = "http://google.com";
+      break;
+    case "HorizontalRule":
+      attrs.thickness = 2;
+      attrs.color = "primary";
+      break;
+    case "Icon":
+      attrs.name = "AttachFile";
+      attrs.color = "#000000";
+      attrs.size = 24;
+      break;
+    default:
+      break;
+  }
+  return attrs;
+}
+
+// function to fill dummy content
+function populateContent(draggableId) {
+  const content = [];
+  if (draggableId === "Row") {
+    content.push(
+      {
+        id: generateUUID(),
+        type: "Image",
+        attrs: {
+          src: "https://placehold.it/200x200",
+          width: 200,
+          height: 200,
+          alt: "Hello World",
+          title: "Hello World",
+        },
+      },
+      { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } }
+    );
+  }
+  return content;
+}
+
 // a little function to help us with reordering the result
 function addContent(list, startIndex, draggableId) {
   const result = Array.from(list);
+
+  console.log(draggableId);
 
   // TODO: Object attr/content should be prefilled based on draggableId (content type)
   result.splice(startIndex, 0, {
     id: generateUUID(),
     type: draggableId,
-    attrs: {},
-    content: [],
+    attrs: populateAttrs(draggableId),
+    content: populateContent(draggableId),
   });
 
   return result;
@@ -58,7 +121,11 @@ class Editor extends Component<Props, State> {
         },
       },
       { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } },
-      { id: generateUUID(), type: "HorizontalRule", attrs: {} },
+      {
+        id: generateUUID(),
+        type: "HorizontalRule",
+        attrs: { thickness: 2, color: "primary" },
+      },
       {
         id: generateUUID(),
         type: "Row",
