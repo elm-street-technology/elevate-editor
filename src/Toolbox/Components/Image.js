@@ -10,11 +10,16 @@ import Uploader from "../Common/Uploader";
 
 import type { $SidebarProps } from "../../../types";
 
-const Image = ({ component: { id, attrs }, onSave }: $SidebarProps) => (
+const Image = ({
+  component: { id, attrs },
+  onSave,
+  cancelEdit,
+}: $SidebarProps) => (
   <SidebarForm
     id={id}
     attrs={attrs}
     onSave={onSave}
+    cancelEdit={cancelEdit}
     validationSchema={() =>
       Yup.object().shape({
         src: Yup.string().required(),

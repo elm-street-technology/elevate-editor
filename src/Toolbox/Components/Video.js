@@ -9,11 +9,16 @@ import SidebarForm from "../Common/SidebarForm";
 
 import type { $SidebarProps } from "../../../types";
 
-const Image = ({ component: { id, attrs }, onSave }: $SidebarProps) => (
+const Image = ({
+  component: { id, attrs },
+  onSave,
+  cancelEdit,
+}: $SidebarProps) => (
   <SidebarForm
     id={id}
     attrs={attrs}
     onSave={onSave}
+    cancelEdit={cancelEdit}
     validationSchema={() =>
       Yup.object().shape({
         mp4: Yup.string(),
