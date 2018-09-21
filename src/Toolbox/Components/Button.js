@@ -19,7 +19,8 @@ const HorizontalRule = ({
     onSave={onSave}
     validationSchema={() =>
       Yup.object().shape({
-        children: Yup.string(),
+        children: Yup.string().required(),
+        url: Yup.string().required(),
       })
     }
   >
@@ -30,6 +31,7 @@ const HorizontalRule = ({
       component={Input}
       type="text"
     />
+    <Field id="url" name="url" label="URL" component={Input} type="text" />
   </SidebarForm>
 );
 

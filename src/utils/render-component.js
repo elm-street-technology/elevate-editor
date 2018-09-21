@@ -30,6 +30,10 @@ export default function(props: $Component) {
   let childProps = cloneDeep(props);
   switch (props.type) {
     case "Button":
+      childProps = omit(props, "handleComponentClick"); // prevent warning
+      childProps.element = "a";
+      childProps.href = childProps.url;
+      break;
     case "Icon":
       childProps = omit(props, "handleComponentClick"); // prevent warning
       break;

@@ -94,6 +94,7 @@ class Editor extends Component<Props, State> {
         type: "Button",
         attrs: {
           children: "Hello Button",
+          url: "",
         },
       },
       {
