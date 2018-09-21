@@ -12,11 +12,13 @@ import type { $SidebarProps } from "../../../types";
 const HorizontalRule = ({
   component: { id, attrs },
   onSave,
+  cancelEdit,
 }: $SidebarProps) => (
   <SidebarForm
     id={id}
     attrs={attrs}
     onSave={onSave}
+    cancelEdit={cancelEdit}
     validationSchema={() =>
       Yup.object().shape({
         children: Yup.string().required(),

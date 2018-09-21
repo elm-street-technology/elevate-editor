@@ -198,6 +198,11 @@ class Editor extends Component<Props, State> {
     ],
   };
 
+  cancelEdit = () => {
+    console.log("cancelEdit fired");
+    this.setState({ editingComponent: null });
+  };
+
   onDragEnd = (result) => {
     const { source, destination, draggableId } = result;
 
@@ -297,6 +302,7 @@ class Editor extends Component<Props, State> {
             </div>
             <Toolbox
               onSave={(id, attrs) => this.handleUpdateContent(id, attrs)}
+              cancelEdit={this.cancelEdit}
               className={classes.toolbox}
               editingComponent={this.state.editingComponent}
             />

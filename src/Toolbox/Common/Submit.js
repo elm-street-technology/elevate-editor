@@ -3,7 +3,11 @@ import React from "react";
 import Button from "elevate-ui/Button";
 
 const Submit = () => (
-  <Button type="submit" style={{ width: "100%" }}>
+  <Button
+    color="secondary"
+    type="submit"
+    style={{ width: "45%", marginRight: "10%" }}
+  >
     Save
   </Button>
 );

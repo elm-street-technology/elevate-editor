@@ -9,11 +9,16 @@ import SidebarForm from "../Common/SidebarForm";
 
 import type { $SidebarProps } from "../../../types";
 
-const Text = ({ component: { id, attrs }, onSave }: $SidebarProps) => (
+const Text = ({
+  component: { id, attrs },
+  onSave,
+  cancelEdit,
+}: $SidebarProps) => (
   <SidebarForm
     id={id}
     attrs={attrs}
     onSave={onSave}
+    cancelEdit={cancelEdit}
     validationSchema={() =>
       Yup.object().shape({
         value: Yup.string().required("Text value is required"),
