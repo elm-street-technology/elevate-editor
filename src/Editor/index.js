@@ -39,25 +39,29 @@ function populateAttrs(draggableId) {
     case "Text":
       attrs.value = "Click here to edit text";
       break;
-    case "Video":
-      attrs.mp4 =
-        "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4";
-      attrs.autoplay = false;
-      attrs.width = 800;
-      attrs.height = 400;
-      break;
     case "Button":
       attrs.children = "Click To Edit";
       attrs.url = "http://google.com";
       break;
     case "HorizontalRule":
       attrs.thickness = 2;
-      attrs.color = "primary";
+      attrs.color = "#666666";
       break;
-    case "Icon":
-      attrs.name = "AttachFile";
-      attrs.color = "#000000";
-      attrs.size = 24;
+    case "Wysiwyg":
+      attrs.value = {
+        blocks: [
+          {
+            key: "2rols",
+            text: "This is a text block. Click here to edit.",
+            type: "unstyled",
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+        ],
+        entityMap: {},
+      };
       break;
     default:
       break;
@@ -74,7 +78,7 @@ function populateContent(draggableId) {
         id: generateUUID(),
         type: "Image",
         attrs: {
-          src: "https://placehold.it/200x200",
+          src: "https://elevate-ui.com/",
           width: 200,
           height: 200,
           alt: "Hello World",
@@ -112,19 +116,64 @@ class Editor extends Component<Props, State> {
         id: generateUUID(),
         type: "Image",
         attrs: {
-          src: "https://placehold.it/200x200",
-          width: 200,
-          height: 200,
-          alt: "Hello World",
-          title: "Hello World",
+          src: "https://tryelevate.com/images/logo.png",
+          width: 399,
+          height: 126,
+          alt: "Try Elevate",
+          title: "Try Elevate",
           upload: "",
         },
       },
-      { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } },
       {
         id: generateUUID(),
         type: "HorizontalRule",
-        attrs: { thickness: 2, color: "primary" },
+        attrs: { thickness: 2, color: "#666666" },
+      },
+      {
+        id: generateUUID(),
+        type: "Wysiwyg",
+        attrs: {
+          value: {
+            blocks: [
+              {
+                key: "2rols",
+                text:
+                  "Elevate is the only fully integrated single system on the market today that does everything real estate professionals need — from generating new leads to creating clients for life!",
+                type: "unstyled",
+                depth: 0,
+                inlineStyleRanges: [],
+                entityRanges: [],
+                data: {},
+              },
+            ],
+            entityMap: {},
+          },
+        },
+      },
+      {
+        id: generateUUID(),
+        type: "HorizontalRule",
+        attrs: { thickness: 2, color: "#666666" },
+      },
+      {
+        id: generateUUID(),
+        type: "Image",
+        attrs: {
+          src: "https://picsum.photos/600/400/?random",
+          width: 600,
+          height: 400,
+          alt: "Elevate is the best!",
+          title: "Elevate is the best!",
+          upload: "",
+        },
+      },
+      {
+        id: generateUUID(),
+        type: "Text",
+        attrs: {
+          value:
+            "Did we mention Elevate's fully integrated, beautifully designed, mobile responsive websites embedded with best-in-class lead capture technology?",
+        },
       },
       {
         id: generateUUID(),
@@ -135,71 +184,40 @@ class Editor extends Component<Props, State> {
             id: generateUUID(),
             type: "Image",
             attrs: {
-              src: "https://placehold.it/200x200",
+              src: "https://picsum.photos/200x200",
               width: 200,
               height: 200,
               alt: "Hello World",
               title: "Hello World",
             },
           },
-          { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } },
+          {
+            id: generateUUID(),
+            type: "Text",
+            attrs: {
+              value:
+                "Provide your clients and prospects with MLS listing search, and provide yourself with full insight and tools to sell faster and create clients for life!",
+            },
+          },
         ],
       },
-      // {
-      //   id: generateUUID(),
-      //   type: "Video",
-      //   attrs: {
-      //     mp4:
-      //       "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
-      //     autoplay: true,
-      //     width: 200,
-      //     height: 200,
-      //   },
-      // },
+      {
+        id: generateUUID(),
+        type: "HorizontalRule",
+        attrs: { thickness: 2, color: "#666666" },
+      },
       {
         id: generateUUID(),
         type: "Button",
         attrs: {
-          children: "Hello Button",
-          url: "",
-        },
-      },
-      {
-        id: generateUUID(),
-        type: "Table",
-        attrs: {
-          columns: [
-            {
-              Header: "Name",
-              accessor: "name",
-              minWidth: 120,
-            },
-            {
-              Header: "Phone",
-              accessor: "phone",
-              minWidth: 120,
-            },
-          ],
-          data: [
-            { name: "Jason Walsh", phone: "(111) 222-3333" },
-            { name: "Chris Heninger", phone: "(111) 222-3333" },
-          ],
-        },
-      },
-      {
-        id: generateUUID(),
-        type: "Icon",
-        attrs: {
-          size: 24,
-          name: "AlarmOn",
-          color: "red",
+          children: "Try Elevate Today",
+          url: "https://tryelevate.com",
         },
       },
     ],
   };
 
   cancelEdit = () => {
-    console.log("cancelEdit fired");
     this.setState({ editingComponent: null });
   };
 
@@ -282,6 +300,7 @@ class Editor extends Component<Props, State> {
 
   handleUpdateContent(id: string, attrs: Object) {
     const component = this.findComponentById(id);
+    console.log(component);
     component.attrs = attrs; // mutates this.state.content directly, not ideal
     this.setState({ editingComponent: null, content: this.state.content });
   }
@@ -341,7 +360,7 @@ export default withStyles((theme) => ({
     overflowY: "scroll",
   },
   toolbox: {
-    width: "300px",
+    width: "420px",
     height: "calc(100vh - 64px)",
   },
 }))(Editor);
