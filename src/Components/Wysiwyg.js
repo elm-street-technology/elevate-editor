@@ -1,9 +1,27 @@
 import React from "react";
 import draftToHtml from "draftjs-to-html";
+import withStyles from "elevate-ui/withStyles";
 
-const Wysiwyg = ({ value }) => {
+const Wysiwyg = ({ value, classes }) => {
   const convertedHTML = draftToHtml(value);
-  return <div dangerouslySetInnerHTML={{ __html: convertedHTML }} />;
+  return (
+    <div
+      className={classes.root}
+      dangerouslySetInnerHTML={{ __html: convertedHTML }}
+    />
+  );
 };
 
-export default Wysiwyg;
+const styles = (theme) => ({
+  root: {
+    lineHeight: "1.3rem",
+    "& strong": {
+      fontWeight: 600,
+    },
+    "& em": {
+      fontStyle: "italic",
+    },
+  },
+});
+
+export default withStyles(styles, { name: "Wysiwyg" })(Wysiwyg);
