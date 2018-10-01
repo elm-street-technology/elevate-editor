@@ -22,8 +22,6 @@ class TextEditor extends Component {
     };
     this.onChange = (editorState) => this.setState({ editorState });
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
-
-    console.log(props.value, props);
   }
 
   handleKeyCommand(command, editorState) {
@@ -46,7 +44,6 @@ class TextEditor extends Component {
   };
 
   onBlur = () => {
-    console.log(this.state.editorState);
     const value = this.convertUserInput(this.state.editorState);
     return this.props.form.setFieldValue(this.props.field.name, value);
   };

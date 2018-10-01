@@ -11,7 +11,7 @@ import Uploader from "../Common/Uploader";
 import type { $SidebarProps } from "../../../types";
 
 const Image = ({
-  component: { id, attrs },
+  component: { id, attrs, type },
   onSave,
   cancelEdit,
 }: $SidebarProps) => (
@@ -30,6 +30,7 @@ const Image = ({
         title: Yup.string(),
       })
     }
+    type={type}
   >
     <Field id="src" name="src" label="Src" component={Input} type="text" />
     <Field

@@ -35,13 +35,16 @@ function populateAttrs(draggableId) {
       attrs.src = "https://picsum.photos/600/400/?random";
       attrs.width = 600;
       attrs.height = 400;
+      attrs.alignment = "left";
       break;
     case "Text":
       attrs.value = "Click here to edit text";
+      attrs.alignment = "left";
       break;
     case "Button":
       attrs.children = "Click To Edit";
       attrs.url = "http://google.com";
+      attrs.alignment = "left";
       break;
     case "HorizontalRule":
       attrs.thickness = 2;
@@ -95,8 +98,6 @@ function populateContent(draggableId) {
 function addContent(list, startIndex, draggableId) {
   const result = Array.from(list);
 
-  console.log(draggableId);
-
   // TODO: Object attr/content should be prefilled based on draggableId (content type)
   result.splice(startIndex, 0, {
     id: generateUUID(),
@@ -122,6 +123,7 @@ class Editor extends Component<Props, State> {
           alt: "Try Elevate",
           title: "Try Elevate",
           upload: "",
+          alignment: "center",
         },
       },
       {
@@ -165,12 +167,14 @@ class Editor extends Component<Props, State> {
           alt: "Elevate is the best!",
           title: "Elevate is the best!",
           upload: "",
+          alignment: "center",
         },
       },
       {
         id: generateUUID(),
         type: "Text",
         attrs: {
+          alignment: "right",
           value:
             "Did we mention Elevate's fully integrated, beautifully designed, mobile responsive websites embedded with best-in-class lead capture technology?",
         },
@@ -212,6 +216,7 @@ class Editor extends Component<Props, State> {
         attrs: {
           children: "Try Elevate Today",
           url: "https://tryelevate.com",
+          alignment: "center",
         },
       },
     ],
@@ -300,7 +305,6 @@ class Editor extends Component<Props, State> {
 
   handleUpdateContent(id: string, attrs: Object) {
     const component = this.findComponentById(id);
-    console.log(component);
     component.attrs = attrs; // mutates this.state.content directly, not ideal
     this.setState({ editingComponent: null, content: this.state.content });
   }

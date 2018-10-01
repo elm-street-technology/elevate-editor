@@ -1,23 +1,17 @@
 // @flow
 import React from "react";
+import EUIButton from "elevate-ui/Button";
 import withStyles from "elevate-ui/withStyles";
-
 import type { $Component } from "../../types";
 
-const Image = ({
-  src,
-  height,
-  alt,
-  width,
-  title,
-  alignment,
-  classes,
-}: $Component) => (
+const Button = ({ color, href, children, alignment, classes }: $Component) => (
   <div
     className={classes.root}
     style={alignment ? { textAlign: alignment } : null}
   >
-    <img src={src} width={width} height={height} alt={alt} title={title} />
+    <EUIButton element="a" href={href} color={color || "primary"}>
+      {children}
+    </EUIButton>
   </div>
 );
 
@@ -25,10 +19,6 @@ const styles = (theme) => ({
   root: {
     width: "100%",
   },
-  image: {
-    display: "block",
-    margin: "0 auto",
-  },
 });
 
-export default withStyles(styles, { name: "Image" })(Image);
+export default withStyles(styles, { name: "Button" })(Button);

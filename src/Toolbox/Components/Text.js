@@ -10,7 +10,7 @@ import SidebarForm from "../Common/SidebarForm";
 import type { $SidebarProps } from "../../../types";
 
 const Text = ({
-  component: { id, attrs },
+  component: { id, attrs, type },
   onSave,
   cancelEdit,
 }: $SidebarProps) => (
@@ -24,6 +24,7 @@ const Text = ({
         value: Yup.string().required("Text value is required"),
       })
     }
+    type={type}
   >
     <Field
       id="value"
