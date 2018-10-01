@@ -8,7 +8,7 @@ import SidebarForm from "../Common/SidebarForm";
 import type { $SidebarProps } from "../../../types";
 
 const Row = ({
-  component: { id, attrs },
+  component: { id, attrs, type },
   onSave,
   cancelEdit,
 }: $SidebarProps) => (
@@ -18,6 +18,7 @@ const Row = ({
     onSave={onSave}
     cancelEdit={cancelEdit}
     validationSchema={() => Yup.object().shape({})}
+    type={type}
   />
 );
 

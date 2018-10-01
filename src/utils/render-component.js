@@ -9,7 +9,7 @@ import Image from "../Components/Image";
 import Text from "../Components/Text";
 import Row from "../Components/Row";
 import Wysiwyg from "../Components/Wysiwyg";
-import Button from "elevate-ui/Button";
+import Button from "../Components/Button";
 
 import type { $Component } from "../../types";
 

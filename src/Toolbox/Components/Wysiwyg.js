@@ -11,7 +11,7 @@ import TextEditor from "../Common/TextEditor/TextEditor";
 import type { $SidebarProps } from "../../../types";
 
 const Wysiwyg = ({
-  component: { id, attrs },
+  component: { id, attrs, type },
   onSave,
   cancelEdit,
 }: $SidebarProps) => (
@@ -28,6 +28,7 @@ const Wysiwyg = ({
     initialValues={{
       value: attrs.value || null,
     }}
+    type={type}
   >
     <Field id="value" name="value" component={TextEditor} />
   </SidebarForm>

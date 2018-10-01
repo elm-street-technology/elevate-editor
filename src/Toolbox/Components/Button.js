@@ -10,7 +10,7 @@ import SidebarForm from "../Common/SidebarForm";
 import type { $SidebarProps } from "../../../types";
 
 const HorizontalRule = ({
-  component: { id, attrs },
+  component: { id, attrs, type },
   onSave,
   cancelEdit,
 }: $SidebarProps) => (
@@ -25,6 +25,7 @@ const HorizontalRule = ({
         url: Yup.string().required(),
       })
     }
+    type={type}
   >
     <Field
       id="children"
