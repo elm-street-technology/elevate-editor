@@ -2283,13 +2283,20 @@ elegant-spinner@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
 
-elevate-ui@^0.14.5:
-  version "0.14.5"
-  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.14.5.tgz#6b34c419d7786600f2c89ba930578cd01fee3b0d"
+elevate-ui-icons@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/elevate-ui-icons/-/elevate-ui-icons-0.1.0.tgz#c8be42d76560107ddf91a23b1d0d4edf98c37912"
+  dependencies:
+    react "^16.5.0"
+
+elevate-ui@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.15.0.tgz#7f919847eaa1b27f98baeb8818e1b086ea44690c"
   dependencies:
     classnames "^2.2.6"
     color "^3.0.0"
     downshift "^1.30.0"
+    elevate-ui-icons "^0.1.0"
     lodash "^4.17.10"
     moment "^2.22.2"
     react "^16.5.0"
