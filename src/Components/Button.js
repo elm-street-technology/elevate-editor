@@ -9,7 +9,12 @@ const Button = ({ color, href, children, alignment, classes }: $Component) => (
     className={classes.root}
     style={alignment ? { textAlign: alignment } : null}
   >
-    <EUIButton element="a" href={href} color={color || "primary"}>
+    <EUIButton
+      element="a"
+      href={href}
+      color={color || "primary"}
+      onClick={(e) => e.preventDefault()}
+    >
       {children}
     </EUIButton>
   </div>
