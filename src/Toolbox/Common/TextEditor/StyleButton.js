@@ -1,25 +1,37 @@
+// @flow
 import React, { Component } from "react";
 import withStyles from "elevate-ui/withStyles";
 
-class StyleButton extends Component {
+type Props = {
+  onToggle?: Function,
+  classes: Object,
+  active: boolean,
+  label: any,
+  icon?: Element,
+  promptForLink: Function,
+};
+
+class StyleButton extends Component<Props> {
   constructor(props) {
     super(props);
 
     this.onToggle = (e) => {
       e.preventDefault();
-      props.onToggle(props.style);
+      return props.onToggle ? props.onToggle(props.style) : null;
     };
   }
 
+  onToggle;
+
   render() {
-    const { classes, active } = this.props;
+    const { classes, active, label, icon } = this.props;
     return (
       <button
         type="button"
         onClick={this.onToggle}
         className={active ? classes.buttonActive : classes.button}
       >
-        {this.props.label}
+        {icon ? icon : label}
       </button>
     );
   }
@@ -27,9 +39,14 @@ class StyleButton extends Component {
 
 const style = (theme) => ({
   button: {
+    display: "inline-flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     width: 30,
     height: 30,
     textAlign: "center",
+    fontSize: 12,
     color: theme.colors["gray900"],
   },
   buttonActive: {
