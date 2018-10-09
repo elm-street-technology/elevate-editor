@@ -7,7 +7,7 @@ import Submit from "./Submit";
 
 const SidebarForm = ({ id, attrs, onSave, children, validationSchema }) => (
   <Formik
-    initialValues={{ ...attrs }}
+    initialValues={attrs}
     validationSchema={validationSchema}
     onSubmit={(values, props) => onSave(id, values)}
     render={() => (
