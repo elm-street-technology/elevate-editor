@@ -10,18 +10,22 @@ import SidebarForm from "../Common/SidebarForm";
 import type { $SidebarProps } from "../../../types";
 
 const HorizontalRule = ({
-  component: { id, attrs },
+  component: { id, attrs, type },
   onSave,
+  cancelEdit,
 }: $SidebarProps) => (
   <SidebarForm
     id={id}
     attrs={attrs}
     onSave={onSave}
+    cancelEdit={cancelEdit}
     validationSchema={() =>
       Yup.object().shape({
-        children: Yup.string(),
+        children: Yup.string().required(),
+        url: Yup.string().required(),
       })
     }
+    type={type}
   >
     <Field
       id="children"
@@ -30,6 +34,7 @@ const HorizontalRule = ({
       component={Input}
       type="text"
     />
+    <Field id="url" name="url" label="URL" component={Input} type="text" />
   </SidebarForm>
 );
 

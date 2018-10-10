@@ -16,11 +16,15 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "draft-js": "^0.10.5",
+    "draftjs-to-html": "^0.8.4",
     "elevate-ui": "^0.17.0",
+    "elevate-ui-icons": "^0.1.0",
     "formik": "^1.2.0",
     "react": "^16.5.0",
     "react-beautiful-dnd": "^9.0.2",
     "react-dom": "^16.5.0",
+    "uploadcare-widget": "^3.6.1",
     "yup": "^0.26.3"
   },
   "devDependencies": {

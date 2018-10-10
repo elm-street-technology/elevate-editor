@@ -8,20 +8,18 @@ import HorizontalRule from "../Components/HorizontalRule";
 import Image from "../Components/Image";
 import Text from "../Components/Text";
 import Row from "../Components/Row";
-import Video from "../Components/Video";
-import Button from "elevate-ui/Button";
-import Table from "elevate-ui/Table";
+import Wysiwyg from "../Components/Wysiwyg";
+import Button from "../Components/Button";
 
 import type { $Component } from "../../types";
 
 export const Components = {
   Text,
   Image,
-  Video,
   Button,
   HorizontalRule,
-  Table,
   Row,
+  Wysiwyg,
 };
 
 export default function(props: $Component) {
@@ -29,6 +27,8 @@ export default function(props: $Component) {
   switch (props.type) {
     case "Button":
       childProps = omit(props, "handleComponentClick"); // prevent warning
+      childProps.element = "a";
+      childProps.href = childProps.url;
       break;
     default:
       break;

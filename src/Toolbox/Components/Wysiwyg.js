@@ -3,13 +3,14 @@ import React from "react";
 
 import { Field } from "formik";
 import * as Yup from "yup";
-import Input from "elevate-ui/Input";
 
 import SidebarForm from "../Common/SidebarForm";
+import TextEditor from "../Common/TextEditor/TextEditor";
 
+// import type { $SidebarProps, $Components } from "../../../types";
 import type { $SidebarProps } from "../../../types";
 
-const HorizontalRule = ({
+const Wysiwyg = ({
   component: { id, attrs, type },
   onSave,
   cancelEdit,
@@ -21,27 +22,16 @@ const HorizontalRule = ({
     cancelEdit={cancelEdit}
     validationSchema={() =>
       Yup.object().shape({
-        color: Yup.string().required(),
-        thickness: Yup.number().required(),
+        value: Yup.string(),
       })
     }
+    initialValues={{
+      value: attrs.value || null,
+    }}
     type={type}
   >
-    <Field
-      id="color"
-      name="color"
-      label="Color"
-      component={Input}
-      type="color"
-    />
-    <Field
-      id="thickness"
-      name="thickness"
-      label="Thickness"
-      component={Input}
-      type="number"
-    />
+    <Field id="value" name="value" component={TextEditor} />
   </SidebarForm>
 );
 
-export default HorizontalRule;
+export default Wysiwyg;

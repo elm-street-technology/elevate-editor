@@ -26,6 +26,74 @@ function reorderContent(list, startIndex, endIndex) {
   return result;
 }
 
+// function to fill dummy attrs based on component
+function populateAttrs(draggableId) {
+  const attrs = {};
+
+  switch (draggableId) {
+    case "Image":
+      attrs.src = "https://picsum.photos/600/400/?random";
+      attrs.width = 600;
+      attrs.height = 400;
+      attrs.alignment = "left";
+      break;
+    case "Text":
+      attrs.value = "Click here to edit text";
+      attrs.alignment = "left";
+      break;
+    case "Button":
+      attrs.children = "Click To Edit";
+      attrs.url = "http://google.com";
+      attrs.alignment = "left";
+      break;
+    case "HorizontalRule":
+      attrs.thickness = 2;
+      attrs.color = "#666666";
+      break;
+    case "Wysiwyg":
+      attrs.value = {
+        blocks: [
+          {
+            key: "2rols",
+            text: "This is a text block. Click here to edit.",
+            type: "unstyled",
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+        ],
+        entityMap: {},
+      };
+      break;
+    default:
+      break;
+  }
+  return attrs;
+}
+
+// function to fill dummy content
+function populateContent(draggableId) {
+  const content = [];
+  if (draggableId === "Row") {
+    content.push(
+      {
+        id: generateUUID(),
+        type: "Image",
+        attrs: {
+          src: "https://elevate-ui.com/",
+          width: 200,
+          height: 200,
+          alt: "Hello World",
+          title: "Hello World",
+        },
+      },
+      { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } }
+    );
+  }
+  return content;
+}
+
 // a little function to help us with reordering the result
 function addContent(list, startIndex, draggableId) {
   const result = Array.from(list);
@@ -34,8 +102,8 @@ function addContent(list, startIndex, draggableId) {
   result.splice(startIndex, 0, {
     id: generateUUID(),
     type: draggableId,
-    attrs: {},
-    content: [],
+    attrs: populateAttrs(draggableId),
+    content: populateContent(draggableId),
   });
 
   return result;
@@ -49,15 +117,68 @@ class Editor extends Component<Props, State> {
         id: generateUUID(),
         type: "Image",
         attrs: {
-          src: "https://placehold.it/200x200",
-          width: 200,
-          height: 200,
-          alt: "Hello World",
-          title: "Hello World",
+          src: "https://tryelevate.com/images/logo.png",
+          width: 399,
+          height: 126,
+          alt: "Try Elevate",
+          title: "Try Elevate",
+          upload: "",
+          alignment: "center",
         },
       },
-      { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } },
-      { id: generateUUID(), type: "HorizontalRule", attrs: {} },
+      {
+        id: generateUUID(),
+        type: "HorizontalRule",
+        attrs: { thickness: 2, color: "#666666" },
+      },
+      {
+        id: generateUUID(),
+        type: "Wysiwyg",
+        attrs: {
+          value: {
+            blocks: [
+              {
+                key: "2rols",
+                text:
+                  "Elevate is the only fully integrated single system on the market today that does everything real estate professionals need — from generating new leads to creating clients for life!",
+                type: "unstyled",
+                depth: 0,
+                inlineStyleRanges: [],
+                entityRanges: [],
+                data: {},
+              },
+            ],
+            entityMap: {},
+          },
+        },
+      },
+      {
+        id: generateUUID(),
+        type: "HorizontalRule",
+        attrs: { thickness: 2, color: "#666666" },
+      },
+      {
+        id: generateUUID(),
+        type: "Image",
+        attrs: {
+          src: "https://picsum.photos/600/400/?random",
+          width: 600,
+          height: 400,
+          alt: "Elevate is the best!",
+          title: "Elevate is the best!",
+          upload: "",
+          alignment: "center",
+        },
+      },
+      {
+        id: generateUUID(),
+        type: "Text",
+        attrs: {
+          alignment: "right",
+          value:
+            "Did we mention Elevate's fully integrated, beautifully designed, mobile responsive websites embedded with best-in-class lead capture technology?",
+        },
+      },
       {
         id: generateUUID(),
         type: "Row",
@@ -67,57 +188,42 @@ class Editor extends Component<Props, State> {
             id: generateUUID(),
             type: "Image",
             attrs: {
-              src: "https://placehold.it/200x200",
+              src: "https://picsum.photos/200x200",
               width: 200,
               height: 200,
               alt: "Hello World",
               title: "Hello World",
             },
           },
-          { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } },
+          {
+            id: generateUUID(),
+            type: "Text",
+            attrs: {
+              value:
+                "Provide your clients and prospects with MLS listing search, and provide yourself with full insight and tools to sell faster and create clients for life!",
+            },
+          },
         ],
       },
-      // {
-      //   id: generateUUID(),
-      //   type: "Video",
-      //   attrs: {
-      //     mp4:
-      //       "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4",
-      //     autoplay: true,
-      //     width: 200,
-      //     height: 200,
-      //   },
-      // },
+      {
+        id: generateUUID(),
+        type: "HorizontalRule",
+        attrs: { thickness: 2, color: "#666666" },
+      },
       {
         id: generateUUID(),
         type: "Button",
         attrs: {
-          children: "Hello Button",
-        },
-      },
-      {
-        id: generateUUID(),
-        type: "Table",
-        attrs: {
-          columns: [
-            {
-              Header: "Name",
-              accessor: "name",
-              minWidth: 120,
-            },
-            {
-              Header: "Phone",
-              accessor: "phone",
-              minWidth: 120,
-            },
-          ],
-          data: [
-            { name: "Jason Walsh", phone: "(111) 222-3333" },
-            { name: "Chris Heninger", phone: "(111) 222-3333" },
-          ],
+          children: "Try Elevate Today",
+          url: "https://tryelevate.com",
+          alignment: "center",
         },
       },
     ],
+  };
+
+  cancelEdit = () => {
+    this.setState({ editingComponent: null });
   };
 
   onDragEnd = (result) => {
@@ -219,6 +325,7 @@ class Editor extends Component<Props, State> {
             </div>
             <Toolbox
               onSave={(id, attrs) => this.handleUpdateContent(id, attrs)}
+              cancelEdit={this.cancelEdit}
               className={classes.toolbox}
               editingComponent={this.state.editingComponent}
             />
@@ -257,7 +364,7 @@ export default withStyles((theme) => ({
     overflowY: "scroll",
   },
   toolbox: {
-    width: "300px",
+    width: "420px",
     height: "calc(100vh - 64px)",
   },
 }))(Editor);

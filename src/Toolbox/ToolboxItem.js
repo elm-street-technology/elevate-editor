@@ -7,11 +7,9 @@ import withStyles from "elevate-ui/withStyles";
 import {
   ButtonIcon,
   HorizontalRuleIcon,
-  IconIcon,
   ImageIcon,
-  TableIcon,
   TextIcon,
-  VideoIcon,
+  WysiwygIcon,
 } from "./Icons";
 
 type Props = {
@@ -26,10 +24,8 @@ const ComponentsIcons = {
   Image: ImageIcon,
   Text: TextIcon,
   Row: "div",
-  Video: VideoIcon,
   Button: ButtonIcon,
-  Table: TableIcon,
-  Icon: IconIcon,
+  Wysiwyg: WysiwygIcon,
 };
 
 const getItemStyle = (isDragging, draggableStyle) => ({
