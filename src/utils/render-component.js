@@ -11,7 +11,6 @@ import Row from "../Components/Row";
 import Video from "../Components/Video";
 import Button from "elevate-ui/Button";
 import Table from "elevate-ui/Table";
-import Icon from "elevate-ui/Icon/Icon";
 
 import type { $Component } from "../../types";
 
@@ -22,7 +21,6 @@ export const Components = {
   Button,
   HorizontalRule,
   Table,
-  Icon,
   Row,
 };
 
@@ -30,7 +28,6 @@ export default function(props: $Component) {
   let childProps = cloneDeep(props);
   switch (props.type) {
     case "Button":
-    case "Icon":
       childProps = omit(props, "handleComponentClick"); // prevent warning
       break;
     default:

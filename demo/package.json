@@ -1,0 +1,29 @@
+{
+  "name": "elevate-editor-demo",
+  "version": "1.33.7",
+  "private": true,
+  "dependencies": {
+    "elevate-ui": "^0.17.0",
+    "no-scroll": "^2.1.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.4"
+  },
+  "scripts": {
+    "postinstall": "yarn link \"elevate-editor\"",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

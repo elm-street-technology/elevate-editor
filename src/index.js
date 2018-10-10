@@ -1,3 +1,1 @@
-// @flow
-
-module.exports = require("./Editor");
+export { default as Editor } from "./Editor";
