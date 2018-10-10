@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 import Paper from "elevate-ui/Paper";
-import { Editor } from "elevate-editor";
+import Editor from "elevate-editor";
 
 type Props = {
   classes: Object,
@@ -11,9 +11,7 @@ type Props = {
 
 const EmailEditor = ({ classes, className }: Props) => (
   <Paper className={classNames(classes.root, className)}>
-    <div>
-      <Editor components={[]} />
-    </div>
+    <Editor components={[]} />
   </Paper>
 );
 
