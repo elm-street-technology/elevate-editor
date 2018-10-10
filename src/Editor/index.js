@@ -268,6 +268,17 @@ class Editor extends Component<Props, State> {
     this.setState({ editingComponent: null });
   };
 
+  deleteContent = (componentID) => {
+    const components = this.state.content;
+    const updatedComponents = components.filter(
+      (component) => component.id !== componentID
+    );
+
+    this.setState({ content: updatedComponents }, () =>
+      this.setState({ editingComponent: null })
+    );
+  };
+
   onDragEnd = (result) => {
     const { source, destination, draggableId } = result;
 
@@ -368,6 +379,7 @@ class Editor extends Component<Props, State> {
             <Toolbox
               onSave={(id, attrs) => this.handleUpdateContent(id, attrs)}
               cancelEdit={this.cancelEdit}
+              deleteContent={this.deleteContent}
               className={classes.toolbox}
               editingComponent={this.state.editingComponent}
             />

@@ -32,10 +32,12 @@ class Toolbox extends Component<Props> {
       classes,
       className,
       cancelEdit,
+      deleteContent,
     } = this.props;
     return (
       <SidebarLayout
         cancelEdit={cancelEdit}
+        deleteContent={deleteContent}
         component={editingComponent}
         onSave={onSave}
         className={classNames(classes.root, className)}

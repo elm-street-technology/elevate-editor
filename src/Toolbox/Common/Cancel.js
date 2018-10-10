@@ -1,13 +1,21 @@
 // @flow
 import React from "react";
 import Button from "elevate-ui/Button";
+import CancelIcon from "elevate-ui-icons/Cancel";
 
-const Cancel = ({ cancelEdit }) => (
+type Props = {
+  cancelEdit: Function,
+  className: Object,
+};
+
+const Cancel = ({ cancelEdit, className }: Props) => (
   <Button
     onClick={cancelEdit}
+    icon={<CancelIcon />}
     type="button"
     color="primary"
-    style={{ width: "45%" }}
+    isOutlined
+    className={className}
   >
     Cancel
   </Button>

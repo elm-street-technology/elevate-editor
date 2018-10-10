@@ -1,13 +1,14 @@
 // @flow
 import React from "react";
 import Button from "elevate-ui/Button";
+import Save from "elevate-ui-icons/Save";
 
-const Submit = () => (
-  <Button
-    color="secondary"
-    type="submit"
-    style={{ width: "45%", marginRight: "10%" }}
-  >
+type Props = {
+  className: Object,
+};
+
+const Submit = ({ className }: Props) => (
+  <Button className={className} icon={<Save />} color="secondary" type="submit">
     Save
   </Button>
 );

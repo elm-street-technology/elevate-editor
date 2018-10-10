@@ -13,6 +13,7 @@ export type $Components = $Component[];
 export type $SidebarProps = {
   component: $Component,
   onSave: (string, Object) => void,
+  deleteContent: Function,
   cancelEdit: Function,
   classes: Object,
   className: string,

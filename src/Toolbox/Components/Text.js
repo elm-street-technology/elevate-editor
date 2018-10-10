@@ -14,12 +14,14 @@ const Text = ({
   component: { id, attrs, type },
   onSave,
   cancelEdit,
+  deleteContent,
 }: $SidebarProps) => (
   <SidebarForm
     id={id}
     attrs={attrs}
     onSave={onSave}
     cancelEdit={cancelEdit}
+    deleteContent={deleteContent}
     validationSchema={() =>
       Yup.object().shape({
         value: Yup.string(),
