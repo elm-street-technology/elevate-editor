@@ -8,7 +8,7 @@ import {
   CompositeDecorator,
 } from "draft-js";
 import withStyles from "elevate-ui/withStyles";
-import "../../../styles/editor.css";
+// import "../../../styles/editor.css";
 
 import Controls from "./Controls";
 import Url from "./Url";
