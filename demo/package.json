@@ -3,6 +3,7 @@
   "version": "1.33.7",
   "private": true,
   "dependencies": {
+    "elevate-editor": "*",
     "elevate-ui": "^0.17.0",
     "no-scroll": "^2.1.1",
     "react": "^16.5.2",

@@ -117,15 +117,6 @@ class Editor extends Component<Props, State> {
           ],
         },
       },
-      {
-        id: generateUUID(),
-        type: "Icon",
-        attrs: {
-          size: 24,
-          name: "AlarmOn",
-          color: "red",
-        },
-      },
     ],
   };
 
