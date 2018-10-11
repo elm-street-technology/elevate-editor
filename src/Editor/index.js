@@ -5,17 +5,26 @@ import { DragDropContext } from "react-beautiful-dnd";
 import find from "lodash/find";
 import values from "lodash/values";
 import transform from "lodash/transform";
+import map from "lodash/map";
 
 import generateUUID from "../utils/generate-uuid";
-import Preview from "./Preview";
+import PreviewChanges from "./PreviewChanges";
+import PreviewForMarkup from "./PreviewForMarkup";
 import Toolbox from "../Toolbox";
+import ThemeProvider from "elevate-ui/ThemeProvider";
+
+import ReactDOMServer from "react-dom/server";
 
 import type { $Components } from "../../types";
 
 type Props = {
   classes: Object,
+  components: $Components,
 };
-type State = { content: $Components, editingComponent: null };
+type State = {
+  content: $Components,
+  editingComponent: null,
+};
 
 // a little function to help us with reordering the result
 function reorderContent(list, startIndex, endIndex) {
@@ -127,9 +136,13 @@ function addContent(list, startIndex, draggableId) {
 }
 
 class Editor extends Component<Props, State> {
-  state = {
-    editingComponent: null,
-    content: [
+  props: Props;
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+
+    let content = [
       {
         id: generateUUID(),
         type: "Image",
@@ -146,7 +159,10 @@ class Editor extends Component<Props, State> {
       {
         id: generateUUID(),
         type: "HorizontalRule",
-        attrs: { thickness: 2, color: "#666666" },
+        attrs: {
+          thickness: 2,
+          color: "#666666",
+        },
       },
       {
         id: generateUUID(),
@@ -172,7 +188,10 @@ class Editor extends Component<Props, State> {
       {
         id: generateUUID(),
         type: "HorizontalRule",
-        attrs: { thickness: 2, color: "#666666" },
+        attrs: {
+          thickness: 2,
+          color: "#666666",
+        },
       },
       {
         id: generateUUID(),
@@ -250,7 +269,10 @@ class Editor extends Component<Props, State> {
       {
         id: generateUUID(),
         type: "HorizontalRule",
-        attrs: { thickness: 2, color: "#666666" },
+        attrs: {
+          thickness: 2,
+          color: "#666666",
+        },
       },
       {
         id: generateUUID(),
@@ -261,11 +283,37 @@ class Editor extends Component<Props, State> {
           alignment: "center",
         },
       },
-    ],
+    ];
+
+    if (props.components) {
+      content = map(props.components, (component) => {
+        return {
+          id: generateUUID(),
+          type: component.type,
+          attrs: populateAttrs(component.type),
+          content: populateContent(component.type),
+        };
+      });
+    }
+
+    this.state = {
+      editingComponent: null,
+      content,
+    };
+  }
+
+  getHTMLContent = () => {
+    return ReactDOMServer.renderToStaticMarkup(
+      <ThemeProvider>
+        <PreviewForMarkup content={this.state.content} />
+      </ThemeProvider>
+    );
   };
 
   cancelEdit = () => {
-    this.setState({ editingComponent: null });
+    this.setState({
+      editingComponent: null,
+    });
   };
 
   deleteContent = (componentID) => {
@@ -297,7 +345,9 @@ class Editor extends Component<Props, State> {
         source.index,
         destination.index
       );
-      this.setState({ content: this.state.content }); // mutates state directly, @todo refactor
+      this.setState({
+        content: this.state.content,
+      }); // mutates state directly, @todo refactor
     } else if (source.droppableId === destination.droppableId) {
       // Root page re-order
       const content = reorderContent(
@@ -306,7 +356,9 @@ class Editor extends Component<Props, State> {
         destination.index
       );
 
-      this.setState({ content });
+      this.setState({
+        content,
+      });
     } else {
       if (draggableIdIsUUID) {
         console.log("Noop: Functionality not yet supported");
@@ -320,7 +372,9 @@ class Editor extends Component<Props, State> {
         destination.index,
         draggableId
       );
-      this.setState({ content });
+      this.setState({
+        content,
+      });
     }
   };
 
@@ -345,7 +399,9 @@ class Editor extends Component<Props, State> {
 
   findComponentById(id: string) {
     const allContent = this.flattenDeep(this.state.content);
-    return find(allContent, { id });
+    return find(allContent, {
+      id,
+    });
   }
 
   handleComponentClick(e: Event, id: string) {
@@ -359,7 +415,10 @@ class Editor extends Component<Props, State> {
   handleUpdateContent(id: string, attrs: Object) {
     const component = this.findComponentById(id);
     component.attrs = attrs; // mutates this.state.content directly, not ideal
-    this.setState({ editingComponent: null, content: this.state.content });
+    this.setState({
+      editingComponent: null,
+      content: this.state.content,
+    });
   }
 
   render() {
@@ -367,11 +426,10 @@ class Editor extends Component<Props, State> {
     const { content } = this.state;
     return (
       <div className={classes.root}>
-        <div className={classes.topNav}>Elevate Editor</div>
         <div className={classes.editor}>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <div className={classes.preview}>
-              <Preview
+              <PreviewChanges
                 content={content}
                 handleComponentClick={this.handleComponentClick.bind(this)}
               />
@@ -397,16 +455,6 @@ export default withStyles((theme) => ({
     width: "100%",
     height: "100%",
     backgroundColor: "#fff",
-  },
-  topNav: {
-    width: "100%",
-    height: "64px",
-    fontSize: "22px",
-    lineHeight: "32px",
-    fontWeight: "700",
-    color: "#fff",
-    backgroundColor: theme.colors.gray900,
-    padding: "16px",
   },
   editor: {
     display: "flex",

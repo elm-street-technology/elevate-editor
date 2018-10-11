@@ -12,7 +12,7 @@ type Props = {
 
 class EmailEditor extends Component<Props> {
   onClick = () => {
-    console.log(this.editor);
+    console.log(this.editor.getHTMLContent());
   };
   render() {
     const { classes, className } = this.props;
@@ -22,7 +22,11 @@ class EmailEditor extends Component<Props> {
         className={classNames(classes.root, className)}
       >
         <Editor
-          components={[]}
+          components={[
+            {
+              type: "Text",
+            },
+          ]}
           innerRef={(editor) => {
             this.editor = editor;
           }}

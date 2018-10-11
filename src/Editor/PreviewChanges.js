@@ -24,7 +24,7 @@ type Props = {
 };
 type State = {};
 
-class Preview extends Component<Props, State> {
+class PreviewChanges extends Component<Props, State> {
   render() {
     const { classes, className, content, handleComponentClick } = this.props;
     return (
@@ -87,4 +87,4 @@ export default withStyles((theme) => ({
       borderColor: "#d0eaff",
     },
   },
-}))(Preview);
+}))(PreviewChanges);
