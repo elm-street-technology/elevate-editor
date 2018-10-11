@@ -8,8 +8,6 @@ import {
   CompositeDecorator,
 } from "draft-js";
 import withStyles from "elevate-ui/withStyles";
-// import "../../../styles/editor.css";
-
 import Controls from "./Controls";
 import Url from "./Url";
 
@@ -183,6 +181,227 @@ class TextEditor extends Component {
 }
 
 const styles = (theme) => ({
+  "@global": {
+    ".DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content": {
+      height: "inherit",
+      textAlign: "initial",
+    },
+    ".public-DraftEditor-content[contenteditable=true]": {
+      W: "read-write-plaintext-only",
+    },
+    ".DraftEditor-root": {
+      position: "relative",
+    },
+    ".DraftEditor-editorContainer": {
+      backgroundColor: "rgba(255,255,255,0)",
+      borderLeft: ".1px solid transparent",
+      position: "relative",
+      zIndex: "1",
+    },
+    ".public-DraftEditor-block": {
+      position: "relative",
+    },
+    ".DraftEditor-alignLeft .public-DraftStyleDefault-block": {
+      textAlign: "left",
+    },
+    ".DraftEditor-alignLeft .public-DraftEditorPlaceholder-root": {
+      left: "0",
+      textAlign: "left",
+    },
+    ".DraftEditor-alignCenter .public-DraftStyleDefault-block": {
+      textAlign: "center",
+    },
+    ".DraftEditor-alignCenter .public-DraftEditorPlaceholder-root": {
+      margin: "0 auto",
+      textAlign: "center",
+      width: "100%",
+    },
+    ".DraftEditor-alignRight .public-DraftStyleDefault-block": {
+      textAlign: "right",
+    },
+    ".DraftEditor-alignRight .public-DraftEditorPlaceholder-root": {
+      right: "0",
+      textAlign: "right",
+    },
+    ".public-DraftEditorPlaceholder-root": {
+      color: "#9197a3",
+      position: "absolute",
+      zIndex: "1",
+    },
+    ".public-DraftEditorPlaceholder-hasFocus": {
+      color: "#bdc1c9",
+    },
+    ".DraftEditorPlaceholder-hidden": {
+      display: "none",
+    },
+    ".public-DraftStyleDefault-block": {
+      position: "relative",
+      whiteSpace: "pre-wrap",
+    },
+    ".public-DraftStyleDefault-ltr": {
+      direction: "ltr",
+      textAlign: "left",
+    },
+    ".public-DraftStyleDefault-rtl": {
+      direction: "rtl",
+      textAlign: "right",
+    },
+    ".public-DraftStyleDefault-listLTR": {
+      direction: "ltr",
+    },
+    ".public-DraftStyleDefault-listRTL": {
+      direction: "rtl",
+    },
+    ".public-DraftStyleDefault-ol, .public-DraftStyleDefault-ul": {
+      margin: "16px 0",
+      padding: "0",
+    },
+    ".public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR": {
+      marginLeft: "1.5em",
+    },
+    ".public-DraftStyleDefault-depth0.public-DraftStyleDefault-listRTL": {
+      marginRight: "1.5em",
+    },
+    ".public-DraftStyleDefault-depth1.public-DraftStyleDefault-listLTR": {
+      marginLeft: "3em",
+    },
+    ".public-DraftStyleDefault-depth1.public-DraftStyleDefault-listRTL": {
+      marginRight: "3em",
+    },
+    ".public-DraftStyleDefault-depth2.public-DraftStyleDefault-listLTR": {
+      marginLeft: "4.5em",
+    },
+    ".public-DraftStyleDefault-depth2.public-DraftStyleDefault-listRTL": {
+      marginRight: "4.5em",
+    },
+    ".public-DraftStyleDefault-depth3.public-DraftStyleDefault-listLTR": {
+      marginLeft: "6em",
+    },
+    ".public-DraftStyleDefault-depth3.public-DraftStyleDefault-listRTL": {
+      marginRight: "6em",
+    },
+    ".public-DraftStyleDefault-depth4.public-DraftStyleDefault-listLTR": {
+      marginLeft: "7.5em",
+    },
+    ".public-DraftStyleDefault-depth4.public-DraftStyleDefault-listRTL": {
+      marginRight: "7.5em",
+    },
+    ".public-DraftStyleDefault-unorderedListItem": {
+      listStyleType: "square",
+      position: "relative",
+    },
+    ".public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth0": {
+      listStyleType: "disc",
+    },
+    ".public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth1": {
+      listStyleType: "circle",
+    },
+    ".public-DraftStyleDefault-orderedListItem": {
+      listStyleType: "none",
+      position: "relative",
+    },
+    ".public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listLTR:before": {
+      left: -36,
+      position: "absolute",
+      textAlign: "right",
+      width: 30,
+    },
+    ".public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listRTL:before": {
+      position: "absolute",
+      right: -36,
+      textAlign: "left",
+      width: 30,
+    },
+    ".public-DraftStyleDefault-orderedListItem:before": {
+      content: 'counter(ol0) ". "',
+      counterIncrement: "ol0",
+    },
+    ".public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth1:before": {
+      content: 'counter(ol1) ". "',
+      counterIncrement: "ol1",
+    },
+    ".public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth2:before": {
+      content: 'counter(ol2) ". "',
+      counterIncrement: "ol2",
+    },
+    ".public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth3:before": {
+      content: 'counter(ol3) ". "',
+      counterIncrement: "ol3",
+    },
+    ".public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth4:before": {
+      content: 'counter(ol4) ". "',
+      counterIncrement: "ol4",
+    },
+    ".public-DraftStyleDefault-depth0.public-DraftStyleDefault-reset": {
+      counterReset: "ol0",
+    },
+    ".public-DraftStyleDefault-depth1.public-DraftStyleDefault-reset": {
+      counterReset: "ol1",
+    },
+    ".public-DraftStyleDefault-depth2.public-DraftStyleDefault-reset": {
+      counterReset: "ol2",
+    },
+    ".public-DraftStyleDefault-depth3.public-DraftStyleDefault-reset": {
+      counterReset: "ol3",
+    },
+    ".public-DraftStyleDefault-depth4.public-DraftStyleDefault-reset": {
+      counterReset: "ol4",
+    },
+    // eslint-disable-next-line
+    ".DraftEditor-root": {
+      background: "#fff",
+      border: "1px solid #ddd",
+      fontFamily: '"Open Sans", sans-serif',
+      fontSize: 14,
+      padding: 15,
+    },
+    ".DraftEditor-editor": {
+      borderTop: "1px solid #ddd",
+      cursor: "text",
+      fontSize: 16,
+      marginTop: 10,
+    },
+    ".DraftEditor-editor .public-DraftEditorPlaceholder-root, .DraftEditor-editor .public-DraftEditor-content": {
+      margin: "0 -15px -15px",
+      padding: 15,
+    },
+    ".DraftEditor-editor .public-DraftEditor-content": {
+      minHeight: 100,
+    },
+    ".DraftEditor-hidePlaceholder .public-DraftEditorPlaceholder-root": {
+      display: "none",
+    },
+    ".DraftEditor-editor .DraftEditor-blockquote": {
+      borderLeft: "5px solid #eee",
+      color: "#666",
+      fontFamily: '"Hoefler Text", "Georgia", serif',
+      fontStyle: "italic",
+      margin: "16px 0",
+      padding: "10px 20px",
+    },
+    ".DraftEditor-editor .public-DraftStyleDefault-pre": {
+      backgroundColor: "rgba(0, 0, 0, 0.05)",
+      fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
+      fontSize: 16,
+      padding: 20,
+    },
+    ".DraftEditor-controls": {
+      fontFamily: '"Helvetica", sans-serif',
+      fontSize: 14,
+      marginBottom: 5,
+      userSelect: "none",
+    },
+    ".DraftEditor-styleButton": {
+      color: "#999",
+      cursor: "pointer",
+      marginRight: 16,
+      padding: "2px 0",
+      display: "inline-block",
+    },
+    ".DraftEditor-activeButton": {
+      color: "#5890ff",
+    },
+  },
   root: {
     position: "relative",
     backgroundColor: theme.colors["gray400"],

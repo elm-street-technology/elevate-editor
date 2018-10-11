@@ -7,7 +7,6 @@ import HorizontalRule from "../Toolbox/Components/HorizontalRule";
 import Image from "../Toolbox/Components/Image";
 import Row from "../Toolbox/Components/Row";
 import Text from "../Toolbox/Components/Text";
-import Wysiwyg from "../Toolbox/Components/Wysiwyg";
 
 import type { $SidebarProps } from "../../types";
 
@@ -17,7 +16,6 @@ const Components = {
   Image,
   Row,
   Text,
-  Wysiwyg,
 };
 
 export default function(props: $SidebarProps) {
