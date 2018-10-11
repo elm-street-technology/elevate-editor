@@ -4,13 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 
-import {
-  ButtonIcon,
-  HorizontalRuleIcon,
-  ImageIcon,
-  TextIcon,
-  WysiwygIcon,
-} from "./Icons";
+import { ButtonIcon, HorizontalRuleIcon, ImageIcon, TextIcon } from "./Icons";
 
 type Props = {
   classes: Object,
@@ -25,7 +19,6 @@ const ComponentsIcons = {
   Text: TextIcon,
   Row: "div",
   Button: ButtonIcon,
-  Wysiwyg: WysiwygIcon,
 };
 
 const getItemStyle = (isDragging, draggableStyle) => ({

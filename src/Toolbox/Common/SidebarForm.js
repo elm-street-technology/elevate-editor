@@ -8,7 +8,7 @@ import Submit from "./Submit";
 import Cancel from "./Cancel";
 
 /* Components that should not render the Alignment component */
-const omitAlign = ["HorizontalRule", "Row", "Wysiwyg"];
+const omitAlign = ["HorizontalRule", "Row"];
 
 const SidebarForm = ({
   id,

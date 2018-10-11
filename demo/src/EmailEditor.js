@@ -17,7 +17,10 @@ class EmailEditor extends Component<Props> {
   render() {
     const { classes, className } = this.props;
     return (
-      <Paper className={classNames(classes.root, className)}>
+      <Paper
+        withPadding={false}
+        className={classNames(classes.root, className)}
+      >
         <Editor
           components={[]}
           innerRef={(editor) => {

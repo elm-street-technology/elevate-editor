@@ -37,10 +37,6 @@ function populateAttrs(draggableId) {
       attrs.height = 400;
       attrs.alignment = "left";
       break;
-    case "Text":
-      attrs.value = "Click here to edit text";
-      attrs.alignment = "left";
-      break;
     case "Button":
       attrs.children = "Click To Edit";
       attrs.url = "http://google.com";
@@ -50,7 +46,8 @@ function populateAttrs(draggableId) {
       attrs.thickness = 2;
       attrs.color = "#666666";
       break;
-    case "Wysiwyg":
+    case "Text":
+      attrs.alignment = "left";
       attrs.value = {
         blocks: [
           {
@@ -88,7 +85,27 @@ function populateContent(draggableId) {
           title: "Hello World",
         },
       },
-      { id: generateUUID(), type: "Text", attrs: { value: "Hello World" } }
+      {
+        id: generateUUID(),
+        type: "Text",
+        attrs: {
+          value: {
+            blocks: [
+              {
+                key: "2rols",
+                text:
+                  "Elevate is the only fully integrated single system on the market today that does everything real estate professionals need — from generating new leads to creating clients for life!",
+                type: "unstyled",
+                depth: 0,
+                inlineStyleRanges: [],
+                entityRanges: [],
+                data: {},
+              },
+            ],
+            entityMap: {},
+          },
+        },
+      }
     );
   }
   return content;
@@ -133,7 +150,7 @@ class Editor extends Component<Props, State> {
       },
       {
         id: generateUUID(),
-        type: "Wysiwyg",
+        type: "Text",
         attrs: {
           value: {
             blocks: [
@@ -174,9 +191,21 @@ class Editor extends Component<Props, State> {
         id: generateUUID(),
         type: "Text",
         attrs: {
-          alignment: "right",
-          value:
-            "Did we mention Elevate's fully integrated, beautifully designed, mobile responsive websites embedded with best-in-class lead capture technology?",
+          value: {
+            blocks: [
+              {
+                key: "2rols",
+                text:
+                  "Did we mention Elevate's fully integrated, beautifully designed, mobile responsive websites embedded with best-in-class lead capture technology?",
+                type: "unstyled",
+                depth: 0,
+                inlineStyleRanges: [],
+                entityRanges: [],
+                data: {},
+              },
+            ],
+            entityMap: {},
+          },
         },
       },
       {
@@ -199,8 +228,21 @@ class Editor extends Component<Props, State> {
             id: generateUUID(),
             type: "Text",
             attrs: {
-              value:
-                "Provide your clients and prospects with MLS listing search, and provide yourself with full insight and tools to sell faster and create clients for life!",
+              value: {
+                blocks: [
+                  {
+                    key: "2rols",
+                    text:
+                      "Provide your clients and prospects with MLS listing search, and provide yourself with full insight and tools to sell faster and create clients for life!",
+                    type: "unstyled",
+                    depth: 0,
+                    inlineStyleRanges: [],
+                    entityRanges: [],
+                    data: {},
+                  },
+                ],
+                entityMap: {},
+              },
             },
           },
         ],
@@ -340,8 +382,8 @@ export default withStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    width: "100vw",
-    height: "100vh",
+    width: "100%",
+    height: "100%",
     backgroundColor: "#fff",
   },
   topNav: {
