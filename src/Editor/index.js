@@ -290,8 +290,8 @@ class Editor extends Component<Props, State> {
         return {
           id: generateUUID(),
           type: component.type,
-          attrs: populateAttrs(component.type),
-          content: populateContent(component.type),
+          attrs: component.attrs || populateAttrs(component.type),
+          content: component.content || populateContent(component.type),
         };
       });
     }
