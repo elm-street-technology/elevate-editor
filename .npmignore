@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 
-# production
+# development
 src/*
 demo/
 
