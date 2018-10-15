@@ -3,6 +3,9 @@
   "version": "0.0.8",
   "private": false,
   "main": "dist/index.js",
+  "files": [
+    "/dist/*"
+  ],
   "scripts": {
     "prepublish": "yarn build && yarn link",
     "start": "concurrently \"yarn run watch\" \"yarn run demo\"",
