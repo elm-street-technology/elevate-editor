@@ -7,6 +7,10 @@ export type $Component = {
   content?: Array<Object>,
   type: string,
   classes?: Object,
+  paddingTop: number,
+  paddingRight: number,
+  paddingBottom: number,
+  paddingLeft: number,
 };
 export type $Components = $Component[];
 

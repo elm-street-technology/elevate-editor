@@ -38,7 +38,10 @@ function reorderContent(list, startIndex, endIndex) {
 // function to fill dummy attrs based on component
 function populateAttrs(draggableId) {
   const attrs = {};
-
+  attrs.paddingTop = 0;
+  attrs.paddingRight = 0;
+  attrs.paddingBottom = 0;
+  attrs.paddingLeft = 0;
   switch (draggableId) {
     case "Image":
       attrs.src = "https://picsum.photos/600/400/?random";
@@ -87,7 +90,7 @@ function populateContent(draggableId) {
         id: generateUUID(),
         type: "Image",
         attrs: {
-          src: "https://elevate-ui.com/",
+          src: "https://picsum.photos/200/200/?random",
           width: 200,
           height: 200,
           alt: "Hello World",
@@ -124,7 +127,6 @@ function populateContent(draggableId) {
 function addContent(list, startIndex, draggableId) {
   const result = Array.from(list);
 
-  // TODO: Object attr/content should be prefilled based on draggableId (content type)
   result.splice(startIndex, 0, {
     id: generateUUID(),
     type: draggableId,

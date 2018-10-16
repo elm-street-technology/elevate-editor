@@ -3184,6 +3184,24 @@ elevate-ui@^0.17.0:
     react-loadable "4.0.5"
     react-table "^6.8.6"
 
+elevate-ui@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.18.0.tgz#a73f21af0e320e140fc930377eeedf50b64baad1"
+  integrity sha512-teEMLg6Y+VImPt2y0NCFG2OqoDDwH6JGc2x0GK224Le3GGBI3sYQ4/0bQMyuLKyuVewuXTMqzHvI12fDdGWz6A==
+  dependencies:
+    classnames "^2.2.6"
+    color "^3.0.0"
+    downshift "^2.2.3"
+    elevate-ui-icons "^0.1.0"
+    lodash "^4.17.10"
+    moment "^2.22.2"
+    react "^16.5.2"
+    react-datetime "^2.15.0"
+    react-input-autosize "^2.2.1"
+    react-jss "^8.6.1"
+    react-loadable "4.0.5"
+    react-table "^6.8.6"
+
 elliptic@^6.0.0:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.4.1.tgz#c2d0b7776911b86722c632c3c06c60f2f819939a"

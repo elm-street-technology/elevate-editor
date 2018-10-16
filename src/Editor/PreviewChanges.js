@@ -69,6 +69,7 @@ class PreviewChanges extends Component<Props, State> {
 
 export default withStyles((theme) => ({
   root: {
+    height: "100%",
     width: "100%",
     maxWidth: "600px", // todo: this should be a setting
     padding: "8px",
