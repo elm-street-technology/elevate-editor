@@ -18,6 +18,7 @@ type Props = {
   editingComponent: null | $Component,
   onSave: Function,
   cancelEdit: Function,
+  deleteContent: Function,
 };
 
 const items = Object.keys(Components).map((type) => ({

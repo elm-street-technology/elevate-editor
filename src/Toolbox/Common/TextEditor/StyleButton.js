@@ -7,7 +7,7 @@ type Props = {
   classes: Object,
   active: boolean,
   label: any,
-  icon?: Element,
+  icon?: any,
   promptForLink: Function,
 };
 

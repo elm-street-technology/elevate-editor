@@ -7,7 +7,10 @@ import renderComponent from "../utils/render-component";
 
 import type { $Component } from "../../types";
 
-type Props = $Component;
+type Props = $Component & {
+  classes: Object,
+  handleComponentClick: (Event, string) => void,
+};
 
 const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({

@@ -4,7 +4,21 @@ import EUIButton from "elevate-ui/Button";
 import withStyles from "elevate-ui/withStyles";
 import type { $Component } from "../../types";
 
-const Button = ({ color, href, children, alignment, classes }: $Component) => (
+type Props = {
+  classes: Object,
+  color: string,
+  href: string,
+  children: any,
+  alignment: string,
+};
+
+const Button = ({
+  classes,
+  color,
+  href,
+  children,
+  alignment,
+}: $Component & Props) => (
   <div
     className={classes.root}
     style={alignment ? { textAlign: alignment } : null}

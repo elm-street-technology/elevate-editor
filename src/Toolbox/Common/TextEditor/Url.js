@@ -4,17 +4,23 @@ import withStyles from "elevate-ui/withStyles";
 import Button from "elevate-ui/Button";
 
 type Props = {
+  classes: Object,
+  confirmLink: Function,
+  onLinkInputKeyDown: Function,
+  onURLChange: Function,
+  removeLink: Function,
   showURLInput: Function,
+  urlValue: string,
 };
 
 const Url = ({
-  showURLInput,
-  onURLChange,
-  urlValue,
-  onLinkInputKeyDown,
-  confirmLink,
   classes,
+  confirmLink,
+  onLinkInputKeyDown,
+  onURLChange,
   removeLink,
+  showURLInput,
+  urlValue,
 }: Props) => {
   if (!showURLInput) {
     return null;
@@ -25,7 +31,6 @@ const Url = ({
       <input
         className={classes.input}
         onChange={onURLChange}
-        ref={(node) => (this.url = node)}
         type="text"
         value={urlValue}
         onKeyDown={onLinkInputKeyDown}

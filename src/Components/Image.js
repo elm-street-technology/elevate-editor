@@ -4,6 +4,16 @@ import withStyles from "elevate-ui/withStyles";
 
 import type { $Component } from "../../types";
 
+type Props = $Component & {
+  classes: Object,
+  src: string,
+  height: string,
+  alt: string,
+  width: string,
+  title: string,
+  alignment: string,
+};
+
 const Image = ({
   src,
   height,
@@ -12,7 +22,7 @@ const Image = ({
   title,
   alignment,
   classes,
-}: $Component) => (
+}: Props) => (
   <div
     className={classes.root}
     style={alignment ? { textAlign: alignment } : null}

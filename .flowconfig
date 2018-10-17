@@ -1,5 +1,6 @@
 [ignore]
 dist/**
+./node_modules/draft-js
 
 [include]
 ./node_modules/react

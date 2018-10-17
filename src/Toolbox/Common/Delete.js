@@ -6,6 +6,7 @@ import DeleteForever from "elevate-ui-icons/DeleteForever";
 type Props = {
   className: Object,
   deleteContent: Function,
+  id: string,
 };
 
 const Delete = ({ className, deleteContent, id }: Props) => (

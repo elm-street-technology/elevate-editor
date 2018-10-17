@@ -30,7 +30,8 @@ const Controls = (props) => {
       ))}
       <StyleButton
         key={"linkToggles"}
-        label={<InsertLink />}
+        icon={<InsertLink />}
+        label="Link"
         onToggle={(e) => props.promptForLink(e)}
       />
     </div>

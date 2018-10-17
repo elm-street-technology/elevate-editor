@@ -38,9 +38,10 @@ export default function(props: $Component) {
       style={{
         display: "flex",
         width: "100%",
-        padding: `${props.paddingTop}px ${props.paddingRight}px ${
-          props.paddingBottom
-        }px ${props.paddingLeft}px `,
+        paddingTop: props.paddingTop ? `${props.paddingTop}px` : 0,
+        paddingRight: props.paddingRight ? `${props.paddingRight}px` : 0,
+        paddingBottom: props.paddingBottom ? `${props.paddingBottom}px` : 0,
+        paddingLeft: props.paddingLeft ? `${props.paddingLeft}px` : 0,
       }}
     >
       {React.createElement(Components[props.type], childProps)}
