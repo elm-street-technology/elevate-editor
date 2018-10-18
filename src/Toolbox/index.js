@@ -58,7 +58,7 @@ class Toolbox extends Component<Props> {
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
-            className={classNames(classes.root, className)}
+            className={classNames(classes.root, classes.toolbox, className)}
           >
             {items.map((item, i) => (
               <ToolboxItem key={i} item={item} index={i} />
@@ -80,7 +80,8 @@ export default withStyles((theme) => ({
     background: "#F5F5F5",
     padding: "8px",
     borderLeft: "1px solid #E0E0E0",
-
+  },
+  toolbox: {
     "& > * + *": {
       marginTop: "8px",
     },

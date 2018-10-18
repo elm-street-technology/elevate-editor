@@ -428,23 +428,21 @@ class Editor extends Component<Props, State> {
     const { content } = this.state;
     return (
       <div className={classes.root}>
-        <div className={classes.editor}>
-          <DragDropContext onDragEnd={this.onDragEnd}>
-            <div className={classes.preview}>
-              <PreviewChanges
-                content={content}
-                handleComponentClick={this.handleComponentClick.bind(this)}
-              />
-            </div>
-            <Toolbox
-              onSave={(id, attrs) => this.handleUpdateContent(id, attrs)}
-              cancelEdit={this.cancelEdit}
-              deleteContent={this.deleteContent}
-              className={classes.toolbox}
-              editingComponent={this.state.editingComponent}
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <div className={classes.preview}>
+            <PreviewChanges
+              content={content}
+              handleComponentClick={this.handleComponentClick.bind(this)}
             />
-          </DragDropContext>
-        </div>
+          </div>
+          <Toolbox
+            onSave={(id, attrs) => this.handleUpdateContent(id, attrs)}
+            cancelEdit={this.cancelEdit}
+            deleteContent={this.deleteContent}
+            className={classes.toolbox}
+            editingComponent={this.state.editingComponent}
+          />
+        </DragDropContext>
       </div>
     );
   }
@@ -453,22 +451,18 @@ class Editor extends Component<Props, State> {
 export default withStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column",
     width: "100%",
     height: "100%",
     backgroundColor: "#fff",
   },
-  editor: {
-    display: "flex",
-  },
   preview: {
     width: "100%",
-    height: "calc(100vh - 64px)",
+    height: "calc(100vh - 16px)", // todo: 100% height
     overflowX: "hidden",
     overflowY: "scroll",
   },
   toolbox: {
-    width: "420px",
-    height: "calc(100vh - 64px)",
+    width: "360px",
+    height: "calc(100vh - 16px)", // todo: 100% height
   },
 }))(Editor);
