@@ -1,4 +1,4 @@
-# Editor
+[<img src="https://github.com/elm-street-technology/elevate-editor/raw/develop/elevate-editor-logo.svg" width="280" />](https://elevate-editor.netlify.com)
 
 ```javascript
 {
