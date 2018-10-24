@@ -11,7 +11,7 @@ import SidebarForm from "../Common/SidebarForm";
 
 import type { $SidebarProps } from "../../../types";
 
-const HorizontalRule = ({
+const Button = ({
   component: { id, attrs, type },
   onSave,
   cancelEdit,
@@ -99,4 +99,4 @@ const HorizontalRule = ({
   </SidebarForm>
 );
 
-export default HorizontalRule;
+export default Button;
