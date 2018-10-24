@@ -10,7 +10,11 @@ type Props = {
 };
 
 const HorizontalRule = ({ color, thickness }: $Component & Props) => (
-  <Hr color={color || "primary"} thickness={thickness || 2} />
+  <Hr
+    color={color || "primary"}
+    thickness={parseInt(thickness) || 2}
+    style={{ margin: "0 auto" }}
+  />
 );
 
 export default HorizontalRule;
