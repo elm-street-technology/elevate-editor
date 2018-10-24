@@ -11,23 +11,18 @@ type Props = $Component & {
   alt: string,
   width: string,
   title: string,
-  alignment: string,
 };
 
-const Image = ({
-  src,
-  height,
-  alt,
-  width,
-  title,
-  alignment,
-  classes,
-}: Props) => (
-  <div
-    className={classes.root}
-    style={alignment ? { textAlign: alignment } : null}
-  >
-    <img src={src} width={width} height={height} alt={alt} title={title} />
+const Image = ({ src, height, alt, width, title, classes }: Props) => (
+  <div className={classes.root}>
+    <img
+      src={src}
+      width={width}
+      height={height}
+      alt={alt}
+      title={title}
+      className={classes.image}
+    />
   </div>
 );
 
@@ -36,8 +31,9 @@ const styles = (theme) => ({
     width: "100%",
   },
   image: {
-    display: "block",
+    display: "inline-block",
     margin: "0 auto",
+    maxWidth: "100%",
   },
 });
 

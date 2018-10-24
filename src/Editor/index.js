@@ -44,9 +44,9 @@ function populateAttrs(draggableId) {
   attrs.paddingLeft = 0;
   switch (draggableId) {
     case "Image":
-      attrs.src = "https://picsum.photos/600/400/?random";
+      attrs.src = "https://picsum.photos/600/260/?random";
       attrs.width = 600;
-      attrs.height = 400;
+      attrs.height = 260;
       attrs.alignment = "left";
       break;
     case "Button":
