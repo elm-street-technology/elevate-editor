@@ -4,6 +4,7 @@ import React from "react";
 import { Field } from "formik";
 import * as Yup from "yup";
 import Input from "elevate-ui/Input";
+import NumberIncrement from "elevate-ui/NumberIncrement";
 
 import SidebarForm from "../Common/SidebarForm";
 
@@ -40,7 +41,7 @@ const HorizontalRule = ({
       id="thickness"
       name="thickness"
       label="Thickness"
-      component={Input}
+      component={NumberIncrement}
       type="number"
     />
   </SidebarForm>
