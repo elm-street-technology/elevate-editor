@@ -51,7 +51,14 @@ function populateAttrs(draggableId) {
       break;
     case "Button":
       attrs.children = "Click To Edit";
+      attrs.color = "#f15953";
+      attrs.textColor = "#ffffff";
       attrs.url = "http://google.com";
+      attrs.fontSize = 14;
+      attrs.buttonPaddingTop = 0;
+      attrs.buttonPaddingRight = 0;
+      attrs.buttonPaddingBottom = 0;
+      attrs.buttonPaddingLeft = 0;
       attrs.alignment = "left";
       break;
     case "HorizontalRule":
