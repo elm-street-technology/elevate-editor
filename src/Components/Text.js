@@ -23,6 +23,94 @@ const styles = (theme) => ({
     "& em": {
       fontStyle: "italic",
     },
+    "& h1": {
+      color: "#121130",
+      fontWeight: "700",
+      letterSpacing: ".2px",
+      fontSize: "32px",
+      marginTop: "44px",
+      marginBottom: "12px",
+    },
+
+    "& h2": {
+      fontSize: "26px",
+      fontWeight: "700",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& h3": {
+      fontSize: "21px",
+      fontWeight: "700",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& h4": {
+      fontSize: "21px",
+      fontWeight: "700",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& h5": {
+      fontSize: "21px",
+      fontWeight: "700",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& h6": {
+      fontSize: "21px",
+      fontWeight: "700",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& a": {
+      color: "#121130",
+      textDecoration: "underline",
+    },
+
+    "& ol": {
+      position: "relative",
+      counterReset: "item",
+    },
+
+    "& ol li": {
+      counterIncrement: "item",
+      paddingLeft: "24px",
+
+      "&:before": {
+        content: 'counter(item) "."',
+        position: "absolute",
+        left: "0",
+        fontWeight: "700",
+      },
+    },
+
+    "& ul": {
+      listStyleType: "disc",
+    },
+
+    "& ul li": {
+      marginLeft: "18px",
+    },
+
+    "& p": {
+      marginTop: "4px",
+      marginBottom: "8px",
+    },
+
+    "& img": {
+      display: "block",
+      maxWidth: "100%",
+      marginBottom: "16px",
+    },
+
+    "& b": {
+      fontWeight: "600",
+    },
   },
   left: {
     textAlign: "left",
