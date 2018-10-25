@@ -1,24 +1,106 @@
 // @flow
-import React from "react";
+import React, { Component, Fragment } from "react";
 import Button from "elevate-ui/Button";
 import DeleteForever from "elevate-ui-icons/DeleteForever";
+import Cancel from "elevate-ui-icons/Cancel";
+import Modal from "./Modal";
+import Typography from "elevate-ui/Typography";
+import withStyles from "elevate-ui/withStyles";
 
 type Props = {
+  classes: Object,
   className: Object,
   deleteContent: Function,
   id: string,
 };
 
-const Delete = ({ className, deleteContent, id }: Props) => (
-  <Button
-    onClick={() => deleteContent(id)}
-    className={className}
-    icon={<DeleteForever />}
-    type="button"
-    color="primary"
-  >
-    Delete
-  </Button>
-);
+type State = {
+  showConfirmation: boolean,
+};
 
-export default Delete;
+class Delete extends Component<Props, State> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showConfirmation: false,
+    };
+  }
+
+  toggleConfirmation = () => {
+    return this.setState((state) => ({
+      showConfirmation: !state.showConfirmation,
+    }));
+  };
+
+  handleDelete = (id) => {
+    this.props.deleteContent(id);
+    return this.toggleConfirmation();
+  };
+
+  render() {
+    const { classes, className, id } = this.props;
+    const { showConfirmation } = this.state;
+    return (
+      <Fragment>
+        <Button
+          onClick={this.toggleConfirmation}
+          className={className}
+          icon={<DeleteForever />}
+          type="button"
+          color="primary"
+        >
+          Delete
+        </Button>
+        <Modal isOpen={showConfirmation}>
+          <Typography
+            type="heading6"
+            className={classes.confirmText}
+            gutterBottom
+          >
+            Are you sure you want to delete this block?
+          </Typography>
+          <div className={classes.buttonRow}>
+            <Button
+              onClick={this.toggleConfirmation}
+              icon={<Cancel />}
+              type="button"
+              color="#CCCCCC"
+              isOutlined
+              className={classes.buttonCancel}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => this.handleDelete(id)}
+              icon={<DeleteForever />}
+              type="button"
+              color="primary"
+            >
+              Delete
+            </Button>
+          </div>
+        </Modal>
+      </Fragment>
+    );
+  }
+}
+
+const styles = (theme) => ({
+  confirmText: {
+    textAlign: "center",
+  },
+  buttonRow: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginTop: 20,
+    paddingRight: 20,
+  },
+  buttonCancel: {
+    marginRight: 8,
+  },
+});
+
+export default withStyles(styles, { name: "Delete" })(Delete);
