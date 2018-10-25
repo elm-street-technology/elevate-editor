@@ -27,6 +27,7 @@ const styles = (theme) => ({
       color: "#121130",
       fontWeight: "700",
       letterSpacing: ".2px",
+      lineHeight: "2.2rem",
       fontSize: "32px",
       marginTop: "44px",
       marginBottom: "12px",
@@ -35,6 +36,7 @@ const styles = (theme) => ({
     "& h2": {
       fontSize: "26px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -42,6 +44,7 @@ const styles = (theme) => ({
     "& h3": {
       fontSize: "21px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -49,6 +52,7 @@ const styles = (theme) => ({
     "& h4": {
       fontSize: "21px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -56,6 +60,7 @@ const styles = (theme) => ({
     "& h5": {
       fontSize: "21px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -63,6 +68,7 @@ const styles = (theme) => ({
     "& h6": {
       fontSize: "21px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -74,6 +80,7 @@ const styles = (theme) => ({
 
     "& ol": {
       position: "relative",
+      marginBottom: 20,
       counterReset: "item",
     },
 
@@ -90,6 +97,7 @@ const styles = (theme) => ({
     },
 
     "& ul": {
+      marginBottom: 20,
       listStyleType: "disc",
     },
 
@@ -110,6 +118,10 @@ const styles = (theme) => ({
 
     "& b": {
       fontWeight: "600",
+    },
+    "& blockquote": {
+      borderLeft: `4px solid ${theme.colors["gray300"]}`,
+      paddingLeft: 24,
     },
   },
   left: {

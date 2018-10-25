@@ -440,7 +440,11 @@ const styles = (theme) => ({
     backgroundColor: theme.colors["gray400"],
     border: `1px solid ${theme.colors["gray300"]}`,
     "& .DraftEditor-root": {
-      height: 400,
+      minHeight: 400,
+    },
+    "& blockquote": {
+      borderLeft: `4px solid ${theme.colors["gray300"]}`,
+      paddingLeft: 24,
     },
     "& strong": {
       fontWeight: 600,
@@ -452,6 +456,7 @@ const styles = (theme) => ({
       color: "#121130",
       fontWeight: "700",
       letterSpacing: ".2px",
+      lineHeight: "2.2rem",
       fontSize: "32px",
       marginTop: "44px",
       marginBottom: "12px",
@@ -460,6 +465,7 @@ const styles = (theme) => ({
     "& h2": {
       fontSize: "26px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -467,6 +473,7 @@ const styles = (theme) => ({
     "& h3": {
       fontSize: "21px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -474,6 +481,7 @@ const styles = (theme) => ({
     "& h4": {
       fontSize: "21px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -481,6 +489,7 @@ const styles = (theme) => ({
     "& h5": {
       fontSize: "21px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -488,6 +497,7 @@ const styles = (theme) => ({
     "& h6": {
       fontSize: "21px",
       fontWeight: "700",
+      lineHeight: "2.2rem",
       marginTop: "32px",
       marginBottom: "12px",
     },
@@ -522,13 +532,18 @@ const styles = (theme) => ({
       marginLeft: "18px",
     },
 
-    "& p, span": {
+    "& p": {
       display: "block",
       marginTop: "4px",
       marginBottom: "8px",
       lineHeight: "1.2rem",
     },
-
+    "& span": {
+      display: "inline-block",
+      marginTop: "4px",
+      marginBottom: "8px",
+      lineHeight: "1.2em",
+    },
     "& img": {
       display: "block",
       maxWidth: "100%",
