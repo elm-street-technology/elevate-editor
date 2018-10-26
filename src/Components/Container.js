@@ -20,12 +20,12 @@ const Container = ({ className, classes, children, style }: Props) => (
   </div>
 );
 
-const styles = (props) => ({
+const styles = {
   root: {
     display: "block",
     position: "relative",
     width: "100%",
   },
-});
+};
 
 export default withStyles(styles, { name: "Container" })(Container);
