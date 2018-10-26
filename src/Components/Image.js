@@ -15,34 +15,26 @@ type Props = $Component & {
 };
 
 const Image = ({ src, height, alt, width, title, classes, url }: Props) => {
+  const img = (
+    <img
+      src={src}
+      width={width}
+      height={height}
+      alt={alt}
+      title={title}
+      className={classes.image}
+    />
+  );
   if (url) {
     return (
       <div className={classes.root}>
         <a href={url} title={title} onClick={(e) => e.preventDefault()}>
-          <img
-            src={src}
-            width={width}
-            height={height}
-            alt={alt}
-            title={title}
-            className={classes.image}
-          />
+          {img}
         </a>
       </div>
     );
   }
-  return (
-    <div className={classes.root}>
-      <img
-        src={src}
-        width={width}
-        height={height}
-        alt={alt}
-        title={title}
-        className={classes.image}
-      />
-    </div>
-  );
+  return <div className={classes.root}>{img}</div>;
 };
 
 const styles = (theme) => ({
