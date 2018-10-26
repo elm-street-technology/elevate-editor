@@ -48,6 +48,7 @@ function populateAttrs(draggableId) {
       attrs.width = 600;
       attrs.height = 260;
       attrs.alignment = "left";
+      attrs.url = "";
       break;
     case "Button":
       attrs.children = "Click To Edit";
