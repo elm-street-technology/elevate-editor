@@ -9,6 +9,7 @@ export type $Component = {
   paddingRight?: number,
   paddingBottom?: number,
   paddingLeft?: number,
+  alignment?: string,
 };
 export type $Components = $Component[];
 

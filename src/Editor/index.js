@@ -42,12 +42,12 @@ function populateAttrs(draggableId) {
   attrs.paddingRight = 0;
   attrs.paddingBottom = 0;
   attrs.paddingLeft = 0;
+  attrs.alignment = "left";
   switch (draggableId) {
     case "Image":
       attrs.src = "https://picsum.photos/600/260/?random";
       attrs.width = 600;
       attrs.height = 260;
-      attrs.alignment = "left";
       break;
     case "Button":
       attrs.children = "Click To Edit";
@@ -59,14 +59,12 @@ function populateAttrs(draggableId) {
       attrs.buttonPaddingRight = 0;
       attrs.buttonPaddingBottom = 0;
       attrs.buttonPaddingLeft = 0;
-      attrs.alignment = "left";
       break;
     case "HorizontalRule":
       attrs.thickness = 2;
       attrs.color = "#666666";
       break;
     case "Text":
-      attrs.alignment = "left";
       attrs.value = {
         blocks: [
           {

@@ -14,22 +14,17 @@ type Props = $Component & {
 };
 
 const Image = ({ src, height, alt, width, title, classes }: Props) => (
-  <div className={classes.root}>
-    <img
-      src={src}
-      width={width}
-      height={height}
-      alt={alt}
-      title={title}
-      className={classes.image}
-    />
-  </div>
+  <img
+    src={src}
+    width={width}
+    height={height}
+    alt={alt}
+    title={title}
+    className={classes.image}
+  />
 );
 
 const styles = (theme) => ({
-  root: {
-    width: "100%",
-  },
   image: {
     display: "inline-block",
     margin: "0 auto",
