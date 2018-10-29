@@ -38,9 +38,6 @@ const Image = ({ src, height, alt, width, title, classes, url }: Props) => {
 };
 
 const styles = (theme) => ({
-  root: {
-    width: "100%",
-  },
   image: {
     display: "inline-block",
     margin: "0 auto",
