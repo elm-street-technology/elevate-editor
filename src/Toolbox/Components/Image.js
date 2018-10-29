@@ -30,6 +30,7 @@ const Image = ({
         height: Yup.number().required(),
         alt: Yup.string(),
         title: Yup.string(),
+        url: Yup.string().url(),
       })
     }
     type={type}
@@ -63,6 +64,13 @@ const Image = ({
       label="Title"
       component={Input}
       type="text"
+    />
+    <Field
+      id="url"
+      name="url"
+      label="Image Link (optional)"
+      component={Input}
+      type="url"
     />
   </SidebarForm>
 );

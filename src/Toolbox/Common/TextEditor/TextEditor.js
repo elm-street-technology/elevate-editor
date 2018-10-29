@@ -6,12 +6,14 @@ import {
   convertToRaw,
   convertFromRaw,
   CompositeDecorator,
+  getDefaultKeyBinding,
 } from "draft-js";
 import withStyles from "elevate-ui/withStyles";
 import Controls from "./Controls";
 import Url from "./Url";
 
 function findLinkEntities(contentBlock, callback, contentState) {
+  console.log("findLinkEntities hit");
   contentBlock.findEntityRanges((character) => {
     const entityKey = character.getEntity();
     return (
@@ -24,8 +26,8 @@ function findLinkEntities(contentBlock, callback, contentState) {
 const Link = (props) => {
   const { url } = props.contentState.getEntity(props.entityKey).getData();
   return (
-    <a href={url} style={{ textDecoration: "underline" }}>
-      {props.children} hay
+    <a href={url} style={{ textDecoration: "underline", color: "red" }}>
+      {props.children} hello- friend.
     </a>
   );
 };
@@ -54,14 +56,42 @@ class TextEditor extends Component {
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
   }
 
-  handleKeyCommand(command, editorState) {
+  handleKeyCommand = (command, editorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       this.onChange(newState);
       return "handled";
     }
     return "not-handled";
-  }
+  };
+
+  mapKeyToEditorCommand = (e) => {
+    if (e.keyCode === 9 /* TAB */) {
+      const newEditorState = RichUtils.onTab(
+        e,
+        this.state.editorState,
+        4 /* maxDepth */
+      );
+      if (newEditorState !== this.state.editorState) {
+        this.onChange(newEditorState);
+      }
+      return;
+    }
+    return getDefaultKeyBinding(e);
+  };
+
+  getBlockStyle = (block) => {
+    switch (block.getType()) {
+      case "blockquote":
+        return "RichEditor-blockquote";
+      default:
+        return null;
+    }
+  };
+
+  toggleBlockType = (blockType) => {
+    this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType));
+  };
 
   toggleInlineStyle = (inlineStyle) => {
     this.onChange(
@@ -157,6 +187,7 @@ class TextEditor extends Component {
           {...this.props}
           editorState={editorState}
           onToggle={this.toggleInlineStyle}
+          toggleBlockType={this.toggleBlockType}
           promptForLink={this.promptForLink}
         />
         <Url
@@ -168,8 +199,10 @@ class TextEditor extends Component {
           removeLink={this.removeLink}
         />
         <Editor
+          blockStyleFn={this.getBlockStyle}
           handleKeyCommand={this.handleKeyCommand}
           editorState={editorState}
+          keyBindingFn={this.mapKeyToEditorCommand}
           onChange={this.onChange}
           className={classes.editor}
           onBlur={this.onBlur}
@@ -407,7 +440,118 @@ const styles = (theme) => ({
     backgroundColor: theme.colors["gray400"],
     border: `1px solid ${theme.colors["gray300"]}`,
     "& .DraftEditor-root": {
-      height: 400,
+      minHeight: 400,
+    },
+    "& blockquote": {
+      borderLeft: `4px solid ${theme.colors["gray300"]}`,
+      paddingLeft: 24,
+    },
+    "& strong": {
+      fontWeight: 600,
+    },
+    "& em": {
+      fontStyle: "italic",
+    },
+    "& h1": {
+      color: "#121130",
+      fontWeight: "700",
+      letterSpacing: ".2px",
+      lineHeight: "2.2rem",
+      fontSize: "32px",
+      marginTop: "44px",
+      marginBottom: "12px",
+    },
+
+    "& h2": {
+      fontSize: "26px",
+      fontWeight: "700",
+      lineHeight: "2.2rem",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& h3": {
+      fontSize: "21px",
+      fontWeight: "700",
+      lineHeight: "2.2rem",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& h4": {
+      fontSize: "21px",
+      fontWeight: "700",
+      lineHeight: "2.2rem",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& h5": {
+      fontSize: "21px",
+      fontWeight: "700",
+      lineHeight: "2.2rem",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& h6": {
+      fontSize: "21px",
+      fontWeight: "700",
+      lineHeight: "2.2rem",
+      marginTop: "32px",
+      marginBottom: "12px",
+    },
+
+    "& a": {
+      color: "#121130",
+      textDecoration: "underline",
+    },
+
+    "& ol": {
+      position: "relative",
+      counterReset: "item",
+    },
+
+    "& ol li": {
+      counterIncrement: "item",
+      paddingLeft: "24px",
+
+      "&:before": {
+        content: 'counter(item) "."',
+        position: "absolute",
+        left: "0",
+        fontWeight: "700",
+      },
+    },
+
+    "& ul": {
+      listStyleType: "disc",
+    },
+
+    "& ul li": {
+      marginLeft: "18px",
+    },
+
+    "& p": {
+      display: "block",
+      marginTop: "4px",
+      marginBottom: "8px",
+      lineHeight: "1.2rem",
+    },
+    "& span": {
+      display: "inline-block",
+      marginTop: "4px",
+      marginBottom: "8px",
+      lineHeight: "1.2em",
+    },
+    "& img": {
+      display: "block",
+      maxWidth: "100%",
+      marginBottom: "16px",
+    },
+
+    "& b": {
+      fontWeight: "600",
     },
   },
 });

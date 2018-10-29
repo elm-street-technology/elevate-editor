@@ -11,18 +11,31 @@ type Props = $Component & {
   alt: string,
   width: string,
   title: string,
+  url: string,
 };
 
-const Image = ({ src, height, alt, width, title, classes }: Props) => (
-  <img
-    src={src}
-    width={width}
-    height={height}
-    alt={alt}
-    title={title}
-    className={classes.image}
-  />
-);
+const Image = ({ src, height, alt, width, title, classes, url }: Props) => {
+  const img = (
+    <img
+      src={src}
+      width={width}
+      height={height}
+      alt={alt}
+      title={title}
+      className={classes.image}
+    />
+  );
+  if (url) {
+    return (
+      <div className={classes.root}>
+        <a href={url} title={title} onClick={(e) => e.preventDefault()}>
+          {img}
+        </a>
+      </div>
+    );
+  }
+  return <div className={classes.root}>{img}</div>;
+};
 
 const styles = (theme) => ({
   image: {
