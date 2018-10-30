@@ -65,6 +65,8 @@ function populateAttrs(draggableId) {
       attrs.width = "600px";
       attrs.borderSize = 0;
       attrs.borderColor = "#000000";
+      attrs.src = "";
+      attrs.backgroundSize = "";
       break;
     case "HorizontalRule":
       attrs.thickness = 2;
