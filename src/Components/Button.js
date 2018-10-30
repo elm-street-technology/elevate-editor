@@ -10,7 +10,6 @@ type Props = {
   color: string,
   href: string,
   children: any,
-  alignment: string,
   buttonPaddingTop?: string,
   buttonPaddingRight?: string,
   buttonPaddingBottom?: string,

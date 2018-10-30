@@ -42,6 +42,7 @@ const Image = ({
       label="Upload a file"
       component={Uploader}
       type="hidden"
+      fieldName="src"
     />
     <Field
       id="width"
