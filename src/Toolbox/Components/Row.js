@@ -59,8 +59,8 @@ const Row = ({
       type="color"
     />
     <Field
-      id="src"
-      name="src"
+      id="backgroundImage"
+      name="backgroundImage"
       label="Background Image (optional)"
       component={Input}
       type="text"
@@ -71,6 +71,7 @@ const Row = ({
       label="Upload a file"
       component={Uploader}
       type="hidden"
+      fieldName="backgroundImage"
     />
     <Field
       id="backgroundSize"

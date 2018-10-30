@@ -7,6 +7,7 @@ type Props = {
   name: string,
   onChange: Function,
   field: Object,
+  fieldName: string, // what formik field to place the result in
   form: Object,
 };
 
@@ -18,6 +19,7 @@ class Uploader extends Component<Props> {
     const {
       field: { onChange },
       form: { setFieldValue },
+      fieldName,
     } = this.props;
     const widget = uploadcare.Widget(this.uploader);
 
@@ -27,7 +29,7 @@ class Uploader extends Component<Props> {
           file
             .done((info) => {
               // set the value of the selected image to `src` field value
-              setFieldValue("src", info.cdnUrl);
+              setFieldValue(fieldName, info.cdnUrl);
             })
             .fail(() => onChange(null));
         } else {

@@ -95,9 +95,10 @@ export default withStyles((theme) => ({
       `${props.paddingTop}px ${props.paddingRight}px ${props.paddingBottom}px ${
         props.paddingLeft
       }px`,
-    background: (props) =>
-      `url(${props.src}) center/${props.backgroundSize} no-repeat`,
     backgroundColor: (props) => props.backgroundColor,
+    backgroundImage: (props) => `url(${props.backgroundImage})`,
+    backgroundSize: (props) => props.backgroundSize,
+    backgroundRepeat: "no-repeat",
     border: (props) => `${props.borderSize}px solid ${props.borderColor}`,
   },
   row: {
