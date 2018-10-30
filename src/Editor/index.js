@@ -38,11 +38,6 @@ function reorderContent(list, startIndex, endIndex) {
 // function to fill dummy attrs based on component
 function populateAttrs(draggableId) {
   const attrs = {};
-  attrs.paddingTop = 0;
-  attrs.paddingRight = 0;
-  attrs.paddingBottom = 0;
-  attrs.paddingLeft = 0;
-  attrs.alignment = "left";
   switch (draggableId) {
     case "Image":
       attrs.src = "https://picsum.photos/600/260/?random";
@@ -59,6 +54,17 @@ function populateAttrs(draggableId) {
       attrs.buttonPaddingRight = 0;
       attrs.buttonPaddingBottom = 0;
       attrs.buttonPaddingLeft = 0;
+      break;
+    case "Row":
+      attrs.alignment = "left";
+      attrs.backgroundColor = "#ffffff";
+      attrs.paddingTop = 0;
+      attrs.paddingRight = 0;
+      attrs.paddingBottom = 0;
+      attrs.paddingLeft = 0;
+      attrs.width = "600px";
+      attrs.borderSize = 0;
+      attrs.borderColor = "#000000";
       break;
     case "HorizontalRule":
       attrs.thickness = 2;

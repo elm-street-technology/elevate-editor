@@ -20,14 +20,14 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   margin: `0 ${grid}px 0 ${grid}px`,
 
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "#fafafa",
+  background: isDragging ? "lightgreen" : "transparent",
 
   // styles we need to apply on draggables
   ...draggableStyle,
 });
 
 const getHoverStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? "lightblue" : "#fafafa",
+  background: isDraggingOver ? "lightblue" : "transparent",
 });
 
 class Row extends Component<Props> {
@@ -86,13 +86,21 @@ class Row extends Component<Props> {
 export default withStyles((theme) => ({
   root: {
     width: "100%",
+    maxWidth: (props) => props.width,
+    margin: "0 auto",
     height: "auto",
     overflowY: "hidden",
     overflowX: "scroll",
-    padding: "8px",
+    padding: (props) =>
+      `${props.paddingTop}px ${props.paddingRight}px ${props.paddingBottom}px ${
+        props.paddingLeft
+      }px`,
+    backgroundColor: (props) => props.backgroundColor,
+    border: (props) => `${props.borderSize}px solid ${props.borderColor}`,
   },
   row: {
     display: "flex",
+    textAlign: (props) => props.alignment,
   },
   item: {
     margin: "0 8px",

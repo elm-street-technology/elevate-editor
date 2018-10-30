@@ -4,13 +4,9 @@ import { Formik, Form } from "formik";
 import withStyles from "elevate-ui/withStyles";
 
 import Padding from "./Padding";
-import Alignment from "./Alignment";
 import Submit from "./Submit";
 import Cancel from "./Cancel";
 import Delete from "./Delete";
-
-/* Components that should not render the Alignment component */
-const omitAlign = ["HorizontalRule", "Row"];
 
 const SidebarForm = ({
   id,
@@ -32,8 +28,6 @@ const SidebarForm = ({
     render={(props) => (
       <Form>
         {children}
-        {!omitAlign.includes(type) ? <Alignment /> : null}
-        <Padding />
         <div className={classes.buttonGroup}>
           <Submit className={classes.halfButton} />
           <Cancel className={classes.halfButton} cancelEdit={cancelEdit} />
