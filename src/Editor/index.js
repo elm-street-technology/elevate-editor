@@ -97,42 +97,42 @@ function populateAttrs(draggableId) {
 // function to fill dummy content
 function populateContent(draggableId) {
   const content = [];
-  if (draggableId === "Row") {
-    content.push(
-      {
-        id: generateUUID(),
-        type: "Image",
-        attrs: {
-          src: "https://picsum.photos/200/200/?random",
-          width: 200,
-          height: 200,
-          alt: "Hello World",
-          title: "Hello World",
-        },
-      },
-      {
-        id: generateUUID(),
-        type: "Text",
-        attrs: {
-          value: {
-            blocks: [
-              {
-                key: "2rols",
-                text:
-                  "Elevate is the only fully integrated single system on the market today that does everything real estate professionals need — from generating new leads to creating clients for life!",
-                type: "unstyled",
-                depth: 0,
-                inlineStyleRanges: [],
-                entityRanges: [],
-                data: {},
-              },
-            ],
-            entityMap: {},
-          },
-        },
-      }
-    );
-  }
+  // if (draggableId === "Row") {
+  //   content.push(
+  //     {
+  //       id: generateUUID(),
+  //       type: "Image",
+  //       attrs: {
+  //         src: "https://picsum.photos/200/200/?random",
+  //         width: 200,
+  //         height: 200,
+  //         alt: "Hello World",
+  //         title: "Hello World",
+  //       },
+  //     },
+  //     {
+  //       id: generateUUID(),
+  //       type: "Text",
+  //       attrs: {
+  //         value: {
+  //           blocks: [
+  //             {
+  //               key: "2rols",
+  //               text:
+  //                 "Elevate is the only fully integrated single system on the market today that does everything real estate professionals need — from generating new leads to creating clients for life!",
+  //               type: "unstyled",
+  //               depth: 0,
+  //               inlineStyleRanges: [],
+  //               entityRanges: [],
+  //               data: {},
+  //             },
+  //           ],
+  //           entityMap: {},
+  //         },
+  //       },
+  //     }
+  //   );
+  // }
   return content;
 }
 
@@ -381,7 +381,7 @@ class Editor extends Component<Props, State> {
       }
 
       // Handle dropping from toolbox into preview
-      // console.log(source, destination, draggableId);
+      console.log(source, destination, draggableId);
       const content = addContent(
         this.state.content,
         destination.index,

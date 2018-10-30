@@ -74,7 +74,14 @@ class Row extends Component<Props> {
               style={getHoverStyle(snapshot.isDraggingOver)}
               className={classes && classes.row}
             >
-              {this.renderChildren()}
+              <div
+                style={{
+                  width: "100%",
+                  height: "60px",
+                  display: "block",
+                  background: "red",
+                }}
+              />
             </div>
           )}
         </Droppable>
@@ -86,6 +93,7 @@ class Row extends Component<Props> {
 export default withStyles((theme) => ({
   root: {
     width: "100%",
+    minHeight: 100,
     maxWidth: (props) => props.width,
     margin: "0 auto",
     height: "auto",
@@ -103,6 +111,7 @@ export default withStyles((theme) => ({
   },
   row: {
     display: "flex",
+    minHeight: 100,
     textAlign: (props) => props.alignment,
   },
   item: {

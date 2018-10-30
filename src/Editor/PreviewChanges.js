@@ -28,7 +28,7 @@ class PreviewChanges extends Component<Props, State> {
   render() {
     const { classes, className, content, handleComponentClick } = this.props;
     return (
-      <Droppable droppableId="content">
+      <Droppable type="editor" droppableId="content">
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
