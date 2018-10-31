@@ -1,23 +1,36 @@
 // @flow
 
-export type $Component = {
+export type $ContentBlocks = $ContentBlock[];
+export type $ContentBlock = {|
   id: string,
   attrs: Object,
-  content?: Array<Object>,
+  content: $ContentBlocks,
   type: string,
-  paddingTop?: number,
-  paddingRight?: number,
-  paddingBottom?: number,
-  paddingLeft?: number,
-  alignment?: string,
+|};
+
+export type $Component = {
+  Render: any,
+  Preview?: any,
+  Form?: any,
+  generateContent?: () => $ContentBlocks,
+  type: string,
+  defaultAttrs?: (Object) => Object,
+  defaultContent?: (Object) => $ContentBlocks,
 };
 export type $Components = $Component[];
 
+export type $Internals = {|
+  isEditor: boolean,
+  key?: number | string,
+  editingContentId: null | string,
+  handleContentClick: (e: Event, id: string) => void,
+  addChildToContent: Function,
+  editingContentFormAttrs: null | Object,
+  components: $Components,
+|};
+
 export type $SidebarProps = {
-  component: $Component,
-  onSave: (string, Object) => void,
+  disableDelete: boolean,
   deleteContent: Function,
   cancelEdit: Function,
-  classes: Object,
-  className: string,
 };
