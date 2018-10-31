@@ -136,17 +136,42 @@ function populateContent(draggableId) {
   return content;
 }
 
-// a little function to help us with reordering the result
-function addContent(list, startIndex, draggableId) {
-  const result = Array.from(list);
+function moveComponentToNewDroppableZone({
+  sourceDroppableZone,
+  sourceIndex,
+  targetDroppableZone,
+  targetIndex,
+  draggedComponent,
+}) {
+  removeComponentFromDroppableZone(sourceDroppableZone.content, sourceIndex);
+  putComponentInContentZone(
+    targetDroppableZone.content,
+    targetIndex,
+    draggedComponent
+  );
+}
 
+function removeComponentFromDroppableZone(content, componentIndex) {
+  const result = Array.from(content);
+  result.splice(componentIndex, 1);
+  return result;
+}
+
+// a little function to help us with reordering the result but only if draggableId is not a uuid
+function createComponentInContentZone(content, startIndex, draggableId) {
+  const result = Array.from(content);
   result.splice(startIndex, 0, {
     id: generateUUID(),
     type: draggableId,
     attrs: populateAttrs(draggableId),
     content: populateContent(draggableId),
   });
+  return result;
+}
 
+function putComponentInContentZone(content, startIndex, component) {
+  const result = Array.from(content);
+  result.splice(startIndex, 0, component);
   return result;
 }
 
@@ -343,20 +368,34 @@ class Editor extends Component<Props, State> {
   };
 
   onDragEnd = (result) => {
+    /**
+     * Source is where the draggable component came from originally
+     * Destination is where the draggable component was placed
+     */
     const { source, destination, draggableId } = result;
 
-    // dropped outside the list
+    console.log(
+      "====> destination, draggableId",
+      source,
+      destination,
+      draggableId
+    );
+
+    // dropped outside a droppable zone
     if (!destination) {
       return;
     }
 
-    const component = this.findComponentById(destination.droppableId);
+    const sourceDroppableZone = this.findComponentById(source.droppableId);
+    const targetDroppableZone = this.findComponentById(destination.droppableId);
+    const draggedComponent = this.findComponentById(draggableId);
     const draggableIdIsUUID = draggableId.length === 36;
 
-    // Dropping into itself should reorder the items
-    if (component) {
-      component.content = reorderContent(
-        component.content,
+    // @todo wrong
+    // Dropping component into itself should reorder the items
+    if (targetDroppableZone) {
+      targetDroppableZone.content = reorderContent(
+        targetDroppableZone.content,
         source.index,
         destination.index
       );
@@ -364,6 +403,7 @@ class Editor extends Component<Props, State> {
         content: this.state.content,
       }); // mutates state directly, @todo refactor
     } else if (source.droppableId === destination.droppableId) {
+      // @todo wrong
       // Root page re-order
       const content = reorderContent(
         this.state.content,
@@ -376,13 +416,43 @@ class Editor extends Component<Props, State> {
       });
     } else {
       if (draggableIdIsUUID) {
+        // Component dragged from inside row to root level
+
+        console.log(
+          "====> draggedComponent, targetDroppableZone, sourceDroppableZone",
+          draggedComponent,
+          targetDroppableZone,
+          sourceDroppableZone
+        );
+        if (draggedComponent && targetDroppableZone && sourceDroppableZone) {
+          console.log("====> sourceDroppableZone", sourceDroppableZone);
+          moveComponentToNewDroppableZone({
+            sourceDroppableZone,
+            sourceIndex: source.index,
+            targetDroppableZone,
+            targetIndex: destination.index,
+            draggedComponent,
+          });
+          console.log("====> sourceDroppableZone", sourceDroppableZone);
+
+          console.log(
+            "====> this.state.content, destination.index, draggableId",
+            this.state.content,
+            destination.index,
+            draggableId
+          );
+          this.setState({
+            content: this.state.content,
+          });
+        }
+
         console.log("Noop: Functionality not yet supported");
-        return; // invariant error, trying to addContent content, but content already exists and was just dragged outside draggable area
+        return; // invariant error, trying to createComponentInContentZone content, but content already exists and was just dragged outside draggable area
       }
 
       // Handle dropping from toolbox into preview
       // console.log(source, destination, draggableId);
-      const content = addContent(
+      const content = createComponentInContentZone(
         this.state.content,
         destination.index,
         draggableId
