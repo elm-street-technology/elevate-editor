@@ -82,11 +82,33 @@ class Editor extends Component<Props, State> {
       content:
         props.content && props.content.length
           ? this.setDefaultProps(props.content, components)
-          : [],
+          : [
+              {
+                id: generateUUID(),
+                type: "Row",
+                attrs: {
+                  disableDelete: true,
+                },
+                content: [],
+              },
+            ],
       components,
       toolboxModalId: null,
       unsavedChanges: null,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      JSON.stringify(prevProps.content) !== JSON.stringify(this.props.content)
+    ) {
+      this.setState({
+        content: this.setDefaultProps(
+          this.props.content,
+          this.state.components
+        ),
+      });
+    }
   }
 
   setDefaultProps(
