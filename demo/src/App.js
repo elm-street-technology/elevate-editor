@@ -8,7 +8,7 @@ import RouteListener from "./RouteListener";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
-import Home from "./Home";
+// import Home from "./Home";
 import EmailEditor from "./EmailEditor";
 
 class Main extends Component {
@@ -54,7 +54,7 @@ class Main extends Component {
             className={classNames(isMenuOpen && classes.underlay)}
           />
           <div className={classes.children}>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={EmailEditor} />
             <Route path="/editor" component={EmailEditor} />
           </div>
         </div>
