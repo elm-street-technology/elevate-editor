@@ -10,6 +10,8 @@ export default {
   Form,
   Preview,
   type: "Button",
+  description: "Button component that can be used as a call to action.",
+  image: "http://picsum.photos/600/300",
   // validation: Yup.object()
   defaultAttrs: (attrs: Object = {}) =>
     assign(

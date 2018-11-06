@@ -8,6 +8,7 @@ import values from "lodash/values";
 import transform from "lodash/transform";
 import ThemeProvider from "elevate-ui/ThemeProvider";
 import ReactDOMServer from "react-dom/server";
+import noScroll from "no-scroll";
 
 import generateUUID from "./utils/generate-uuid";
 
@@ -166,7 +167,7 @@ class Editor extends Component<Props, State> {
   };
 
   openToolboxModal = (toolboxModalId: string) => {
-    this.setState({ toolboxModalId });
+    this.setState({ toolboxModalId }, () => noScroll.on());
   };
 
   deleteContent = (contentId) => {
