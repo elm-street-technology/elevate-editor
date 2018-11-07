@@ -10,6 +10,9 @@ export default {
   Form,
   Preview,
   type: "Image",
+  description:
+    "Image component to display images or graphics in the page layout.",
+  image: "http://picsum.photos/600/300",
   defaultAttrs: (attrs: Object = {}) =>
     assign(
       {},

@@ -10,6 +10,9 @@ export default {
   Form,
   Preview,
   type: "Text",
+  description:
+    "The Text component allows you to add custom text to the page layout.",
+  image: "http://picsum.photos/600/300",
   defaultAttrs: (attrs: Object = {}) =>
     assign(
       {},

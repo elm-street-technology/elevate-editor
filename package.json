@@ -24,6 +24,7 @@
     "elevate-ui": "^0.18.1",
     "elevate-ui-icons": "^0.1.0",
     "formik": "^1.2.0",
+    "no-scroll": "^2.1.1",
     "react": "^16.5.0",
     "react-beautiful-dnd": "^9.0.2",
     "react-dom": "^16.5.0",

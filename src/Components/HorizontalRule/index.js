@@ -10,6 +10,9 @@ export default {
   Form,
   Preview,
   type: "HorizontalRule",
+  description:
+    "Horizontal Rule component to create a clear separation of content.",
+  image: "http://picsum.photos/600/300",
   defaultAttrs: (attrs: Object = {}) =>
     assign(
       {},

@@ -11,6 +11,9 @@ export default {
   Form,
   Preview,
   type: "Row",
+  description:
+    "The row component allows you to group multiple components together.",
+  image: "http://picsum.photos/600/300",
   defaultAttrs: (attrs: Object = {}) => {
     return assign(
       {},
