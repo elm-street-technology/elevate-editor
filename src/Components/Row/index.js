@@ -15,14 +15,14 @@ export default {
     return assign(
       {},
       {
-        backgroundColor: "#ffffff",
         width: "100%",
         height: "inherit",
         borderSize: 0,
         borderColor: "#000000",
+        backgroundColor: "#ffffff",
         backgroundImage: "",
-        upload: "",
         backgroundSize: "",
+        upload: "",
         direction: "vertical",
         alignment: "left",
         paddingTop: 4,
