@@ -360,62 +360,7 @@ class Editor extends Component<Props, State> {
           enableReinitialize={true}
           validateOnChange={false}
           validateOnBlur={false}
-          initialValues={
-            editingContent
-              ? { ...editingContent.attrs }
-              : {
-                  // Row
-                  width: "100%",
-                  height: "inherit",
-                  borderSize: 0,
-                  borderColor: "#000000",
-                  backgroundColor: "#ffffff",
-                  backgroundImage: "",
-                  backgroundSize: "",
-                  upload: "",
-                  direction: "vertical",
-                  alignment: "left",
-                  paddingTop: 0,
-                  paddingRight: 0,
-                  paddingBottom: 0,
-                  paddingLeft: 0,
-                  // HorizontalRule
-                  thickness: 2,
-                  color: "#000000",
-                  // Image
-                  src: "https://picsum.photos/50/50/?random",
-                  // upload: "", // dupe key
-                  // width: "", // dupe key
-                  // height: "", // dupe key
-                  title: "",
-                  alt: "",
-                  url: "",
-                  // Text
-                  value: {
-                    blocks: [
-                      {
-                        key: "2rols",
-                        text: "This is a text block. Click here to edit.",
-                        type: "unstyled",
-                        depth: 0,
-                        inlineStyleRanges: [],
-                        entityRanges: [],
-                        data: {},
-                      },
-                    ],
-                    entityMap: {},
-                  },
-                  // Button
-                  children: "Button Text",
-                  fontSize: "14px",
-                  // backgroundColor: "#ff0000", // dupe key
-                  // color: "#000000", // dupe key
-                  // paddingTop: 4, // dupe key
-                  // paddingRight: 4, // dupe key
-                  // paddingBottom: 4, // dupe key
-                  // paddingLeft: 4, // dupe key
-                }
-          }
+          initialValues={editingContent ? { ...editingContent.attrs } : {}}
           onSubmit={(values: Object) =>
             this.updateComponentAttrs(
               editingContent && editingContent.id,
@@ -423,6 +368,10 @@ class Editor extends Component<Props, State> {
             )
           }
           render={(formProps: { values: Object }) => {
+            const editingAttrs =
+              editingContent && (Object.keys(editingContent.attrs) || []);
+            const formValues =
+              formProps && (Object.keys(formProps.values) || []);
             return (
               <Form className={classes.root}>
                 <div className={classes.preview}>
@@ -449,7 +398,9 @@ class Editor extends Component<Props, State> {
                     />
                   ))}
                 </div>
-                {editingContent && formProps && formProps.values ? (
+                {editingContent &&
+                formProps &&
+                JSON.stringify(editingAttrs) === JSON.stringify(formValues) ? (
                   <div className={classes.sidebar}>
                     <SidebarForm
                       type={editingContent.type}
