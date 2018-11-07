@@ -386,6 +386,10 @@ class Editor extends Component<Props, State> {
             )
           }
           render={(formProps: { values: Object }) => {
+            const editingAttrs =
+              editingContent && (Object.keys(editingContent.attrs) || []);
+            const formValues =
+              formProps && (Object.keys(formProps.values) || []);
             return (
               <Form className={classes.root}>
                 <div className={classes.preview}>
@@ -412,7 +416,9 @@ class Editor extends Component<Props, State> {
                     />
                   ))}
                 </div>
-                {editingContent && formProps && formProps.values ? (
+                {editingContent &&
+                formProps &&
+                JSON.stringify(editingAttrs) === JSON.stringify(formValues) ? (
                   <div className={classes.sidebar}>
                     <SidebarForm
                       type={editingContent.type}
