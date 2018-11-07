@@ -136,6 +136,12 @@ export default withStyles((theme) => ({
   row: {
     display: "flex",
     flexWrap: "wrap",
+    justifyContent: ({ component: { attrs } }) => {
+      if (!attrs.justifyContent) {
+        return "flex-start";
+      }
+      return attrs.justifyContent;
+    },
     maxWidth: ({ component: { attrs } }) => attrs && attrs.width,
     minHeight: ({ component: { attrs } }) => attrs && attrs.height,
     flexDirection: ({ component: { attrs } }) =>

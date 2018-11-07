@@ -77,6 +77,18 @@ const RowForm = (props: $SidebarProps) => (
         { label: "Horizontal", value: "horizontal" },
       ]}
     />
+    <FastField
+      id="justifyContent"
+      name="justifyContent"
+      label="Justify Content"
+      component={Select}
+      items={[
+        { label: "Space Around", value: "space-around" },
+        { label: "Space Between", value: "space-between" },
+        { label: "Start", value: "flex-start" },
+        { label: "End", value: "flex-end" },
+      ]}
+    />
   </Fragment>
 );
 export default RowForm;

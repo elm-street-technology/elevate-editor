@@ -62,6 +62,40 @@ function reorderContent(components, startIndex, endIndex) {
   return result;
 }
 
+function renderToStaticMarkup(
+  content: $ContentBlocks = [],
+  components: $Components = []
+) {
+  return ReactDOMServer.renderToStaticMarkup(
+    <ThemeProvider>
+      <GenerateMarkup
+        content={content}
+        internals={{
+          isEditor: false, // an indicator to not show CSS related to editing content
+          components: combineComponents(components),
+          addChildToContent: () => {},
+          handleContentClick: (e, id) => {
+            return;
+          },
+          editingContentFormAttrs: null,
+          editingContentId: null,
+        }}
+      />
+    </ThemeProvider>
+  );
+}
+
+function combineComponents(components: $Components = []) {
+  // Add default components, but allows props.components to overwrite default components
+  const combined = components && components.length ? [...components] : [];
+  InternalComponents.forEach((component) => {
+    if (!find(components, { type: component.type })) {
+      combined.push(component);
+    }
+  });
+  return combined;
+}
+
 class Editor extends Component<Props, State> {
   props: Props;
   state: State;
@@ -69,19 +103,13 @@ class Editor extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    // Add default components, but allows props.components to overwrite default components
-    const components = props.components || [];
-    InternalComponents.forEach((component) => {
-      if (!find(components, { type: component.type })) {
-        components.push(component);
-      }
-    });
+    const components = combineComponents(props.components);
 
     this.state = {
       editingContent: null,
-      content:
+      content: this.setDefaultProps(
         props.content && props.content.length
-          ? this.setDefaultProps(props.content, components)
+          ? props.content
           : [
               {
                 id: generateUUID(),
@@ -92,6 +120,8 @@ class Editor extends Component<Props, State> {
                 content: [],
               },
             ],
+        components
+      ),
       components,
       toolboxModalId: null,
       unsavedChanges: null,
@@ -146,24 +176,11 @@ class Editor extends Component<Props, State> {
     });
   }
 
-  exportHTML = () => {
-    return ReactDOMServer.renderToStaticMarkup(
-      <ThemeProvider>
-        <GenerateMarkup
-          content={this.state.content}
-          internals={{
-            isEditor: false, // an indicator to not show CSS related to editing content
-            components: this.state.components || [],
-            addChildToContent: () => {},
-            handleContentClick: (e, id) => {
-              return;
-            },
-            editingContentFormAttrs: null,
-            editingContentId: null,
-          }}
-        />
-      </ThemeProvider>
-    );
+  exportHTML = (
+    content: $ContentBlocks = this.state.content,
+    components: $Components = this.state.components
+  ) => {
+    return renderToStaticMarkup(content, components);
   };
 
   exportJSON = () => {
@@ -238,7 +255,7 @@ class Editor extends Component<Props, State> {
   recursiveDelete(id: string, content: $ContentBlocks): void {
     content.forEach((child, idx) => {
       if (child.id === id) {
-        delete content[idx];
+        content.splice(idx, 1);
       } else if (child.content && child.content.length) {
         this.recursiveDelete(id, child.content);
       }
@@ -467,4 +484,5 @@ export const Tools = {
   RenderComponent,
   generateUUID,
   ToolboxItem,
+  renderToStaticMarkup,
 };
