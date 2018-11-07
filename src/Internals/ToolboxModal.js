@@ -115,6 +115,7 @@ class ToolboxModal extends Component<$Props, $State> {
             <Button
               icon={<AddCircle />}
               disabled={!activeComponent ? true : false}
+              color="secondary"
               onClick={() => {
                 noScroll.off();
                 return onSelect(
