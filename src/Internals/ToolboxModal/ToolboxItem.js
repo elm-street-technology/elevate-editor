@@ -27,12 +27,11 @@ export default withStyles((theme) => ({
     justifyContent: "flex-start",
     alignItems: "center",
     width: "100%",
-    minHeight: "64px",
     color: "black",
-    border: `1px solid #E0E0E0`,
+    border: `1px solid ${theme.colors.gray200}`,
     borderRadius: "4px",
     userSelect: "none",
-    padding: "8px 18px",
+    padding: "12px 16px",
 
     "&:hover": {
       backgroundColor: theme.colors["gray100"],

@@ -27,16 +27,17 @@ const Sidebar = ({
     <Typography type="heading4" gutterBottom>
       Select a component:
     </Typography>
-    <div className={classes.inputWrapper}>
+    <label className={classes.inputWrapper}>
       <input
         className={classes.input}
         type="text"
         value={filterInput}
         onChange={filterComponents}
         placeholder="Filter components..."
+        autoFocus
       />
       <Search className={classes.inputIcon} size={32} />
-    </div>
+    </label>
     {components.map((component) => {
       return (
         <ToolboxItem
@@ -64,7 +65,7 @@ const styles = (theme) => ({
     flex: "0 0 375px",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    paddingRight: 20,
+    padding: "20px",
     overflowY: "scroll",
     overflowX: "visible",
     borderRight: `1px solid ${theme.colors["gray200"]}`,
@@ -94,7 +95,8 @@ const styles = (theme) => ({
     fontSize: "16px",
     lineHeight: "20px",
     backgroundColor: "#fff",
-    border: `1px solid ${theme.colors.gray300}`,
+    border: `1px solid ${theme.colors.gray200}`,
+    borderRadius: theme.globalBorderRadius,
     padding: "8px 46px 8px 12px",
     boxShadow: "none", // Reset default inputs for mozilla
     "-webkit-appearance": "none", // Reset default browser styles
@@ -111,6 +113,7 @@ const styles = (theme) => ({
   },
   inputIcon: {
     position: "absolute",
+    color: theme.colors.gray300,
     right: 10,
   },
 });
