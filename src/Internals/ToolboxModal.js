@@ -144,7 +144,6 @@ const styles = (theme) => ({
     width: 900,
     maxWidth: "100%",
     height: "calc(85vh - 100px)",
-    // border: `1px solid ${theme.colors["gray100"]}`,
     borderRadius: theme.globalBorderRadius,
     backgroundColor: theme.colors["white"],
     boxShadow: theme.globalBoxShadow,
