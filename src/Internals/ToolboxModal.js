@@ -27,7 +27,7 @@ type $State = {
   parentId: null | string,
 };
 
-class ToolboxModalNew extends Component<$Props, $State> {
+class ToolboxModal extends Component<$Props, $State> {
   constructor(props) {
     super(props);
 
@@ -170,18 +170,22 @@ const styles = (theme) => ({
     justifyContent: "space-between",
     alignItems: "stretch",
     overflowY: "scroll",
+    overflowX: "visible",
     width: "100%",
   },
   bottom: {
+    flex: "0 0 auto",
     display: "flex",
     width: "100%",
     flexFlow: "row nowrap",
     justifyContent: "flex-end",
     alignItems: "center",
+    borderTop: `1px solid ${theme.colors["gray200"]}`,
+    paddingTop: "12px",
     "& *+*": {
       marginLeft: 20,
     },
   },
 });
 
-export default withStyles(styles, { name: "ToolboxModalNew" })(ToolboxModalNew);
+export default withStyles(styles, { name: "ToolboxModal" })(ToolboxModal);

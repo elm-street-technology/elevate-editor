@@ -20,7 +20,7 @@ const ComponentPreview = ({ activeComponent, classes }: $Props) => {
           alt={activeComponent && activeComponent.type}
           className={classes.previewImage}
         />
-        <Typography type="body">
+        <Typography type="body" gutterTop>
           {activeComponent && activeComponent.description}
         </Typography>
       </div>

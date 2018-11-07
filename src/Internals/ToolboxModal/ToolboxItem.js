@@ -32,7 +32,7 @@ export default withStyles((theme) => ({
     border: `1px solid #E0E0E0`,
     borderRadius: "4px",
     userSelect: "none",
-    padding: "8px",
+    padding: "8px 18px",
 
     "&:hover": {
       backgroundColor: theme.colors["gray100"],
@@ -40,6 +40,9 @@ export default withStyles((theme) => ({
   },
   active: {
     backgroundColor: theme.colors["gray200"],
+    "&:hover": {
+      backgroundColor: theme.colors["gray200"],
+    },
   },
   icon: {
     display: "flex",

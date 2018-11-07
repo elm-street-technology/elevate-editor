@@ -66,16 +66,8 @@ const styles = (theme) => ({
     alignItems: "flex-start",
     paddingRight: 20,
     overflowY: "scroll",
-    "&:before": {
-      content: "''",
-      display: "block",
-      position: "absolute",
-      width: 1,
-      height: "90%",
-      top: "5%",
-      right: 0,
-      backgroundColor: theme.colors["gray200"],
-    },
+    overflowX: "visible",
+    borderRight: `1px solid ${theme.colors["gray200"]}`,
   },
   toolboxItem: {
     marginBottom: 10,
@@ -90,6 +82,7 @@ const styles = (theme) => ({
     width: "100%",
     height: 50,
     marginBottom: 20,
+    overflowX: "visible",
   },
   input: {
     display: "block",
