@@ -9,6 +9,7 @@ import Header from "./Header";
 import Sidebar from "./Sidebar";
 
 // import Home from "./Home";
+import BlankEditor from "./BlankEditor";
 import EmailEditor from "./EmailEditor";
 
 class Main extends Component {
@@ -55,6 +56,7 @@ class Main extends Component {
           />
           <div className={classes.children}>
             <Route exact path="/" component={EmailEditor} />
+            <Route path="/new" component={BlankEditor} />
             <Route path="/editor" component={EmailEditor} />
           </div>
         </div>

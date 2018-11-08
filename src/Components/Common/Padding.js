@@ -19,24 +19,28 @@ const Padding = ({ classes }: Props) => (
       name="paddingTop"
       label="Top"
       component={NumberIncrement}
+      min="0"
     />
     <FastField
       id="paddingRight"
       name="paddingRight"
       label="Right"
       component={NumberIncrement}
+      min="0"
     />
     <FastField
       id="paddingBottom"
       name="paddingBottom"
       label="Bottom"
       component={NumberIncrement}
+      min="0"
     />
     <FastField
       id="paddingLeft"
       name="paddingLeft"
       label="Left"
       component={NumberIncrement}
+      min="0"
     />
   </Fragment>
 );
