@@ -6,8 +6,7 @@ import find from "lodash/find";
 import noScroll from "no-scroll";
 
 import Button from "elevate-ui/Button";
-import Cancel from "elevate-ui-icons/Cancel";
-import AddCircle from "elevate-ui-icons/AddCircle";
+import Add from "elevate-ui-icons/Add";
 
 import Sidebar from "./ToolboxModal/Sidebar";
 import ComponentPreview from "./ToolboxModal/ComponentPreview";
@@ -17,6 +16,7 @@ type $Props = {
   className?: string,
   id?: string,
   onSelect: Function,
+  theme: Object,
 };
 
 type $State = {
@@ -76,7 +76,7 @@ class ToolboxModal extends Component<$Props, $State> {
   };
 
   render() {
-    const { classes, className, onSelect } = this.props;
+    const { classes, className, onSelect, theme } = this.props;
     const {
       activeComponent,
       filteredComponents,
@@ -106,14 +106,13 @@ class ToolboxModal extends Component<$Props, $State> {
                 noScroll.off();
                 return onSelect(null, null);
               }}
-              icon={<Cancel />}
-              color="#EEEEEE"
+              color={theme.colors.gray200 || "#EEEEEE"}
               isOutlined
             >
               Cancel
             </Button>
             <Button
-              icon={<AddCircle />}
+              icon={<Add />}
               disabled={!activeComponent ? true : false}
               color="secondary"
               onClick={() => {
@@ -145,12 +144,11 @@ const styles = (theme) => ({
     width: 900,
     maxWidth: "100%",
     height: "calc(85vh - 100px)",
-    ...theme.globalPadding,
-    border: `1px solid ${theme.colors["gray100"]}`,
     borderRadius: theme.globalBorderRadius,
     backgroundColor: theme.colors["white"],
     boxShadow: theme.globalBoxShadow,
     zIndex: 999,
+    overflow: "hidden",
   },
   mask: {
     display: "block",
@@ -182,9 +180,10 @@ const styles = (theme) => ({
     justifyContent: "flex-end",
     alignItems: "center",
     borderTop: `1px solid ${theme.colors["gray200"]}`,
-    paddingTop: "12px",
-    "& *+*": {
-      marginLeft: 20,
+    backgroundColor: theme.colors.gray050,
+    padding: "12px",
+    "& * + *": {
+      marginLeft: "12px",
     },
   },
 });

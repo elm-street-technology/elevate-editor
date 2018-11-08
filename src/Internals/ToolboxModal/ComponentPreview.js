@@ -38,22 +38,24 @@ const ComponentPreview = ({ activeComponent, classes }: $Props) => {
 
 const styles = (theme) => ({
   root: {
-    flex: "0 1 auto",
+    flex: "1 1 auto",
     position: "relative",
-    paddingLeft: 20,
     overflowY: "scroll",
+    padding: "20px",
   },
   previewImage: {
     maxWidth: "100%",
     height: "auto",
   },
   noSelection: {
+    flex: "1 1 auto",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    textAlign: "center",
     minHeight: "100%",
-    paddingLeft: 20,
+    padding: "20px",
   },
 });
 
