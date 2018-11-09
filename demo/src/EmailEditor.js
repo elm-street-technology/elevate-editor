@@ -18,7 +18,7 @@ class EmailEditor extends Component<Props> {
     console.log(this.editor.exportHTML());
   };
   exportJSON = () => {
-    console.log(this.editor.exportJSON());
+    console.log(JSON.stringify(this.editor.exportJSON()));
   };
 
   render() {
