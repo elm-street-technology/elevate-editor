@@ -2,18 +2,19 @@
 import React from "react";
 import withStyles from "elevate-ui/withStyles";
 
-import type { $ContentBlock } from "types";
+import type { $ContentBlock, $Internals } from "types";
 type $Props = {
-  component: $ContentBlock,
-} & {
+  content: $ContentBlock,
+  internals: $Internals,
   classes: Object,
 };
 
 const ImagePreview = ({
   classes,
-  component: {
+  content: {
     attrs: { src, height, alt, width, title, url },
   },
+  internals: { isEditor },
 }: $Props) => {
   const img = (
     <img
@@ -30,7 +31,15 @@ const ImagePreview = ({
     return img;
   }
   return (
-    <a href={url} title={title} onClick={(e) => e.preventDefault()}>
+    <a
+      href={url}
+      title={title}
+      onClick={(e) => {
+        if (isEditor) {
+          e.preventDefault();
+        }
+      }}
+    >
       {img}
     </a>
   );

@@ -2,21 +2,21 @@
 import React from "react";
 import EUIButton from "elevate-ui/Button";
 import withStyles from "elevate-ui/withStyles";
-import classNames from "classnames";
 
-import type { $ContentBlock } from "types";
+import type { $ContentBlock, $Internals } from "types";
 type $Props = {
-  component: $ContentBlock,
+  content: $ContentBlock,
   classes: Object,
+  internals: $Internals,
 };
 
-const ButtonPreview = ({
+const ButtonRender = ({
   classes,
-  component: {
+  content: {
     attrs,
     attrs: {
       color,
-      href,
+      url,
       children,
       paddingTop,
       paddingRight,
@@ -26,13 +26,18 @@ const ButtonPreview = ({
       backgroundColor,
     },
   },
+  internals: { isEditor },
 }: $Props) => {
   return (
     <EUIButton
       element="a"
-      href={href}
+      href={url}
       color={backgroundColor || "primary"}
-      onClick={(e) => e.preventDefault()}
+      onClick={(e) => {
+        if (isEditor) {
+          e.preventDefault();
+        }
+      }}
       style={{
         paddingTop: paddingTop ? `${paddingTop}px` : "0",
         paddingRight: paddingRight ? `${paddingRight}px` : "0",
@@ -54,4 +59,4 @@ const styles = (theme) => ({
   },
 });
 
-export default withStyles(styles)(ButtonPreview);
+export default withStyles(styles)(ButtonRender);

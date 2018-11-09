@@ -3,7 +3,7 @@ import draftToHtml from "draftjs-to-html";
 import withStyles from "elevate-ui/withStyles";
 import classNames from "classnames";
 
-const TextPreview = ({ component: { attrs }, classes }) => {
+const TextPreview = ({ content: { attrs }, classes }) => {
   return (
     <div
       className={classNames(classes.root, classes[attrs.alignment])}
