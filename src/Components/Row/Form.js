@@ -34,6 +34,7 @@ const RowForm = (props: $SidebarProps) => (
       name="borderSize"
       label="Border Size"
       component={NumberIncrement}
+      min="0"
     />
     <FastField
       id="borderColor"

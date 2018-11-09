@@ -459,29 +459,34 @@ class Editor extends Component<Props, State> {
 
 export default withStyles((theme) => ({
   root: {
+    flex: "1",
+    position: "relative",
     display: "flex",
     width: "100%",
     height: "100%",
     backgroundColor: "#fff",
   },
   preview: {
+    flex: "1",
     width: "100%",
-    height: "calc(100vh - 16px)",
+    height: "auto",
     overflowX: "hidden",
     overflowY: "scroll",
-    paddingBottom: "32px",
   },
   sidebar: {
+    position: "absolute",
+    top: "0",
+    right: "0",
+    bottom: "0",
     display: "flex",
     flexDirection: "column",
-    padding: "8px",
-
     flexShrink: "0",
     width: "360px",
-    height: "calc(100vh - 16px)",
+    height: "100%",
     overflowX: "hidden",
-    overflowY: "scroll",
+    overflowY: "auto",
     background: "#F5F5F5",
+    padding: "8px",
     borderLeft: "1px solid #E0E0E0",
   },
 }))(Editor);

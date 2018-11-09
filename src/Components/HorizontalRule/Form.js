@@ -20,6 +20,7 @@ const HorizontalRuleForm = (props: $SidebarProps) => (
       name="thickness"
       label="Thickness"
       component={NumberIncrement}
+      min="1"
       type="number"
     />
   </Fragment>

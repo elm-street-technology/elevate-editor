@@ -18,11 +18,12 @@ function previewComponentStyles({
   childActive: boolean,
 }): Object {
   return {
+    width: "100%",
+    height: "100%",
     border: childActive
       ? "1px dotted rgb(181, 181, 181)"
       : "1px dotted rgb(200, 200, 200)",
     boxShadow: isActive ? "1px 1px 1px #ddd" : "", // if a child is being edited, darken parent's border
-    margin: "4px",
   };
 }
 

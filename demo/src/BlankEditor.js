@@ -6,14 +6,13 @@ import Button from "elevate-ui/Button";
 import Editor from "elevate-editor";
 
 import SignatureBlock from "./Components/SignatureBlock";
-import { elevateUI } from "./templates";
 
 type Props = {
   classes: Object,
   className: string,
 };
 
-class EmailEditor extends Component<Props> {
+class BlankEditor extends Component<Props> {
   exportHTML = () => {
     console.log(this.editor.exportHTML());
   };
@@ -31,7 +30,7 @@ class EmailEditor extends Component<Props> {
         >
           <Editor
             components={[SignatureBlock]}
-            content={elevateUI || []}
+            content={[]}
             innerRef={(editor) => {
               this.editor = editor;
             }}
@@ -57,7 +56,7 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    height: "100%",
+    height: "auto",
     overflow: "hidden", // round corners
   },
   flex: {
@@ -70,4 +69,4 @@ const styles = (theme) => ({
   },
 });
 
-export default withStyles(styles)(EmailEditor);
+export default withStyles(styles)(BlankEditor);
