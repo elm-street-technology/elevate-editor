@@ -3,16 +3,14 @@ import React, { Component } from "react";
 import withStyles from "elevate-ui/withStyles";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
-import Add from "elevate-ui-icons/Add";
-import Button from "elevate-ui/Button";
 
-import RenderComponent from "../../Internals/RenderComponent";
+import RenderContent from "../../Internals/RenderContent";
 
 import type { $ContentBlock, $Internals } from "types";
 
 type $Props = {|
   classes: Object,
-  component: $ContentBlock,
+  content: $ContentBlock,
   internals: $Internals,
 |};
 
@@ -34,12 +32,12 @@ class RowPreview extends Component<$Props> {
   renderChildren() {
     const {
       classes,
-      component: { attrs, content, id },
+      content: { content, id },
       internals,
     } = this.props;
 
     const isActive = internals.editingContentId === id;
-    const children =
+    return (
       content &&
       content.map((child, idx) => {
         if (!child) {
@@ -47,7 +45,7 @@ class RowPreview extends Component<$Props> {
         }
 
         const renderedChild = (
-          <RenderComponent key={idx} internals={internals} component={child} />
+          <RenderContent key={idx} internals={internals} content={[child]} />
         );
         if (!isActive || content.length === 1) {
           // content === 1 check because we don't want to show something as draggable when there are no other siblings to sort against
@@ -73,36 +71,17 @@ class RowPreview extends Component<$Props> {
             )}
           </Draggable>
         );
-      });
-
-    if (isActive && children) {
-      children.push(
-        <Button
-          type="button"
-          onClick={() =>
-            internals.addChildToContent &&
-            internals.addChildToContent(id, "Text")
-          }
-          color="secondary"
-          isOutlined
-          key="add-component"
-          style={{ margin: attrs.direction === "vertical" ? "8px 0" : "0 8px" }}
-        >
-          <Add size={24} /> Add Component
-        </Button>
-      );
-    }
-
-    return children;
+      })
+    );
   }
 
   render() {
     const {
       classes,
-      component: { attrs, id },
-      internals,
+      content: { attrs, id },
+      internals: { editingContentId },
     } = this.props;
-    const isActive = internals.editingContentId === id;
+    const isActive = editingContentId === id;
     const row = (
       <div className={classes && classes.row}>{this.renderChildren()}</div>
     );
@@ -136,31 +115,51 @@ export default withStyles((theme) => ({
   row: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: ({ component: { attrs } }) => {
-      if (!attrs.justifyContent) {
-        return "flex-start";
+    justifyContent: ({ content: { attrs } }) => {
+      if (attrs && attrs.direction !== "horizontal") {
+        return "";
       }
-      return attrs.justifyContent;
+
+      if (!attrs.alignment || attrs.alignment === "left") {
+        return "flex-start";
+      } else if (attrs.alignment === "center") {
+        return "space-around";
+      } else if (attrs.alignment === "right") {
+        return "space-around";
+      }
     },
-    maxWidth: ({ component: { attrs } }) => attrs && attrs.width,
-    minHeight: ({ component: { attrs } }) => attrs && attrs.height,
-    flexDirection: ({ component: { attrs } }) =>
+    alignItems: ({ content: { attrs } }) => {
+      if (attrs && attrs.direction !== "vertical") {
+        return "";
+      }
+
+      if (!attrs.alignment || attrs.alignment === "left") {
+        return "flex-start";
+      } else if (attrs.alignment === "center") {
+        return "center";
+      } else if (attrs.alignment === "right") {
+        return "flex-end";
+      }
+    },
+    maxWidth: ({ content: { attrs } }) => attrs && attrs.width,
+    minHeight: ({ content: { attrs } }) => attrs && attrs.height,
+    flexDirection: ({ content: { attrs } }) =>
       attrs && attrs.direction === "horizontal" ? "row" : "column",
-    textAlign: ({ component: { attrs } }) => attrs.alignment || "left",
-    paddingTop: ({ component: { attrs } }) =>
+    textAlign: ({ content: { attrs } }) => attrs.alignment || "left",
+    paddingTop: ({ content: { attrs } }) =>
       attrs.paddingTop ? `${attrs.paddingTop}px` : "0",
-    paddingRight: ({ component: { attrs } }) =>
+    paddingRight: ({ content: { attrs } }) =>
       attrs.paddingRight ? `${attrs.paddingRight}px` : "0",
-    paddingBottom: ({ component: { attrs } }) =>
+    paddingBottom: ({ content: { attrs } }) =>
       attrs.paddingBottom ? `${attrs.paddingBottom}px` : "0",
-    paddingLeft: ({ component: { attrs } }) =>
+    paddingLeft: ({ content: { attrs } }) =>
       attrs.paddingLeft ? `${attrs.paddingLeft}px` : "0",
-    backgroundColor: ({ component: { attrs } }) => attrs.backgroundColor,
-    backgroundImage: ({ component: { attrs } }) =>
+    backgroundColor: ({ content: { attrs } }) => attrs.backgroundColor,
+    backgroundImage: ({ content: { attrs } }) =>
       attrs.backgroundImage ? `url(${attrs.backgroundImage})` : "",
-    backgroundSize: ({ component: { attrs } }) => attrs.backgroundSize,
+    backgroundSize: ({ content: { attrs } }) => attrs.backgroundSize,
     backgroundRepeat: "no-repeat",
-    border: ({ component: { attrs } }) =>
+    border: ({ content: { attrs } }) =>
       `${attrs.borderSize}px solid ${attrs.borderColor}`,
 
     [theme.breakpoints[600]]: {

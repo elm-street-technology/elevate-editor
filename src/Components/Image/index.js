@@ -4,6 +4,7 @@ import assign from "lodash/assign";
 import Render from "./Render";
 import Form from "./Form";
 import Preview from "./Preview";
+import { Tools } from "../../";
 
 export default {
   Render,
@@ -17,7 +18,7 @@ export default {
     assign(
       {},
       {
-        src: "https://picsum.photos/50/50/?random",
+        src: "https://picsum.photos/125/125/?random",
         upload: "",
         width: "",
         height: "",
@@ -27,4 +28,21 @@ export default {
       },
       attrs
     ),
+  generateContent() {
+    return [
+      {
+        id: Tools.generateUUID(),
+        type: "Row",
+        attrs: {},
+        content: [
+          {
+            id: Tools.generateUUID(),
+            type: "Image",
+            attrs: {},
+            content: [],
+          },
+        ],
+      },
+    ];
+  },
 };

@@ -4,11 +4,11 @@ import Hr from "elevate-ui/Hr";
 
 import type { $ContentBlock } from "types";
 type $Props = {
-  component: $ContentBlock,
+  content: $ContentBlock,
 };
 
 const HorizontalRulePreview = ({
-  component: {
+  content: {
     attrs: { color, thickness },
   },
 }: $Props) => (

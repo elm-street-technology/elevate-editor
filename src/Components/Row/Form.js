@@ -6,8 +6,8 @@ import NumberIncrement from "elevate-ui/NumberIncrement";
 import Select from "elevate-ui/Select";
 
 import Padding from "../Common/Padding";
-import Alignment from "../Common/Alignment";
 import Uploader from "../Common/Uploader";
+import Alignment from "../Common/Alignment";
 
 import type { $SidebarProps } from "types";
 
@@ -76,18 +76,6 @@ const RowForm = (props: $SidebarProps) => (
       items={[
         { label: "Vertical", value: "vertical" },
         { label: "Horizontal", value: "horizontal" },
-      ]}
-    />
-    <FastField
-      id="justifyContent"
-      name="justifyContent"
-      label="Justify Content"
-      component={Select}
-      items={[
-        { label: "Space Around", value: "space-around" },
-        { label: "Space Between", value: "space-between" },
-        { label: "Start", value: "flex-start" },
-        { label: "End", value: "flex-end" },
       ]}
     />
   </Fragment>

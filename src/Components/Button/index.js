@@ -4,6 +4,7 @@ import assign from "lodash/assign";
 import Render from "./Render";
 import Form from "./Form";
 import Preview from "./Preview";
+import { Tools } from "../../";
 
 export default {
   Render,
@@ -19,13 +20,31 @@ export default {
       {
         children: "Button Text",
         fontSize: "14px",
-        backgroundColor: "#ff0000",
+        backgroundColor: "primary",
         color: "#000000",
         paddingTop: 4,
         paddingRight: 4,
         paddingBottom: 4,
         paddingLeft: 4,
+        url: "",
       },
       attrs
     ),
+  generateContent() {
+    return [
+      {
+        id: Tools.generateUUID(),
+        type: "Row",
+        attrs: {},
+        content: [
+          {
+            id: Tools.generateUUID(),
+            type: "Button",
+            attrs: {},
+            content: [],
+          },
+        ],
+      },
+    ];
+  },
 };

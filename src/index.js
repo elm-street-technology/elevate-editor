@@ -12,8 +12,7 @@ import noScroll from "no-scroll";
 
 import generateUUID from "./utils/generate-uuid";
 
-import RenderComponent from "./Internals/RenderComponent";
-import GenerateMarkup from "./Internals/GenerateMarkup";
+import RenderContent from "./Internals/RenderContent";
 import SidebarForm from "./Internals/SidebarForm";
 import ToolboxModal from "./Internals/ToolboxModal";
 import UnsavedChangesModal from "./Internals/UnsavedChangesModal";
@@ -63,13 +62,13 @@ function reorderContent(components, startIndex, endIndex) {
   return result;
 }
 
-function renderToStaticMarkup(
+function renderReact(
   content: $ContentBlocks = [],
   components: $Components = []
 ) {
-  return ReactDOMServer.renderToStaticMarkup(
+  return (
     <ThemeProvider>
-      <GenerateMarkup
+      <RenderContent
         content={content}
         internals={{
           isEditor: false, // an indicator to not show CSS related to editing content
@@ -181,7 +180,9 @@ class Editor extends Component<Props, State> {
     content: $ContentBlocks = this.state.content,
     components: $Components = this.state.components
   ) => {
-    return renderToStaticMarkup(content, components);
+    return ReactDOMServer.renderToStaticMarkup(
+      renderReact(content, components)
+    );
   };
 
   exportJSON = () => {
@@ -393,28 +394,25 @@ class Editor extends Component<Props, State> {
             return (
               <Form className={classes.root}>
                 <div className={classes.preview}>
-                  {content.map((component, idx) => (
-                    <RenderComponent
-                      key={idx}
-                      component={component}
-                      internals={{
-                        isEditor: true, // an indicator to not show CSS related to editing content
-                        handleContentClick: (e, id) =>
-                          this.handleContentClick(e, id, {
-                            prev:
-                              editingContent && editingContent.attrs
-                                ? editingContent.attrs
-                                : {},
-                            next: formProps.values,
-                          }),
-                        editingContentFormAttrs: formProps.values,
-                        editingContentId: editingContent && editingContent.id,
-                        addChildToContent: (id: string) =>
-                          this.openToolboxModal(id),
-                        components,
-                      }}
-                    />
-                  ))}
+                  <RenderContent
+                    content={content}
+                    internals={{
+                      isEditor: true, // an indicator to not show CSS related to editing content
+                      handleContentClick: (e, id) =>
+                        this.handleContentClick(e, id, {
+                          prev:
+                            editingContent && editingContent.attrs
+                              ? editingContent.attrs
+                              : {},
+                          next: formProps.values,
+                        }),
+                      editingContentFormAttrs: formProps.values,
+                      editingContentId: editingContent && editingContent.id,
+                      addChildToContent: (id: string) =>
+                        this.openToolboxModal(id),
+                      components,
+                    }}
+                  />
                 </div>
                 {editingContent &&
                 formProps &&
@@ -493,8 +491,7 @@ export default withStyles((theme) => ({
 
 // Available to help with building components
 export const Tools = {
-  RenderComponent,
   generateUUID,
   ToolboxItem,
-  renderToStaticMarkup,
+  renderReact,
 };

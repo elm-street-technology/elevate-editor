@@ -4,6 +4,7 @@ import assign from "lodash/assign";
 import Render from "./Render";
 import Form from "./Form";
 import Preview from "./Preview";
+import { Tools } from "../../";
 
 export default {
   Render,
@@ -34,4 +35,21 @@ export default {
       },
       attrs
     ),
+  generateContent() {
+    return [
+      {
+        id: Tools.generateUUID(),
+        type: "Row",
+        attrs: {},
+        content: [
+          {
+            id: Tools.generateUUID(),
+            type: "Text",
+            attrs: {},
+            content: [],
+          },
+        ],
+      },
+    ];
+  },
 };

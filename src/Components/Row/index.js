@@ -32,6 +32,7 @@ export default {
         paddingRight: 4,
         paddingBottom: 4,
         paddingLeft: 4,
+        allowChildren: true,
       },
       attrs
     );
@@ -40,14 +41,28 @@ export default {
   defaultContent: () => [
     {
       id: generateUUID(),
-      type: "Image",
-      content: [],
+      type: "Row",
+      content: [
+        {
+          id: generateUUID(),
+          type: "Image",
+          content: [],
+          attrs: {},
+        },
+      ],
       attrs: {},
     },
     {
       id: generateUUID(),
-      type: "Text",
-      content: [],
+      type: "Row",
+      content: [
+        {
+          id: generateUUID(),
+          type: "Text",
+          content: [],
+          attrs: {},
+        },
+      ],
       attrs: {},
     },
   ],
