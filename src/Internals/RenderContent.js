@@ -5,9 +5,7 @@ import reduce from "lodash/reduce";
 import find from "lodash/find";
 import assign from "lodash/assign";
 
-import Add from "elevate-ui-icons/Add";
-import Button from "elevate-ui/Button";
-import Edit from "elevate-ui-icons/Edit";
+import ActionBar from "./ActionBar";
 
 import type { $ContentBlock, $ContentBlocks, $Internals } from "types";
 
@@ -79,45 +77,7 @@ function renderChild(origChild: $ContentBlock, idx: number, props: $Props) {
       key={idx}
     >
       {element}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-end",
-          fontSize: "8px",
-          backgroundColor: "#eee",
-          justifyContent: "flex-end",
-          padding: "4px",
-        }}
-      >
-        <div style={{ marginRight: "4px" }}>
-          <Button
-            type="button"
-            color="secondary"
-            onClick={(e: Event) =>
-              internals.handleContentClick &&
-              internals.handleContentClick(e, child.id)
-            }
-          >
-            {child.type}
-            &nbsp;
-            <Edit size={12} />
-          </Button>
-        </div>
-
-        {child.attrs.allowChildren ? (
-          <Button
-            type="button"
-            onClick={() =>
-              internals.addChildToContent &&
-              internals.addChildToContent(child.id)
-            }
-            color="secondary"
-            isOutlined
-          >
-            <Add size={12} />
-          </Button>
-        ) : null}
-      </div>
+      <ActionBar content={child} internals={internals} />
     </div>
   );
 }
