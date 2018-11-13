@@ -28,6 +28,7 @@
     "react": "^16.5.0",
     "react-beautiful-dnd": "^9.0.2",
     "react-dom": "=16.5.0",
+    "react-draft-wysiwyg": "^1.12.13",
     "uploadcare-widget": "^3.6.1",
     "yup": "^0.26.3"
   },
