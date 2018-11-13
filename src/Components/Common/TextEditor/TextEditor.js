@@ -64,6 +64,35 @@ class TextEditor extends Component {
       <Editor
         editorState={editorState}
         onEditorStateChange={this.onEditorStateChange}
+        toolbar={{
+          options: [
+            "inline",
+            "blockType",
+            "list",
+            "textAlign",
+            "link",
+            "embedded",
+            "emoji",
+            "image",
+            "remove",
+            "history",
+          ],
+          inline: {
+            options: ["bold", "italic", "underline", "strikethrough"],
+          },
+          blockType: {
+            options: [
+              "Normal",
+              "H1",
+              "H2",
+              "H3",
+              "H4",
+              "H5",
+              "H6",
+              "Blockquote",
+            ],
+          },
+        }}
       />
     );
   }

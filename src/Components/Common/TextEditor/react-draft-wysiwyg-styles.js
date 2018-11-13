@@ -18,9 +18,11 @@ export default {
       boxShadow: "1px 1px 0px #BFBDBD",
     },
     ".rdw-option-wrapper:active": {
+      backgroundColor: "#ccc",
       boxShadow: "1px 1px 0px #BFBDBD inset",
     },
     ".rdw-option-active": {
+      backgroundColor: "#ccc",
       boxShadow: "1px 1px 0px #BFBDBD inset",
     },
     ".rdw-option-disabled": {
