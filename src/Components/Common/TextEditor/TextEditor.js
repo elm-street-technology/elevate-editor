@@ -94,7 +94,10 @@ class TextEditor extends Component {
             ],
           },
           embedded: {
-            popupClassName: classes.embeddedModal,
+            popupClassName: classes.optionModal,
+          },
+          link: {
+            popupClassName: classes.optionModal,
           },
         }}
       />
@@ -104,7 +107,7 @@ class TextEditor extends Component {
 
 const styles = () => ({
   ...editorStyles,
-  embeddedModal: {
+  optionModal: {
     left: "unset",
     right: 0,
   },

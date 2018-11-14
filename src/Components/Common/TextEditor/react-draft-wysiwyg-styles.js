@@ -1,3 +1,5 @@
+import WYSIWYGFormatting from "./WYSIWYGFormatting";
+
 export default {
   "@global": {
     ".rdw-option-wrapper": {
@@ -828,6 +830,11 @@ export default {
     },
     ".public-DraftStyleDefault-block": {
       margin: "1em 0",
+      position: "relative",
+      whiteSpace: "pre-wrap",
+    },
+    "h1 .public-DraftStyleDefault-block, h2 .public-DraftStyleDefault-block, h3 .public-DraftStyleDefault-block, h4 .public-DraftStyleDefault-block, h5 .public-DraftStyleDefault-block, h6 .public-DraftStyleDefault-block, p .public-DraftStyleDefault-block, ol .public-DraftStyleDefault-block, ul .public-DraftStyleDefault-block": {
+      margin: 0,
     },
     ".rdw-editor-wrapper:focus": {
       outline: "none",
@@ -856,117 +863,8 @@ export default {
       borderLeft: ".1px solid transparent",
       position: "relative",
       zIndex: "1",
-      "& blockquote": {
-        borderLeft: `4px solid #444`,
-        paddingLeft: 24,
-      },
-      "& strong": {
-        fontWeight: 600,
-      },
-      "& em": {
-        fontStyle: "italic",
-      },
-      "& h1": {
-        color: "#121130",
-        fontWeight: "700",
-        letterSpacing: ".2px",
-        lineHeight: "2.2rem",
-        fontSize: "32px",
-        marginTop: "44px",
-        marginBottom: "12px",
-      },
-
-      "& h2": {
-        fontSize: "26px",
-        fontWeight: "700",
-        lineHeight: "2.2rem",
-        marginTop: "32px",
-        marginBottom: "12px",
-      },
-
-      "& h3": {
-        fontSize: "21px",
-        fontWeight: "700",
-        lineHeight: "2.2rem",
-        marginTop: "32px",
-        marginBottom: "12px",
-      },
-
-      "& h4": {
-        fontSize: "21px",
-        fontWeight: "700",
-        lineHeight: "2.2rem",
-        marginTop: "32px",
-        marginBottom: "12px",
-      },
-
-      "& h5": {
-        fontSize: "21px",
-        fontWeight: "700",
-        lineHeight: "2.2rem",
-        marginTop: "32px",
-        marginBottom: "12px",
-      },
-
-      "& h6": {
-        fontSize: "21px",
-        fontWeight: "700",
-        lineHeight: "2.2rem",
-        marginTop: "32px",
-        marginBottom: "12px",
-      },
-
-      "& a": {
-        color: "#121130",
-        textDecoration: "underline",
-      },
-
-      "& ol": {
-        position: "relative",
-        counterReset: "item",
-      },
-
-      "& ol li": {
-        counterIncrement: "item",
-        paddingLeft: "24px",
-
-        "&:before": {
-          content: 'counter(item) "."',
-          position: "absolute",
-          left: "0",
-          fontWeight: "700",
-        },
-      },
-
-      "& ul": {
-        listStyleType: "disc",
-      },
-
-      "& ul li": {
-        marginLeft: "18px",
-      },
-
-      "& p": {
-        display: "block",
-        marginTop: "4px",
-        marginBottom: "8px",
-        lineHeight: "1.2rem",
-      },
-      "& span": {
-        display: "inline-block",
-        marginTop: "4px",
-        marginBottom: "8px",
-        lineHeight: "1.2em",
-      },
-      "& img": {
-        display: "block",
-        maxWidth: "100%",
-        marginBottom: "16px",
-      },
-
-      "& b": {
-        fontWeight: "600",
-      },
+      lineHeight: "1.35em",
+      ...WYSIWYGFormatting,
     },
     ".public-DraftEditor-block": {
       position: "relative",
@@ -1003,10 +901,6 @@ export default {
     },
     ".DraftEditorPlaceholder-hidden": {
       display: "none",
-    },
-    ".public-DraftStyleDefault-block": {
-      position: "relative",
-      whiteSpace: "pre-wrap",
     },
     ".public-DraftStyleDefault-ltr": {
       direction: "ltr",
