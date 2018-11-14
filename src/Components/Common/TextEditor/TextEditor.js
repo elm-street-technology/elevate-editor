@@ -59,6 +59,7 @@ class TextEditor extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     const { editorState } = this.state;
     return (
       <Editor
@@ -92,12 +93,21 @@ class TextEditor extends Component {
               "Blockquote",
             ],
           },
+          embedded: {
+            popupClassName: classes.embeddedModal,
+          },
         }}
       />
     );
   }
 }
 
-const styles = () => editorStyles;
+const styles = () => ({
+  ...editorStyles,
+  embeddedModal: {
+    left: "unset",
+    right: 0,
+  },
+});
 
 export default withStyles(styles)(TextEditor);
