@@ -3,9 +3,10 @@
 import React from "react";
 import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
-
 import Add from "elevate-ui-icons/Add";
 import Edit from "elevate-ui-icons/Edit";
+
+import Delete from "../Components/Common/Delete";
 
 import type { $Internals, $ContentBlock } from "types";
 
@@ -18,13 +19,23 @@ type Props = {
 
 const ActionBar = ({ classes, className, internals, content }: Props) => (
   <div className={classNames(classes.root, className)}>
+    {content.attrs.allowChildren ? (
+      <button
+        type="button"
+        className={classes.add}
+        onClick={() =>
+          internals.addChildToContent && internals.addChildToContent(content.id)
+        }
+      >
+        <Add size={12} />
+      </button>
+    ) : null}
+
     <button
       type="button"
-      color="secondary"
       className={classes.alignCenter}
       onClick={(e: Event) =>
-        internals.handleContentClick &&
-        internals.handleContentClick(e, content.id)
+        internals.showSidebar && internals.showSidebar(e, content.id)
       }
     >
       {content.type}
@@ -32,21 +43,12 @@ const ActionBar = ({ classes, className, internals, content }: Props) => (
       <Edit size={12} />
     </button>
 
-    {content.attrs.allowChildren ? (
-      <div style={{ marginLeft: "4px" }}>
-        <button
-          type="button"
-          onClick={() =>
-            internals.addChildToContent &&
-            internals.addChildToContent(content.id)
-          }
-          color="secondary"
-          isOutlined
-        >
-          <Add size={12} />
-        </button>
-      </div>
-    ) : null}
+    {content.attrs.disableDelete ? null : (
+      <Delete
+        id={content.id}
+        deleteContent={(id) => internals.deleteContent(id)}
+      />
+    )}
   </div>
 );
 
@@ -63,6 +65,10 @@ const styles = (theme) => ({
   alignCenter: {
     display: "flex",
     alignItems: "center",
+  },
+  add: {
+    display: "flex",
+    flexGrow: 1,
   },
 });
 

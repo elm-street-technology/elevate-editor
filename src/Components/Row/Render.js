@@ -64,7 +64,6 @@ class RowPreview extends Component<$Props> {
                   provided.draggableProps.style
                 )}
                 className={classes.draggable}
-                onClick={(e) => internals.handleContentClick(e, child.id)}
               >
                 {renderedChild}
               </div>

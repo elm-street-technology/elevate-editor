@@ -3,23 +3,46 @@ import assign from "lodash/assign";
 
 import Render from "./Render";
 import Form from "./Form";
-import Preview from "./Preview";
+import { Tools } from "../..";
+
+const defaultAttrs = (attrs: Object = {}) =>
+  assign(
+    {},
+    {
+      color: "#000000",
+      thickness: 1,
+    },
+    attrs
+  );
 
 export default {
   Render,
   Form,
-  Preview,
   type: "HorizontalRule",
   description:
     "Horizontal Rule component to create a clear separation of content.",
-  image: "http://picsum.photos/600/300",
-  defaultAttrs: (attrs: Object = {}) =>
-    assign(
-      {},
+  defaultAttrs,
+  generateContent() {
+    return [
       {
-        color: "#000000",
-        thickness: 1,
+        id: Tools.generateUUID(),
+        type: "Row",
+        attrs: {
+          width: "100%",
+          paddingTop: 4,
+          paddingRight: 4,
+          paddingBottom: 4,
+          paddingLeft: 4,
+        },
+        content: [
+          {
+            id: Tools.generateUUID(),
+            type: "HorizontalRule",
+            attrs: defaultAttrs(),
+            content: [],
+          },
+        ],
       },
-      attrs
-    ),
+    ];
+  },
 };

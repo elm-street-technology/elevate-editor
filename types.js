@@ -15,7 +15,6 @@ export type $Component = {
   generateContent?: () => $ContentBlocks,
   type: string,
   defaultAttrs?: (Object) => Object,
-  defaultContent?: (Object) => $ContentBlocks,
 };
 export type $Components = $Component[];
 
@@ -23,14 +22,13 @@ export type $Internals = {|
   isEditor: boolean,
   key?: number | string,
   editingContentId: null | string,
-  handleContentClick: (e: Event, id: string) => void,
+  showSidebar: (e: Event, id: string) => void,
   addChildToContent: Function,
   editingContentFormAttrs: null | Object,
   components: $Components,
+  deleteContent: Function,
 |};
 
 export type $SidebarProps = {
-  disableDelete: boolean,
-  deleteContent: Function,
   cancelEdit: Function,
 };

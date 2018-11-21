@@ -9,7 +9,6 @@ import withStyles from "elevate-ui/withStyles";
 
 type Props = {
   classes: Object,
-  className: Object,
   deleteContent: Function,
   id: string,
 };
@@ -39,19 +38,18 @@ class Delete extends Component<Props, State> {
   };
 
   render() {
-    const { classes, className } = this.props;
+    const { classes } = this.props;
     const { showConfirmation } = this.state;
     return (
       <Fragment>
-        <Button
-          onClick={this.toggleConfirmation}
-          className={className}
-          icon={<DeleteForever />}
+        <button
           type="button"
-          color="primary"
+          onClick={this.toggleConfirmation}
+          className={classes.trash}
         >
-          Delete
-        </Button>
+          <DeleteForever size={12} />
+        </button>
+
         <Modal isOpen={showConfirmation}>
           <Typography
             type="heading6"
@@ -87,6 +85,9 @@ class Delete extends Component<Props, State> {
 }
 
 const styles = (theme) => ({
+  trash: {
+    display: "flex",
+  },
   confirmText: {
     textAlign: "center",
   },

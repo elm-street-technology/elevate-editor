@@ -15,7 +15,7 @@ const HorizontalRulePreview = ({
   <Hr
     color={color || "primary"}
     thickness={parseInt(thickness) || 2}
-    style={{ margin: "0 auto" }}
+    style={{ margin: "0 auto", minWidth: "25px" }}
   />
 );
 

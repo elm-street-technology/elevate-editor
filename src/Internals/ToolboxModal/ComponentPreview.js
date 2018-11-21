@@ -2,24 +2,35 @@
 import React from "react";
 import withStyles from "elevate-ui/withStyles";
 import Typography from "elevate-ui/Typography";
+import { Tools } from "../..";
+
+import type { $Internals } from "types";
 
 type $Props = {
   activeComponent: Object | null,
   classes: Object,
+  internals: $Internals,
 };
 
-const ComponentPreview = ({ activeComponent, classes }: $Props) => {
+const ComponentPreview = ({ activeComponent, classes, internals }: $Props) => {
   if (activeComponent) {
+    let preview = null;
+    if (activeComponent.generateContent) {
+      preview = activeComponent.generateContent();
+    }
+
+    if (!Array.isArray(preview) && preview) {
+      preview = [preview];
+    }
+
     return (
       <div className={classes.root}>
         <Typography type="heading6" gutterBottom>
           {activeComponent.type} Preview
         </Typography>
-        <img
-          src={activeComponent && activeComponent.image}
-          alt={activeComponent && activeComponent.type}
-          className={classes.previewImage}
-        />
+        <div className={classes.preview}>
+          {preview ? Tools.renderReact(preview, internals.components) : null}
+        </div>
         <Typography type="body" gutterTop>
           {activeComponent && activeComponent.description}
         </Typography>
@@ -42,6 +53,13 @@ const styles = (theme) => ({
     position: "relative",
     overflowY: "scroll",
     padding: "20px",
+  },
+  preview: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    padding: "20px 0",
+    border: "1px dotted #ddd",
   },
   previewImage: {
     maxWidth: "100%",

@@ -1,14 +1,12 @@
 // @flow
 
-import Preview from "./Preview";
 import { Tools } from "elevate-editor";
 
 export default {
-  Preview,
   type: "SignatureBlock",
   description:
     "An email signature component that includes contact information, photo, and more...",
-  image: "http://picsum.photos/600/300",
+
   generateContent() {
     return [
       {

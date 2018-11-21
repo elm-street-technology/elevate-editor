@@ -47,7 +47,7 @@ type State = {
   editingContent: null | $ContentBlock,
   components: $Components,
   toolboxModalId: null | string,
-  unsavedChanges: null | string, // id of component to edit after saving or discarding changes
+  unsavedChanges: null | string | Function, // id of component to edit after saving or discarding changes or a callback Fn
 };
 
 // a little function to help us with reordering the result
@@ -66,15 +66,17 @@ function renderReact(
   content: $ContentBlocks = [],
   components: $Components = []
 ) {
+  const allComponents = combineComponents(components);
   return (
     <ThemeProvider>
       <RenderContent
-        content={content}
+        content={Editor.setDefaultProps(content, allComponents)}
         internals={{
           isEditor: false, // an indicator to not show CSS related to editing content
-          components: combineComponents(components),
+          components: allComponents,
           addChildToContent: () => {},
-          handleContentClick: (e, id) => {
+          deleteContent: () => {},
+          showSidebar: (e, id) => {
             return;
           },
           editingContentFormAttrs: null,
@@ -107,7 +109,7 @@ class Editor extends Component<Props, State> {
 
     this.state = {
       editingContent: null,
-      content: this.setDefaultProps(
+      content: Editor.setDefaultProps(
         props.content && props.content.length
           ? props.content
           : [
@@ -133,7 +135,7 @@ class Editor extends Component<Props, State> {
       JSON.stringify(prevProps.content) !== JSON.stringify(this.props.content)
     ) {
       this.setState({
-        content: this.setDefaultProps(
+        content: Editor.setDefaultProps(
           this.props.content,
           this.state.components
         ),
@@ -141,7 +143,7 @@ class Editor extends Component<Props, State> {
     }
   }
 
-  setDefaultProps(
+  static setDefaultProps(
     content: $ContentBlocks,
     components: $Components
   ): $ContentBlocks {
@@ -152,7 +154,6 @@ class Editor extends Component<Props, State> {
           component.defaultAttrs && typeof component.defaultAttrs === "function"
         )
       ) {
-        // debugger;
         throw new Error(
           `${
             child.type
@@ -165,13 +166,8 @@ class Editor extends Component<Props, State> {
         attrs: component.defaultAttrs(child.attrs || {}),
         content:
           child.content && child.content.length
-            ? this.setDefaultProps(child.content, components)
-            : this.setDefaultProps(
-                component && component.defaultContent
-                  ? component.defaultContent(child)
-                  : [],
-                components
-              ),
+            ? Editor.setDefaultProps(child.content, components)
+            : Editor.setDefaultProps([], components),
       };
     });
   }
@@ -189,20 +185,36 @@ class Editor extends Component<Props, State> {
     return this.state.content;
   };
 
-  cancelEdit = () => {
-    const componentId = this.state.unsavedChanges;
+  /**
+   * Used by parent before exporting json/html to make sure the last editted content block is fully saved
+   * Returns boolean, but has side effect of triggering unsaved changes modal
+   */
+  hasUnsavedChanges(cb: Function): boolean {
+    const activeContentBlockId =
+      this.state.editingContent && this.state.editingContent.id;
+    if (activeContentBlockId) {
+      this.setState({ unsavedChanges: cb });
+      return true; // Indicator to parent form to wait on exporting json / html
+    }
+    return false; // Indicator to parent form it's ok to export json / html
+  }
 
+  handleUnsavedChanges() {
+    const contentIdOrCallback = this.state.unsavedChanges;
+    if (contentIdOrCallback && typeof contentIdOrCallback !== "function") {
+      this.showSidebar(null, contentIdOrCallback);
+    } else if (contentIdOrCallback) {
+      contentIdOrCallback(); // callback function from parent after we confirmed latest component changes were saved or discarded
+    }
+  }
+
+  cancelEdit = () => {
     this.setState(
       {
         editingContent: null,
         toolboxModalId: null,
-        unsavedChanges: null,
       },
-      () => {
-        if (componentId) {
-          this.handleContentClick(null, componentId);
-        }
-      }
+      () => this.handleUnsavedChanges()
     );
   };
 
@@ -211,6 +223,9 @@ class Editor extends Component<Props, State> {
   };
 
   deleteContent = (contentId) => {
+    if (!contentId) {
+      return;
+    }
     const content = [...this.state.content];
     this.recursiveDelete(contentId, content);
     this.setState({ content, editingContent: null });
@@ -274,7 +289,7 @@ class Editor extends Component<Props, State> {
     });
   }
 
-  handleContentClick = (
+  showSidebar = (
     e: null | Event,
     id: string,
     props?: { prev: Object, next: Object }
@@ -299,6 +314,7 @@ class Editor extends Component<Props, State> {
 
     this.setState({
       editingContent: this.findContentById(id),
+      unsavedChanges: null,
     });
   };
 
@@ -313,19 +329,12 @@ class Editor extends Component<Props, State> {
     }
     component.attrs = attrs;
 
-    const componentId = this.state.unsavedChanges;
-
     this.setState(
       {
-        unsavedChanges: null,
         editingContent: null,
         content,
       },
-      () => {
-        if (componentId) {
-          this.handleContentClick(null, componentId);
-        }
-      }
+      () => this.handleUnsavedChanges()
     );
   }
 
@@ -348,14 +357,14 @@ class Editor extends Component<Props, State> {
         typeof newComponent.generateContent === "function"
       ) {
         parentComponent.content = parentComponent.content.concat(
-          this.setDefaultProps(
+          Editor.setDefaultProps(
             newComponent.generateContent(),
             this.state.components
           )
         );
       } else {
         parentComponent.content = parentComponent.content.concat(
-          this.setDefaultProps(
+          Editor.setDefaultProps(
             [{ type, content: [], attrs: {}, id: generateUUID() }],
             this.state.components
           )
@@ -391,28 +400,26 @@ class Editor extends Component<Props, State> {
               editingContent && (Object.keys(editingContent.attrs) || []);
             const formValues =
               formProps && (Object.keys(formProps.values) || []);
+            const internals = {
+              isEditor: true, // an indicator to not show CSS related to editing content
+              showSidebar: (e, id) =>
+                this.showSidebar(e, id, {
+                  prev:
+                    editingContent && editingContent.attrs
+                      ? editingContent.attrs
+                      : {},
+                  next: formProps.values,
+                }),
+              editingContentFormAttrs: formProps.values,
+              editingContentId: editingContent && editingContent.id,
+              addChildToContent: (id: string) => this.openToolboxModal(id),
+              components,
+              deleteContent: (id) => this.deleteContent(id),
+            };
             return (
               <Form className={classes.root}>
                 <div className={classes.preview}>
-                  <RenderContent
-                    content={content}
-                    internals={{
-                      isEditor: true, // an indicator to not show CSS related to editing content
-                      handleContentClick: (e, id) =>
-                        this.handleContentClick(e, id, {
-                          prev:
-                            editingContent && editingContent.attrs
-                              ? editingContent.attrs
-                              : {},
-                          next: formProps.values,
-                        }),
-                      editingContentFormAttrs: formProps.values,
-                      editingContentId: editingContent && editingContent.id,
-                      addChildToContent: (id: string) =>
-                        this.openToolboxModal(id),
-                      components,
-                    }}
-                  />
+                  <RenderContent content={content} internals={internals} />
                 </div>
                 {editingContent &&
                 formProps &&
@@ -421,10 +428,6 @@ class Editor extends Component<Props, State> {
                     <SidebarForm
                       type={editingContent.type}
                       cancelEdit={this.cancelEdit}
-                      deleteContent={() =>
-                        this.deleteContent(editingContent.id)
-                      }
-                      disableDelete={editingContent.attrs.disableDelete}
                     >
                       {React.createElement(
                         find(components, { type: editingContent.type }).Form,
@@ -439,16 +442,17 @@ class Editor extends Component<Props, State> {
                   isOpen={this.state.unsavedChanges}
                   type={editingContent && editingContent.type}
                 />
+                <ToolboxModal
+                  id={toolboxModalId}
+                  components={components}
+                  onSelect={(id: string, type: string) =>
+                    this.addChildToContent(id, type)
+                  }
+                  internals={internals}
+                />
               </Form>
             );
           }}
-        />
-        <ToolboxModal
-          id={toolboxModalId}
-          components={components}
-          onSelect={(id: string, type: string) =>
-            this.addChildToContent(id, type)
-          }
         />
       </DragDropContext>
     );

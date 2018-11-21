@@ -11,12 +11,15 @@ import Add from "elevate-ui-icons/Add";
 import Sidebar from "./ToolboxModal/Sidebar";
 import ComponentPreview from "./ToolboxModal/ComponentPreview";
 
+import type { $Internals } from "types";
+
 type $Props = {
   classes: Object,
   className?: string,
   id?: string,
   onSelect: Function,
   theme: Object,
+  internals: $Internals,
 };
 
 type $State = {
@@ -76,7 +79,7 @@ class ToolboxModal extends Component<$Props, $State> {
   };
 
   render() {
-    const { classes, className, onSelect, theme } = this.props;
+    const { classes, className, onSelect, theme, internals } = this.props;
     const {
       activeComponent,
       filteredComponents,
@@ -98,7 +101,10 @@ class ToolboxModal extends Component<$Props, $State> {
               filterInput={filterInput}
               handleComponentClick={this.handleComponentClick}
             />
-            <ComponentPreview activeComponent={activeComponent} />
+            <ComponentPreview
+              internals={internals}
+              activeComponent={activeComponent}
+            />
           </div>
           <div className={classes.bottom}>
             <Button
