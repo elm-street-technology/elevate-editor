@@ -13,17 +13,17 @@ const defaultAttrs = (attrs: Object = {}) => {
       height: "inherit",
       borderSize: 0,
       borderColor: "#000000",
-      backgroundColor: "#ffffff",
+      backgroundColor: "transparent",
       backgroundImage: "",
       backgroundSize: "",
       upload: "",
       direction: "vertical",
       alignment: "left",
-      paddingTop: 4,
-      paddingRight: 4,
-      paddingBottom: 4,
-      paddingLeft: 4,
-      allowChildren: true,
+      paddingTop: 8,
+      paddingRight: 8,
+      paddingBottom: 8,
+      paddingLeft: 8,
+      allowChildren: false,
     },
     attrs
   );
@@ -41,35 +41,8 @@ export default {
     {
       id: generateUUID(),
       type: "Row",
-      content: [
-        {
-          id: generateUUID(),
-          type: "Row",
-          content: [
-            {
-              id: generateUUID(),
-              type: "Image",
-              content: [],
-              attrs: {},
-            },
-          ],
-          attrs: defaultAttrs(),
-        },
-        {
-          id: generateUUID(),
-          type: "Row",
-          content: [
-            {
-              id: generateUUID(),
-              type: "Text",
-              content: [],
-              attrs: { children: "Your text" },
-            },
-          ],
-          attrs: defaultAttrs(),
-        },
-      ],
-      attrs: defaultAttrs({ direction: "horizontal" }),
+      content: [],
+      attrs: defaultAttrs({ direction: "vertical" }),
     },
   ],
 };

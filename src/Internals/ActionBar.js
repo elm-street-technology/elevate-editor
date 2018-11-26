@@ -19,7 +19,7 @@ type Props = {
 
 const ActionBar = ({ classes, className, internals, content }: Props) => (
   <div className={classNames(classes.root, className)}>
-    {content.attrs.allowChildren ? (
+    {/* {content.attrs.allowChildren ? (
       <button
         type="button"
         className={classes.add}
@@ -27,21 +27,19 @@ const ActionBar = ({ classes, className, internals, content }: Props) => (
           internals.addChildToContent && internals.addChildToContent(content.id)
         }
       >
-        <Add size={12} />
+        <Add size={16} />
       </button>
-    ) : null}
+    ) : null} */}
 
-    <button
+    {/* <button
       type="button"
       className={classes.alignCenter}
       onClick={(e: Event) =>
         internals.showSidebar && internals.showSidebar(e, content.id)
       }
     >
-      {content.type}
-      &nbsp;
-      <Edit size={12} />
-    </button>
+      <Edit size={16} />
+    </button> */}
 
     {content.attrs.disableDelete ? null : (
       <Delete

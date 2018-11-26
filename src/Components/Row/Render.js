@@ -37,41 +37,41 @@ class RowPreview extends Component<$Props> {
     } = this.props;
 
     const isActive = internals.editingContentId === id;
-    return (
-      content &&
-      content.map((child, idx) => {
-        if (!child) {
-          return null;
-        }
+    if (!(content && content.length)) {
+      return <div>This row is empty. TODO: Click to add a new component.</div>; // TODO: Zero-content placeholder and ability to add components to a row
+    }
+    return content.map((child, idx) => {
+      if (!child) {
+        return null;
+      }
 
-        const renderedChild = (
-          <RenderContent key={idx} internals={internals} content={[child]} />
-        );
-        if (!isActive || content.length === 1) {
-          // content === 1 check because we don't want to show something as draggable when there are no other siblings to sort against
-          return renderedChild;
-        }
+      const renderedChild = (
+        <RenderContent key={idx} internals={internals} content={[child]} />
+      );
+      if (!isActive || content.length === 1) {
+        // content === 1 check because we don't want to show something as draggable when there are no other siblings to sort against
+        return renderedChild;
+      }
 
-        return (
-          <Draggable key={child.id} draggableId={child.id} index={idx}>
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                style={getItemStyle(
-                  snapshot.isDragging,
-                  provided.draggableProps.style
-                )}
-                className={classes.draggable}
-              >
-                {renderedChild}
-              </div>
-            )}
-          </Draggable>
-        );
-      })
-    );
+      return (
+        <Draggable key={child.id} draggableId={child.id} index={idx}>
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              style={getItemStyle(
+                snapshot.isDragging,
+                provided.draggableProps.style
+              )}
+              className={classes.draggable}
+            >
+              {renderedChild}
+            </div>
+          )}
+        </Draggable>
+      );
+    });
   }
 
   render() {
@@ -106,10 +106,10 @@ class RowPreview extends Component<$Props> {
 
 export default withStyles((theme) => ({
   root: {
-    width: "100%",
-    margin: "0 auto",
-    overflowY: "hidden",
-    overflowX: "scroll",
+    // width: "100%",
+    // margin: "0 auto",
+    // overflowY: "hidden",
+    // overflowX: "scroll",
   },
   row: {
     display: "flex",
@@ -166,7 +166,7 @@ export default withStyles((theme) => ({
     },
   },
   draggable: {
-    border: `1px dashed ${theme.colors.secondary}`,
-    margin: "2px",
+    // border: `1px dashed ${theme.colors.secondary}`,
+    // margin: "2px",
   },
 }))(RowPreview);
