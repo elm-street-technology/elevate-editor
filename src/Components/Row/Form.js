@@ -68,16 +68,6 @@ const RowForm = (props: $SidebarProps) => (
         { label: "Contain", value: "contain" },
       ]}
     />
-    <FastField
-      id="direction"
-      name="direction"
-      label="Direction"
-      component={Select}
-      items={[
-        { label: "Vertical", value: "vertical" },
-        { label: "Horizontal", value: "horizontal" },
-      ]}
-    />
   </Fragment>
 );
 export default RowForm;

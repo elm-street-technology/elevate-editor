@@ -3184,10 +3184,10 @@ elevate-ui@^0.17.0:
     react-loadable "4.0.5"
     react-table "^6.8.6"
 
-elevate-ui@^0.18.1:
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.18.1.tgz#b88545200eced3920734293ca5f14f69ab6ee1c4"
-  integrity sha512-kHF3cHGgvdYW7ovBe/z625ArY6SmzR7CuHrhWRvrBL1IBZhQn9EU3jUY+9dAeeze6nQaQe12SN/iv59mQu9gAQ==
+elevate-ui@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.24.0.tgz#05eaed37849fff74375d1235ff62644517121784"
+  integrity sha512-5cQJNjQp9anpviCWppzISuRG/CTqV5zkT7j3Ks7+zCEq3ws2JCCh1JHm53fGR98gRyg3nNj3hwthjgAObeizcw==
   dependencies:
     classnames "^2.2.6"
     color "^3.0.0"
@@ -3196,6 +3196,7 @@ elevate-ui@^0.18.1:
     lodash "^4.17.10"
     moment "^2.22.2"
     react "^16.5.2"
+    react-aria-modal "^3.0.1"
     react-datetime "^2.15.0"
     react-input-autosize "^2.2.1"
     react-jss "^8.6.1"
@@ -3933,6 +3934,21 @@ fn-name@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/fn-name/-/fn-name-2.0.1.tgz#5214d7537a4d06a4a301c0cc262feb84188002e7"
   integrity sha1-UhTXU3pNBqSjAcDMJi/rhBiAAuc=
+
+focus-trap-react@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/focus-trap-react/-/focus-trap-react-4.0.1.tgz#3cffd39341df3b2f546a4a2fe94cfdea66154683"
+  integrity sha512-UUZKVEn5cFbF6yUnW7lbXNW0iqN617ShSqYKgxctUvWw1wuylLtyVmC0RmPQNnJ/U+zoKc/djb0tZMs0uN/0QQ==
+  dependencies:
+    focus-trap "^3.0.0"
+
+focus-trap@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-3.0.0.tgz#4d2ee044ae66bf7eb6ebc6c93bd7a1039481d7dc"
+  integrity sha512-jTFblf0tLWbleGjj2JZsAKbgtZTdL1uC48L8FcmSDl4c2vDoU4NycN1kgV5vJhuq1mxNFkw7uWZ1JAGlINWvyw==
+  dependencies:
+    tabbable "^3.1.0"
+    xtend "^4.0.1"
 
 follow-redirects@^1.0.0:
   version "1.5.8"
@@ -8047,6 +8063,15 @@ react-app-polyfill@^0.1.3:
     raf "3.4.0"
     whatwg-fetch "3.0.0"
 
+react-aria-modal@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-aria-modal/-/react-aria-modal-3.0.1.tgz#d3cf814955a626c4015684abac7c5019596c5f5d"
+  integrity sha512-H0pV5ITXe6JCQAUGoSiSncfTeGunImT8KFzLLMisuzOzsG4X7GZQJGcjk6uSwZmvwZpHL+EjMwRD+vJZx3nG8g==
+  dependencies:
+    focus-trap-react "^4.0.0"
+    no-scroll "^2.1.1"
+    react-displace "^2.3.0"
+
 react-beautiful-dnd@^9.0.2:
   version "9.0.2"
   resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-9.0.2.tgz#9785a96c1f1385620aed840f0bc774c7455b3fd4"
@@ -8099,6 +8124,11 @@ react-dev-utils@^6.0.4:
     sockjs-client "1.1.5"
     strip-ansi "4.0.0"
     text-table "0.2.0"
+
+react-displace@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-displace/-/react-displace-2.3.0.tgz#6915f8f2f279a29a7b58442405c26edc3d441429"
+  integrity sha512-T8g/lyn3IX8kxLO4k4vJ/oIO9G72pRTc9GYslqKsfPcN4gY5+FYR5OHxeTH1skPjVylJrveGE3OC2qCt3BuHeA==
 
 react-dom@^16.5.0, react-dom@^16.5.2:
   version "16.5.2"
@@ -9366,6 +9396,11 @@ synchronous-promise@^2.0.5:
   resolved "https://registry.yarnpkg.com/synchronous-promise/-/synchronous-promise-2.0.6.tgz#de76e0ea2b3558c1e673942e47e714a930fa64aa"
   integrity sha512-TyOuWLwkmtPL49LHCX1caIwHjRzcVd62+GF6h8W/jHOeZUFHpnd2XJDVuUlaTaLPH1nuu2M69mfHr5XbQJnf/g==
 
+tabbable@^3.1.0:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-3.1.1.tgz#db7512f28a9a1ed16e4275bd190131be9d5ad8e9"
+  integrity sha512-583MHIOwictf7+zbxqO/L5fBqMN6Li4SJ1XTKQA9WzHRA7c2BB+D+Ny7Y6kGqU2u+rHK59+oRzrBvMU53aZz+A==
+
 table@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/table/-/table-4.0.3.tgz#00b5e2b602f1794b9acaf9ca908a76386a7813bc"
@@ -10296,7 +10331,7 @@ xregexp@4.0.0:
   resolved "https://registry.yarnpkg.com/xregexp/-/xregexp-4.0.0.tgz#e698189de49dd2a18cc5687b05e17c8e43943020"
   integrity sha512-PHyM+sQouu7xspQQwELlGwwd05mXUFqwFYfqPO0cC7x4fxyHnnuetmQr6CjJiafIDoH4MogHb9dOoJzR/Y4rFg==
 
-xtend@^4.0.0, xtend@~4.0.1:
+xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
   integrity sha1-pcbVMr5lbiPbgg77lDofBJmNY68=

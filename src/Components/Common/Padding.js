@@ -14,34 +14,36 @@ const Padding = ({ classes }: Props) => (
     <Typography type="heading6" className={classes.headline}>
       Padding
     </Typography>
-    <FastField
-      id="paddingTop"
-      name="paddingTop"
-      label="Top"
-      component={NumberIncrement}
-      min="0"
-    />
-    <FastField
-      id="paddingRight"
-      name="paddingRight"
-      label="Right"
-      component={NumberIncrement}
-      min="0"
-    />
-    <FastField
-      id="paddingBottom"
-      name="paddingBottom"
-      label="Bottom"
-      component={NumberIncrement}
-      min="0"
-    />
-    <FastField
-      id="paddingLeft"
-      name="paddingLeft"
-      label="Left"
-      component={NumberIncrement}
-      min="0"
-    />
+    <div className={classes.grid}>
+      <FastField
+        id="paddingTop"
+        name="paddingTop"
+        label="Top"
+        component={NumberIncrement}
+        min="0"
+      />
+      <FastField
+        id="paddingRight"
+        name="paddingRight"
+        label="Right"
+        component={NumberIncrement}
+        min="0"
+      />
+      <FastField
+        id="paddingLeft"
+        name="paddingLeft"
+        label="Left"
+        component={NumberIncrement}
+        min="0"
+      />
+      <FastField
+        id="paddingBottom"
+        name="paddingBottom"
+        label="Bottom"
+        component={NumberIncrement}
+        min="0"
+      />
+    </div>
   </Fragment>
 );
 
@@ -55,8 +57,13 @@ const styles = () => ({
     flexFlow: "row nowrap",
     alignItems: "center",
   },
-  icon: {
-    marginLeft: 8,
+  grid: {
+    display: "grid",
+    justifyItems: "center",
+    alignItems: "center",
+    gridTemplateColumns: "1fr 1fr",
+    gridTemplateRows: "1fr 1fr",
+    gridGap: "16px",
   },
 });
 

@@ -1,7 +1,8 @@
 // @flow
 import React, { Component, Fragment } from "react";
+import classNames from "classnames";
 import Button from "elevate-ui/Button";
-import DeleteForever from "elevate-ui-icons/DeleteForever";
+import DeleteIcon from "elevate-ui-icons/Delete";
 import Cancel from "elevate-ui-icons/Cancel";
 import Modal from "./Modal";
 import Typography from "elevate-ui/Typography";
@@ -9,6 +10,7 @@ import withStyles from "elevate-ui/withStyles";
 
 type Props = {
   classes: Object,
+  className: string,
   deleteContent: Function,
   id: string,
 };
@@ -38,16 +40,16 @@ class Delete extends Component<Props, State> {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, className } = this.props;
     const { showConfirmation } = this.state;
     return (
       <Fragment>
         <button
           type="button"
           onClick={this.toggleConfirmation}
-          className={classes.trash}
+          className={classNames(classes.trash, className)}
         >
-          <DeleteForever size={12} />
+          <DeleteIcon size={16} />
         </button>
 
         <Modal isOpen={showConfirmation}>
@@ -71,7 +73,7 @@ class Delete extends Component<Props, State> {
             </Button>
             <Button
               onClick={() => this.handleDelete()}
-              icon={<DeleteForever />}
+              icon={<DeleteIcon />}
               type="button"
               color="primary"
             >

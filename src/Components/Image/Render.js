@@ -24,7 +24,6 @@ const ImagePreview = ({
       height={height}
       alt={alt}
       title={title}
-      // className={classes.image}
     />
   );
   if (!url) {

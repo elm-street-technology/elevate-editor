@@ -6,7 +6,26 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 render(
-  <ThemeProvider>
+  <ThemeProvider
+    theme={{
+      colors: {},
+      overrides: {
+        NumberIncrement: {
+          root: {
+            maxWidth: "160px",
+          },
+          input: {
+            flex: "1",
+          },
+        },
+        EuiScaffold: {
+          root: {
+            margin: "0 auto",
+          },
+        },
+      },
+    }}
+  >
     <Router>
       <App />
     </Router>

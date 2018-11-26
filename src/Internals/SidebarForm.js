@@ -15,8 +15,10 @@ const SidebarForm = ({
 }: Object) => {
   return (
     <div>
-      <Typography type="heading3">Editing {type}</Typography>
-      {children}
+      <Typography type="heading3" gutterBottom>
+        Editing {type}
+      </Typography>
+      <div className={classes.grid}>{children}</div>
       <div className={classes.buttonGroup}>
         <Cancel className={classes.halfButton} cancelEdit={cancelEdit} />
         <Submit className={classes.halfButton} />
@@ -35,6 +37,11 @@ const styles = (theme) => ({
   },
   halfButton: {
     flex: "0 1 45%",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridGap: "24px",
   },
 });
 

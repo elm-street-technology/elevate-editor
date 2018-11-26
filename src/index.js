@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from "react";
+import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 import { Formik, Form } from "formik";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -11,6 +12,7 @@ import ReactDOMServer from "react-dom/server";
 import noScroll from "no-scroll";
 
 import generateUUID from "./utils/generate-uuid";
+import Constants from "./utils/constants";
 
 import RenderContent from "./Internals/RenderContent";
 import SidebarForm from "./Internals/SidebarForm";
@@ -34,11 +36,7 @@ import type {
 const InternalComponents = [Button, HorizontalRule, Image, Row, Text];
 
 type Props = {
-  classes: {
-    root: Object,
-    preview: Object,
-    sidebar: Object,
-  },
+  classes: Object,
   components?: $Components,
   content: $ContentBlocks,
 };
@@ -68,7 +66,24 @@ function renderReact(
 ) {
   const allComponents = combineComponents(components);
   return (
-    <ThemeProvider>
+    <ThemeProvider
+      theme={{
+        colors: {},
+        overrides: {
+          EuiInput: {
+            root: {
+              background: "red",
+            },
+          },
+          EuiScaffold: {
+            root: {
+              margin: "0 auto",
+              background: "red",
+            },
+          },
+        },
+      }}
+    >
       <RenderContent
         content={Editor.setDefaultProps(content, allComponents)}
         internals={{
@@ -142,6 +157,22 @@ class Editor extends Component<Props, State> {
       });
     }
   }
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.keydownListener, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keydownListener, false);
+  }
+
+  keydownListener = (e: KeyboardEvent) => {
+    if (e.keyCode === 27) {
+      // Escape key
+      if (this.state.editingContent) {
+        this.cancelEdit();
+      }
+    }
+  };
 
   static setDefaultProps(
     content: $ContentBlocks,
@@ -417,7 +448,12 @@ class Editor extends Component<Props, State> {
               deleteContent: (id) => this.deleteContent(id),
             };
             return (
-              <Form className={classes.root}>
+              <Form
+                className={classNames(
+                  classes.root,
+                  editingContent && classes.editingContent
+                )}
+              >
                 <div className={classes.preview}>
                   <RenderContent content={content} internals={internals} />
                 </div>
@@ -468,12 +504,17 @@ export default withStyles((theme) => ({
     height: "100%",
     backgroundColor: "#fff",
   },
+  editingContent: {
+    "& $preview": {
+      paddingRight: "360px", // Scoots the preview over to ensure it doesn't render under the sidebar nav, not sure if I like this
+    },
+  },
   preview: {
     flex: "1",
     width: "100%",
     height: "auto",
     overflowX: "hidden",
-    overflowY: "scroll",
+    overflowY: "auto",
   },
   sidebar: {
     position: "absolute",
@@ -487,9 +528,10 @@ export default withStyles((theme) => ({
     height: "100%",
     overflowX: "hidden",
     overflowY: "auto",
-    background: "#F5F5F5",
+    background: theme.colors.gray050,
     padding: "8px",
-    borderLeft: "1px solid #E0E0E0",
+    zIndex: Constants.zIndex.sidebar,
+    boxShadow: theme.globalBoxShadow,
   },
 }))(Editor);
 
