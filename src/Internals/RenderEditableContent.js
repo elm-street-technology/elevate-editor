@@ -16,7 +16,7 @@ type Props = {
   isActive: boolean,
 };
 
-class RenderElement extends Component<Props> {
+class RenderEditableContent extends Component<Props> {
   render() {
     const {
       child,
@@ -43,10 +43,12 @@ class RenderElement extends Component<Props> {
           <button
             type="button"
             className={classes.add}
-            onClick={() =>
-              internals.addChildToContent &&
-              internals.addChildToContent(child.id)
-            }
+            onClick={(e) => {
+              e.stopPropagation();
+              if (internals.addChildToContent) {
+                return internals.addChildToContent(child.id);
+              }
+            }}
           >
             <Add size={18} />
           </button>
@@ -66,7 +68,6 @@ class RenderElement extends Component<Props> {
 const styles = (theme) => ({
   root: {
     position: "relative",
-    // border: "1px solid transparent",
     "&:hover": {
       boxShadow: "0px 0px 0px 2px rgba(0, 85, 172, 0.5)",
     },
@@ -111,7 +112,8 @@ const styles = (theme) => ({
     height: "24px",
     color: theme.colors.white,
     background: "#0055ac",
+    zIndex: Constants.zIndex.elementDelete,
   },
 });
 
-export default withStyles(styles)(RenderElement);
+export default withStyles(styles)(RenderEditableContent);

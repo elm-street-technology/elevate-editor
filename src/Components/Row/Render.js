@@ -38,7 +38,20 @@ class RowPreview extends Component<$Props> {
 
     const isActive = internals.editingContentId === id;
     if (!(content && content.length)) {
-      return <div>This row is empty. TODO: Click to add a new component.</div>; // TODO: Zero-content placeholder and ability to add components to a row
+      if (!internals.isEditor) {
+        return null;
+      }
+
+      return (
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            internals.addChildToContent(id);
+          }}
+        >
+          Placeholder
+        </div>
+      ); // TODO: Zero-content placeholder and ability to add components to a row
     }
     return content.map((child, idx) => {
       if (!child) {

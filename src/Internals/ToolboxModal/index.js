@@ -8,8 +8,8 @@ import noScroll from "no-scroll";
 import Button from "elevate-ui/Button";
 import Add from "elevate-ui-icons/Add";
 
-import Sidebar from "./ToolboxModal/Sidebar";
-import ComponentPreview from "./ToolboxModal/ComponentPreview";
+import Sidebar from "./ComponentList";
+import ComponentPreview from "./ComponentPreview";
 
 import type { $Internals } from "types";
 

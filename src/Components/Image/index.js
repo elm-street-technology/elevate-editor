@@ -27,21 +27,25 @@ export default {
   description:
     "Image component to display images or graphics in the page layout.",
   defaultAttrs,
-  generateContent() {
-    return [
+  generateContent({ parent }: Object = {}) {
+    const content = [
       {
         id: Tools.generateUUID(),
-        type: "Row",
-        attrs: {},
-        content: [
-          {
-            id: Tools.generateUUID(),
-            type: "Image",
-            attrs: defaultAttrs(),
-            content: [],
-          },
-        ],
+        type: "Image",
+        attrs: defaultAttrs(),
+        content: [],
       },
     ];
+
+    return parent && !parent.content.length
+      ? content
+      : [
+          {
+            id: Tools.generateUUID(),
+            type: "Row",
+            attrs: {},
+            content,
+          },
+        ];
   },
 };

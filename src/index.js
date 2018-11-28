@@ -24,6 +24,9 @@ import Button from "./Components/Button";
 import HorizontalRule from "./Components/HorizontalRule";
 import Image from "./Components/Image";
 import Row from "./Components/Row";
+import TwoCol from "./Components/TwoCol";
+import ThreeCol from "./Components/ThreeCol";
+import FourCol from "./Components/FourCol";
 import Text from "./Components/Text";
 
 import type {
@@ -33,7 +36,16 @@ import type {
   $Component,
 } from "types";
 
-const InternalComponents = [Button, HorizontalRule, Image, Row, Text];
+const InternalComponents = [
+  Button,
+  HorizontalRule,
+  Image,
+  Text,
+  Row,
+  TwoCol,
+  ThreeCol,
+  FourCol,
+];
 
 type Props = {
   classes: Object,
@@ -374,8 +386,8 @@ class Editor extends Component<Props, State> {
     const components = this.state.components;
 
     if (id && type) {
-      const parentComponent = this.findContentById(id, content);
-      if (!parentComponent) {
+      const parent = this.findContentById(id, content);
+      if (!parent) {
         return;
       }
 
@@ -387,14 +399,14 @@ class Editor extends Component<Props, State> {
         newComponent.generateContent &&
         typeof newComponent.generateContent === "function"
       ) {
-        parentComponent.content = parentComponent.content.concat(
+        parent.content = parent.content.concat(
           Editor.setDefaultProps(
-            newComponent.generateContent(),
+            newComponent.generateContent({ parent }),
             this.state.components
           )
         );
       } else {
-        parentComponent.content = parentComponent.content.concat(
+        parent.content = parent.content.concat(
           Editor.setDefaultProps(
             [{ type, content: [], attrs: {}, id: generateUUID() }],
             this.state.components
