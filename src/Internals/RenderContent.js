@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 import find from "lodash/find";
 import assign from "lodash/assign";
 
-import RenderElement from "./RenderElement";
+import RenderEditableContent from "./RenderEditableContent";
 
 import type { $ContentBlock, $ContentBlocks, $Internals } from "types";
 
@@ -52,14 +52,14 @@ function renderChild(origChild: $ContentBlock, idx: number, props: $Props) {
   return !props.internals.isEditor ? (
     <Fragment key={idx}>{element}</Fragment>
   ) : (
-    <RenderElement
+    <RenderEditableContent
       key={idx}
       child={child}
       internals={internals}
       isActive={isActive}
     >
       {element}
-    </RenderElement>
+    </RenderEditableContent>
   );
 }
 

@@ -9,10 +9,10 @@ export type $ContentBlock = {|
 |};
 
 export type $Component = {
-  Render: any,
+  Render?: any,
   Preview?: any,
   Form?: any,
-  generateContent?: () => $ContentBlocks,
+  generateContent?: ({ parent?: $ContentBlock }) => $ContentBlocks,
   type: string,
   defaultAttrs?: (Object) => Object,
 };

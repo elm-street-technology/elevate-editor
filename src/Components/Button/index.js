@@ -30,21 +30,25 @@ export default {
 
   // validation: Yup.object()
   defaultAttrs,
-  generateContent() {
-    return [
+  generateContent({ parent }: Object = {}) {
+    const content = [
       {
         id: Tools.generateUUID(),
-        type: "Row",
-        attrs: {},
-        content: [
-          {
-            id: Tools.generateUUID(),
-            type: "Button",
-            attrs: defaultAttrs(),
-            content: [],
-          },
-        ],
+        type: "Button",
+        attrs: defaultAttrs(),
+        content: [],
       },
     ];
+
+    return parent && !parent.content.length
+      ? content
+      : [
+          {
+            id: Tools.generateUUID(),
+            type: "Row",
+            attrs: {},
+            content,
+          },
+        ];
   },
 };

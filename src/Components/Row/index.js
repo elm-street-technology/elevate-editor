@@ -42,7 +42,7 @@ export default {
       id: generateUUID(),
       type: "Row",
       content: [],
-      attrs: defaultAttrs({ direction: "vertical" }),
+      attrs: defaultAttrs(),
     },
   ],
 };

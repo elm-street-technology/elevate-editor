@@ -33,21 +33,25 @@ export default {
       },
       attrs
     ),
-  generateContent() {
-    return [
+  generateContent({ parent }: Object = {}) {
+    const content = [
       {
         id: Tools.generateUUID(),
-        type: "Row",
+        type: "Text",
         attrs: {},
-        content: [
-          {
-            id: Tools.generateUUID(),
-            type: "Text",
-            attrs: {},
-            content: [],
-          },
-        ],
+        content: [],
       },
     ];
+
+    return parent && !parent.content.length
+      ? content
+      : [
+          {
+            id: Tools.generateUUID(),
+            type: "Row",
+            attrs: {},
+            content,
+          },
+        ];
   },
 };
