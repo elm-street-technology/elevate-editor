@@ -15,12 +15,16 @@ type $Props = {|
   internals: $Internals,
 |};
 
-const getItemStyle = (isDragging: boolean, draggableStyle: Object) => ({
+const getItemStyle = (
+  isDragging: boolean,
+  draggableStyle: Object,
+  child: Object
+) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   // change background colour if dragging
   background: isDragging ? "lightgreen" : "transparent",
-
+  width: child && child.attrs && child.attrs.width,
   // styles we need to apply on draggables
   ...draggableStyle,
 });
@@ -74,7 +78,8 @@ class RowPreview extends Component<$Props> {
               {...provided.dragHandleProps}
               style={getItemStyle(
                 snapshot.isDragging,
-                provided.draggableProps.style
+                provided.draggableProps.style,
+                child
               )}
               className={classes.draggable}
             >
@@ -125,7 +130,7 @@ export default withStyles((theme) => ({
   },
   row: {
     display: "flex",
-    flexWrap: "wrap",
+    // flexWrap: "wrap",
     justifyContent: ({ content: { attrs } }) => {
       if (attrs && attrs.direction !== "horizontal") {
         return "";
@@ -143,8 +148,9 @@ export default withStyles((theme) => ({
       if (attrs && attrs.direction !== "vertical") {
         return "";
       }
-
-      if (!attrs.alignment || attrs.alignment === "left") {
+      if (!attrs.alignment) {
+        return "stretch";
+      } else if (attrs.alignment === "left") {
         return "flex-start";
       } else if (attrs.alignment === "center") {
         return "center";
@@ -152,7 +158,8 @@ export default withStyles((theme) => ({
         return "flex-end";
       }
     },
-    maxWidth: ({ content: { attrs } }) => attrs && attrs.width,
+    maxWidth: ({ content: { attrs }, internals: { isEditor } }) =>
+      !isEditor && attrs && attrs.width,
     minHeight: ({ content: { attrs } }) => attrs && attrs.height,
     flexDirection: ({ content: { attrs } }) =>
       attrs && attrs.direction === "horizontal" ? "row" : "column",
@@ -178,6 +185,20 @@ export default withStyles((theme) => ({
     },
   },
   draggable: {
+    alignItems: ({ content: { attrs } }) => {
+      if (attrs && attrs.direction !== "vertical") {
+        return "";
+      }
+      if (!attrs.alignment) {
+        return "stretch";
+      } else if (attrs.alignment === "left") {
+        return "flex-start";
+      } else if (attrs.alignment === "center") {
+        return "center";
+      } else if (attrs.alignment === "right") {
+        return "flex-end";
+      }
+    },
     // border: `1px dashed ${theme.colors.secondary}`,
     // margin: "2px",
   },

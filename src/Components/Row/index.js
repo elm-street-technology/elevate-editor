@@ -18,7 +18,7 @@ const defaultAttrs = (attrs: Object = {}) => {
       backgroundSize: "",
       upload: "",
       direction: "vertical",
-      alignment: "left",
+      alignment: "",
       paddingTop: 8,
       paddingRight: 8,
       paddingBottom: 8,

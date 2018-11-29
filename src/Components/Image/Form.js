@@ -34,7 +34,7 @@ const ImageForm = (props: $SidebarProps) => (
       name="width"
       label="Width"
       component={Input}
-      type="number"
+      type="text"
     />
     <FastField
       id="height"
