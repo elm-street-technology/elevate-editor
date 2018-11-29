@@ -145,6 +145,7 @@ class Editor extends Component<Props, State> {
                 type: "Row",
                 attrs: {
                   disableDelete: true,
+                  allowChildren: true,
                 },
                 content: [],
               },
