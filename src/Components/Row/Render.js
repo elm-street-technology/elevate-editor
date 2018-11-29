@@ -5,6 +5,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
 
 import RenderContent from "../../Internals/RenderContent";
+import Placeholder from "./Placeholder";
 
 import type { $ContentBlock, $Internals } from "types";
 
@@ -43,15 +44,13 @@ class RowPreview extends Component<$Props> {
       }
 
       return (
-        <div
+        <Placeholder
           onClick={(e) => {
             e.stopPropagation();
             internals.addChildToContent(id);
           }}
-        >
-          Placeholder
-        </div>
-      ); // TODO: Zero-content placeholder and ability to add components to a row
+        />
+      );
     }
     return content.map((child, idx) => {
       if (!child) {

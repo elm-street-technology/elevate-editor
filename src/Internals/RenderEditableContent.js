@@ -68,6 +68,8 @@ class RenderEditableContent extends Component<Props> {
 const styles = (theme) => ({
   root: {
     position: "relative",
+    flex: "1",
+
     "&:hover": {
       boxShadow: "0px 0px 0px 2px rgba(0, 85, 172, 0.5)",
     },
