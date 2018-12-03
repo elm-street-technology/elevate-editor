@@ -17,14 +17,16 @@ const ImagePreview = ({
   internals: { isEditor },
 }: $Props) => {
   const img = (
-    <img
-      className={classes.root}
-      src={src}
-      width={width}
-      height={height}
-      alt={alt}
-      title={title}
-    />
+    <div style={{ width: "100%", display: "block", position: "relative" }}>
+      <img
+        className={classes.root}
+        src={src}
+        width={width}
+        height={height}
+        alt={alt}
+        title={title}
+      />
+    </div>
   );
   if (!url) {
     return img;

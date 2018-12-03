@@ -30,6 +30,13 @@ const RowForm = (props: $SidebarProps) => (
       type="text"
     />
     <FastField
+      id="mobile.width"
+      name="mobile.width"
+      label="Mobile Width"
+      component={Input}
+      type="text"
+    />
+    <FastField
       id="borderSize"
       name="borderSize"
       label="Border Size"

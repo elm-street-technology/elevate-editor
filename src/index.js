@@ -82,15 +82,9 @@ function renderReact(
       theme={{
         colors: {},
         overrides: {
-          EuiInput: {
-            root: {
-              background: "red",
-            },
-          },
           EuiScaffold: {
             root: {
               margin: "0 auto",
-              background: "red",
             },
           },
         },

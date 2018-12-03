@@ -160,6 +160,9 @@ export default withStyles((theme) => ({
     },
     maxWidth: ({ content: { attrs }, internals: { isEditor } }) =>
       !isEditor && attrs && attrs.width,
+    width: ({ content: { attrs }, internals: { isEditor } }) =>
+      !isEditor && "100%",
+    minWidth: "100%",
     minHeight: ({ content: { attrs } }) => attrs && attrs.height,
     flexDirection: ({ content: { attrs } }) =>
       attrs && attrs.direction === "horizontal" ? "row" : "column",
@@ -179,9 +182,12 @@ export default withStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     border: ({ content: { attrs } }) =>
       `${attrs.borderSize}px solid ${attrs.borderColor}`,
-
-    [theme.breakpoints[600]]: {
-      flexWrap: "no-wrap",
+    [theme.breakpoints(768)]: {
+      width: "100%",
+    },
+    [theme.breakpoints(992)]: {
+      minWidth: "auto",
+      flexWrap: "nowrap",
     },
   },
   draggable: {
@@ -201,5 +207,8 @@ export default withStyles((theme) => ({
     },
     // border: `1px dashed ${theme.colors.secondary}`,
     // margin: "2px",
+    "& > *": {
+      width: "100% !important",
+    },
   },
 }))(RowPreview);

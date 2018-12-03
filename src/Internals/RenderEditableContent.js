@@ -68,8 +68,8 @@ class RenderEditableContent extends Component<Props> {
 const styles = (theme) => ({
   root: {
     position: "relative",
-    flex: "1",
-    width: ({ child: { attrs, type } }) => {
+    // flex: "1",
+    width: ({ child: { attrs, type, id }, isActive }) => {
       if (type === "Row") {
         return attrs && attrs.width;
       }
