@@ -8,7 +8,7 @@ import Editor from "elevate-editor";
 import { Tools } from "elevate-editor";
 
 import SignatureBlock from "./Components/SignatureBlock";
-import { elevateUI } from "./templates/grid";
+import templates from "./templates";
 
 type Props = {
   classes: Object,
@@ -17,14 +17,32 @@ type Props = {
 
 type State = {
   step: "editor" | "preview",
-  conent: Object[],
+  template: string,
+  content: Object[],
 };
 
 class EmailEditor extends Component<Props, State> {
-  state = {
-    step: "editor",
-    content: elevateUI || [],
-  };
+  constructor(props: Props) {
+    super(props);
+    const template = props.match.params.template || "email";
+    this.state = {
+      step: "editor",
+      template,
+      content: templates[template] || [],
+    };
+  }
+
+  componentDidUpdate() {
+    const template = this.props.match.params.template || "email";
+    const currentTemplate = this.state.template;
+    if (currentTemplate !== template && template) {
+      this.setState({
+        template,
+        content: templates[template] || [],
+      });
+    }
+  }
+
   exportHTML = () => {
     console.log(this.editor.exportHTML());
   };
@@ -56,9 +74,10 @@ class EmailEditor extends Component<Props, State> {
     );
   }
   renderEditor() {
-    const { content } = this.state;
+    const { content, template } = this.state;
     return (
       <Editor
+        key={template}
         components={[SignatureBlock]}
         content={content}
         innerRef={(editor) => {

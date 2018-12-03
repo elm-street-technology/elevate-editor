@@ -24,9 +24,6 @@ const defaultAttrs = (attrs: Object = {}) => {
       paddingBottom: 8,
       paddingLeft: 8,
       allowChildren: false,
-      mobile: {
-        width: "10%",
-      },
     },
     attrs
   );

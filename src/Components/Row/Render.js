@@ -130,7 +130,8 @@ export default withStyles((theme) => ({
   },
   row: {
     display: "flex",
-    // flexWrap: "wrap",
+    flexWrap: ({ content: { attrs } }) =>
+      attrs.direction === "horizontal" ? "wrap" : "nowrap",
     justifyContent: ({ content: { attrs } }) => {
       if (attrs && attrs.direction !== "horizontal") {
         return "";
@@ -183,11 +184,11 @@ export default withStyles((theme) => ({
     border: ({ content: { attrs } }) =>
       `${attrs.borderSize}px solid ${attrs.borderColor}`,
     [theme.breakpoints(768)]: {
-      width: "100%",
+      minWidth: "auto",
     },
     [theme.breakpoints(992)]: {
       minWidth: "auto",
-      flexWrap: "nowrap",
+      // flexWrap: "nowrap",
     },
   },
   draggable: {
