@@ -15,6 +15,15 @@ type $Props = {|
   internals: $Internals,
 |};
 
+const getColor = (color) => {
+  switch (typeof color) {
+    case "object":
+      return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+    default:
+      return color || "transparent";
+  }
+};
+
 const getItemStyle = (
   isDragging: boolean,
   draggableStyle: Object,
@@ -43,7 +52,7 @@ class RowPreview extends Component<$Props> {
 
     const isActive = internals.editingContentId === id;
     if (!(content && content.length)) {
-      if (!internals.isEditor) {
+      if (!(internals.isEditor || internals.previewPlaceholders)) {
         return null;
       }
 
@@ -105,7 +114,7 @@ class RowPreview extends Component<$Props> {
       return row;
     }
     return (
-      <div className={classNames(classes && classes.root)}>
+      <div className={classNames(classes.root, classes.row)}>
         <Droppable droppableId={id} direction={attrs.direction || "vertical"}>
           {(provided, snapshot) => (
             <div
@@ -162,7 +171,7 @@ export default withStyles((theme) => ({
     maxWidth: ({ content: { attrs }, internals: { isEditor } }) =>
       !isEditor && attrs && attrs.width,
     width: ({ content: { attrs }, internals: { isEditor } }) =>
-      !isEditor && "100%",
+      !isEditor && attrs && (attrs.width || "") !== "" && "100%",
     minWidth: "100%",
     minHeight: ({ content: { attrs } }) => attrs && attrs.height,
     flexDirection: ({ content: { attrs } }) =>
@@ -176,13 +185,14 @@ export default withStyles((theme) => ({
       attrs.paddingBottom ? `${attrs.paddingBottom}px` : "0",
     paddingLeft: ({ content: { attrs } }) =>
       attrs.paddingLeft ? `${attrs.paddingLeft}px` : "0",
-    backgroundColor: ({ content: { attrs } }) => attrs.backgroundColor,
+    backgroundColor: ({ content: { attrs } }) =>
+      getColor(attrs.backgroundColor),
     backgroundImage: ({ content: { attrs } }) =>
       attrs.backgroundImage ? `url(${attrs.backgroundImage})` : "",
     backgroundSize: ({ content: { attrs } }) => attrs.backgroundSize,
     backgroundRepeat: "no-repeat",
     border: ({ content: { attrs } }) =>
-      `${attrs.borderSize}px solid ${attrs.borderColor}`,
+      `${attrs.borderSize}px solid ${getColor(attrs.borderColor)}`,
     [theme.breakpoints(768)]: {
       minWidth: "auto",
     },

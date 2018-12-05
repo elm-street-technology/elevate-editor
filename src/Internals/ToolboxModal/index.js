@@ -102,6 +102,7 @@ class ToolboxModal extends Component<$Props, $State> {
               handleComponentClick={this.handleComponentClick}
             />
             <ComponentPreview
+              key={activeComponent && activeComponent.type}
               internals={internals}
               activeComponent={activeComponent}
             />

@@ -32,6 +32,20 @@ const Sidebar = ({ classes }) => {
         >
           Grid Example
         </NavLink>
+        <NavLink
+          activeClassName={classes.active}
+          className={classes.item}
+          to="/editor/listing-flyer"
+        >
+          Listing Flyer
+        </NavLink>
+        <NavLink
+          activeClassName={classes.active}
+          className={classes.item}
+          to="/editor/page-example-one"
+        >
+          Page Example
+        </NavLink>
       </nav>
     </div>
   );

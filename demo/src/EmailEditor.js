@@ -53,6 +53,12 @@ class EmailEditor extends Component<Props, State> {
   togglePreview() {
     const { step: lastStep, content: oldContent } = this.state;
     const step = lastStep === "editor" ? "preview" : "editor";
+    if (
+      lastStep === "editor" &&
+      this.editor.hasUnsavedChanges(this.togglePreview.bind(this))
+    ) {
+      return;
+    }
     const content =
       lastStep === "editor" ? this.editor.exportJSON() : oldContent;
     this.setState({
@@ -63,7 +69,7 @@ class EmailEditor extends Component<Props, State> {
 
   renderPreview() {
     const { content } = this.state;
-    const html = ReactDOM.renderToString(Tools.renderReact(content, []));
+    const html = ReactDOM.renderToString(Tools.renderReact({ content }));
 
     return (
       <div
@@ -105,12 +111,16 @@ class EmailEditor extends Component<Props, State> {
           >
             {step === "editor" ? "Preview" : "Editor"}
           </Button>
-          <Button className={classes.button} onClick={this.exportHTML}>
-            Export to HTML (console.log)
-          </Button>
-          <Button className={classes.button} onClick={this.exportJSON}>
-            Export to JSON (console.log)
-          </Button>
+          {step === "editor" && (
+            <Fragment>
+              <Button className={classes.button} onClick={this.exportHTML}>
+                Export to HTML (console.log)
+              </Button>
+              <Button className={classes.button} onClick={this.exportJSON}>
+                Export to JSON (console.log)
+              </Button>
+            </Fragment>
+          )}
         </div>
       </Fragment>
     );

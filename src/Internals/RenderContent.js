@@ -46,7 +46,7 @@ function renderChild(origChild: $ContentBlock, idx: number, props: $Props) {
 
   const element = React.createElement(
     Component.Render,
-    assign({}, props, { content: child, onClick: () => console.log("wtf") })
+    assign({}, props, { content: child, onClick: () => null })
   );
 
   return !props.internals.isEditor ? (

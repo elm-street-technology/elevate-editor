@@ -14,13 +14,13 @@ type $Props = {
 
 const ComponentPreview = ({ activeComponent, classes, internals }: $Props) => {
   if (activeComponent) {
-    let preview = null;
+    let content = null;
     if (activeComponent.generateContent) {
-      preview = activeComponent.generateContent();
+      content = activeComponent.generateContent();
     }
 
-    if (!Array.isArray(preview) && preview) {
-      preview = [preview];
+    if (!Array.isArray(content) && content) {
+      content = [content];
     }
 
     return (
@@ -28,8 +28,14 @@ const ComponentPreview = ({ activeComponent, classes, internals }: $Props) => {
         <Typography type="heading6" gutterBottom>
           {activeComponent.type} Preview
         </Typography>
-        <div className={classes.preview}>
-          {preview ? Tools.renderReact(preview, internals.components) : null}
+        <div className={classes.content}>
+          {content
+            ? Tools.renderReact({
+                content,
+                components: internals.components,
+                previewPlaceholders: true,
+              })
+            : null}
         </div>
         <Typography type="body" gutterTop>
           {activeComponent && activeComponent.description}

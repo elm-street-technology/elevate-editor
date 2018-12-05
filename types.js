@@ -27,7 +27,14 @@ export type $Internals = {|
   editingContentFormAttrs: null | Object,
   components: $Components,
   deleteContent: Function,
+  previewPlaceholders?: boolean,
 |};
+
+export type $RenderReactProps = {
+  content: $ContentBlocks,
+  components?: $Components,
+  previewPlaceholders?: boolean,
+};
 
 export type $SidebarProps = {
   cancelEdit: Function,

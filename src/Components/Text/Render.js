@@ -15,10 +15,14 @@ const TextPreview = ({ content: { attrs }, classes }) => {
 
 const styles = (theme) => ({
   root: {
+    color: ({ content: { attrs } }) => attrs && attrs.color,
     width: "100%",
     lineHeight: "1.3rem",
     textAlign: "left",
     ...WYSIWYGFormatting,
+    "& > *": {
+      color: "inherit !important",
+    },
   },
   left: {
     textAlign: "left",
