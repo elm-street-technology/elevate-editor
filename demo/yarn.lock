@@ -3184,10 +3184,10 @@ elevate-ui@^0.17.0:
     react-loadable "4.0.5"
     react-table "^6.8.6"
 
-elevate-ui@^0.29.0:
-  version "0.29.0"
-  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.29.0.tgz#ed6d1a6899659021925fbbd5d1b503bab8f61800"
-  integrity sha512-dtwXAqwMaJl1HsAyZ306IUQxMMMjp7/jK+hd/1rVG8XbhqZUoYLJwi+V5FlwkVQPHZTSCoqZS5Y+lMwGH6V/qw==
+elevate-ui@^0.29.3:
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.29.3.tgz#ceb60e86ed6c5934d3cc656f7e6005e843370c20"
+  integrity sha512-cjtbJ4qz8ZIe3SUXVhB+EIcuTdYIEbfif1yMnseg4svWc/XL/5A09Vl2Km+V6RB6zEmcyx/6FaM4TEJv9ANxlQ==
   dependencies:
     classnames "^2.2.6"
     color "^3.0.0"

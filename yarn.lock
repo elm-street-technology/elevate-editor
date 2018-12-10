@@ -1494,25 +1494,6 @@ elegant-spinner@^1.0.1:
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
   integrity sha1-2wQ1IcldfjA/2PNFvtwzSc+wcp4=
 
-elevate-editor@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/elevate-editor/-/elevate-editor-0.1.1.tgz#8531ae81e294e129b7ce0a0162707631764bc583"
-  integrity sha512-Q+YqQAffnKhLRXG2XOHkFosDWyImiBA8BIw5n8J4ZzqMOSDjOPEHMpEjdWDiHQ/RrTiIuISAO8PK53pXu9RnxA==
-  dependencies:
-    classnames "^2.2.6"
-    draft-js "^0.10.5"
-    draftjs-to-html "^0.8.4"
-    elevate-ui "^0.24.0"
-    elevate-ui-icons "^0.1.0"
-    formik "^1.2.0"
-    no-scroll "^2.1.1"
-    react "^16.5.0"
-    react-beautiful-dnd "^9.0.2"
-    react-dom "=16.5.0"
-    react-draft-wysiwyg "^1.12.13"
-    uploadcare-widget "^3.6.1"
-    yup "^0.26.3"
-
 elevate-ui-icons@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/elevate-ui-icons/-/elevate-ui-icons-0.1.0.tgz#c8be42d76560107ddf91a23b1d0d4edf98c37912"
@@ -1520,29 +1501,10 @@ elevate-ui-icons@^0.1.0:
   dependencies:
     react "^16.5.0"
 
-elevate-ui@^0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.24.0.tgz#05eaed37849fff74375d1235ff62644517121784"
-  integrity sha512-5cQJNjQp9anpviCWppzISuRG/CTqV5zkT7j3Ks7+zCEq3ws2JCCh1JHm53fGR98gRyg3nNj3hwthjgAObeizcw==
-  dependencies:
-    classnames "^2.2.6"
-    color "^3.0.0"
-    downshift "^2.2.3"
-    elevate-ui-icons "^0.1.0"
-    lodash "^4.17.10"
-    moment "^2.22.2"
-    react "^16.5.2"
-    react-aria-modal "^3.0.1"
-    react-datetime "^2.15.0"
-    react-input-autosize "^2.2.1"
-    react-jss "^8.6.1"
-    react-loadable "4.0.5"
-    react-table "^6.8.6"
-
-elevate-ui@^0.29.0:
-  version "0.29.0"
-  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.29.0.tgz#ed6d1a6899659021925fbbd5d1b503bab8f61800"
-  integrity sha512-dtwXAqwMaJl1HsAyZ306IUQxMMMjp7/jK+hd/1rVG8XbhqZUoYLJwi+V5FlwkVQPHZTSCoqZS5Y+lMwGH6V/qw==
+elevate-ui@^0.29.3:
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-0.29.3.tgz#ceb60e86ed6c5934d3cc656f7e6005e843370c20"
+  integrity sha512-cjtbJ4qz8ZIe3SUXVhB+EIcuTdYIEbfif1yMnseg4svWc/XL/5A09Vl2Km+V6RB6zEmcyx/6FaM4TEJv9ANxlQ==
   dependencies:
     classnames "^2.2.6"
     color "^3.0.0"
