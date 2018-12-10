@@ -9,6 +9,7 @@ type Props = {
   field: Object,
   fieldName: string, // what formik field to place the result in
   form: Object,
+  UPLOADCARE_API_KEY: string,
 };
 
 // Visual customization: https://uploadcare.com/cookbook/widget_visual/
@@ -21,9 +22,12 @@ class Uploader extends Component<Props> {
       field: { onChange },
       form: { setFieldValue },
       fieldName,
+      UPLOADCARE_API_KEY,
     } = this.props;
 
-    const widget = uploadcare.Widget(this.uploader);
+    const widget = uploadcare.Widget(this.uploader, {
+      publicKey: UPLOADCARE_API_KEY,
+    });
     if (onChange && typeof onChange === "function") {
       widget.onChange((file) => {
         if (file) {

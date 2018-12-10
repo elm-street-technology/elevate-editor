@@ -38,4 +38,5 @@ export type $RenderReactProps = {
 
 export type $SidebarProps = {
   cancelEdit: Function,
+  UPLOADCARE_API_KEY: string,
 };
