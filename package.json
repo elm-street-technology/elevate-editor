@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "prepublish": "yarn build && yarn link",
-    "start": "concurrently \"yarn run watch\" \"yarn run demo\"",
+    "start": "rm -Rf dist/ && concurrently \"yarn run watch\" \"yarn run demo\"",
     "watch": "babel --watch src --out-dir dist",
     "build": "babel src --out-dir dist",
     "demo": "cd demo && yarn start",
