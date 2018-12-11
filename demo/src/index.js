@@ -10,7 +10,7 @@ render(
     theme={{
       colors: {},
       overrides: {
-        NumberIncrement: {
+        EuiNumberIncrement: {
           root: {
             maxWidth: "160px",
           },

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "elevate-editor": "*",
-    "elevate-ui": "^0.29.0",
+    "elevate-ui": "^0.29.3",
     "no-scroll": "^2.1.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
