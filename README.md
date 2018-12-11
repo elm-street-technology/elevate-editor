@@ -42,6 +42,7 @@ class App extends Component {
             innerRef={(editor) => {
               this.editor = editor;
             }}
+            UPLOADCARE_API_KEY="demopublickey"
           />
           <button
             onClick={() => {

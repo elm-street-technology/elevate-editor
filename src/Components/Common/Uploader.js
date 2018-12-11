@@ -9,6 +9,7 @@ type Props = {
   field: Object,
   fieldName: string, // what formik field to place the result in
   form: Object,
+  UPLOADCARE_API_KEY: string,
 };
 
 // Visual customization: https://uploadcare.com/cookbook/widget_visual/
@@ -52,12 +53,14 @@ class Uploader extends Component<Props> {
   }
 
   render() {
+    const { UPLOADCARE_API_KEY } = this.props;
     return (
       <input
         type="hidden"
         ref={(input) => (this.uploader = input)}
         {...this.props.field}
         data-crop=""
+        data-public-key={UPLOADCARE_API_KEY}
         role="uploadcare-uploader" // eslint-disable-line
       />
     );

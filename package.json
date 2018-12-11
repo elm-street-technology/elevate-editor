@@ -15,7 +15,8 @@
     "prettier": "prettier --write '**/*.{js,json,css,md}'",
     "test": "flow check",
     "flow": "flow",
-    "lint": "eslint --ext .js ."
+    "lint": "eslint --ext .js .",
+    "reset": "rm -Rf dist/ node_modules dist/node_modules && yarn && cd dist && yarn"
   },
   "dependencies": {
     "classnames": "^2.2.6",

@@ -86,6 +86,7 @@ class EmailEditor extends Component<Props, State> {
         key={template}
         components={[SignatureBlock]}
         content={content}
+        UPLOADCARE_API_KEY="demopublickey"
         innerRef={(editor) => {
           this.editor = editor;
         }}

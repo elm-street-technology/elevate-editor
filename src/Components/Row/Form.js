@@ -62,6 +62,7 @@ const RowForm = (props: $SidebarProps) => (
       name="upload"
       label="Upload a file"
       component={Uploader}
+      UPLOADCARE_API_KEY={props.UPLOADCARE_API_KEY}
       type="hidden"
       fieldName="backgroundImage"
     />

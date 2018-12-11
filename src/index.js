@@ -52,12 +52,13 @@ const InternalComponents = [
   FiveCol,
 ];
 
-type Props = {
+type $Props = {
   classes: Object,
   components?: $Components,
   content: $ContentBlocks,
+  UPLOADCARE_API_KEY: string,
 };
-type State = {
+type $State = {
   content: $ContentBlocks,
   editingContent: null | $ContentBlock,
   editingPath: null | Array<{ type: string, id: string }>,
@@ -123,11 +124,11 @@ function combineComponents(components: $Components = []) {
   return combined;
 }
 
-class Editor extends Component<Props, State> {
-  props: Props;
-  state: State;
+class Editor extends Component<$Props, $State> {
+  props: $Props;
+  state: $State;
 
-  constructor(props: Props) {
+  constructor(props: $Props) {
     super(props);
 
     const components = combineComponents(props.components);
@@ -460,7 +461,7 @@ class Editor extends Component<Props, State> {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, UPLOADCARE_API_KEY } = this.props;
     const {
       toolboxModalId,
       content,
@@ -540,10 +541,11 @@ class Editor extends Component<Props, State> {
                       cancelEdit={this.cancelEdit}
                       breadcrumbs={editingPath}
                       internals={internals}
+                      UPLOADCARE_API_KEY={UPLOADCARE_API_KEY}
                     >
                       {React.createElement(
                         find(components, { type: editingContent.type }).Form,
-                        {}
+                        { UPLOADCARE_API_KEY: UPLOADCARE_API_KEY }
                       )}
                     </SidebarForm>
                   </div>
