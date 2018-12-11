@@ -1,6 +1,4 @@
 // @flow
-import assign from "lodash/assign";
-
 import Render from "./Render";
 import Form from "./Form";
 import { Tools } from "../../";
@@ -13,8 +11,7 @@ export default {
     "The Text component allows you to add custom text to the page layout.",
 
   defaultAttrs: (attrs: Object = {}) =>
-    assign(
-      {},
+    Tools.applyDefaults(
       {
         value: {
           blocks: [
@@ -30,6 +27,7 @@ export default {
           ],
           entityMap: {},
         },
+        color: "",
       },
       attrs
     ),
@@ -38,7 +36,9 @@ export default {
       {
         id: Tools.generateUUID(),
         type: "Text",
-        attrs: {},
+        attrs: {
+          color: null,
+        },
         content: [],
       },
     ];

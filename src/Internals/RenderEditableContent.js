@@ -24,8 +24,12 @@ class RenderEditableContent extends Component<Props> {
       classes,
       className,
       internals,
+      internals: { editingContentId },
       isActive,
     } = this.props;
+    const activeAllowChildren =
+      (editingContentId === child.id || !editingContentId) &&
+      child.attrs.allowChildren;
     return (
       <div
         className={classNames(
@@ -39,7 +43,10 @@ class RenderEditableContent extends Component<Props> {
       >
         {children}
 
-        {child.attrs.allowChildren ? (
+        {activeAllowChildren ||
+        (isActive &&
+          child.type === "Row" &&
+          child.attrs.direction === "vertical") ? (
           <button
             type="button"
             className={classes.add}
@@ -68,8 +75,16 @@ class RenderEditableContent extends Component<Props> {
 const styles = (theme) => ({
   root: {
     position: "relative",
-    flex: "1",
-
+    minHeight: ({ child: { attrs, type } }) =>
+      type === "Row" && attrs && attrs.direction === "vertical"
+        ? "100%"
+        : "inherit",
+    // height: "100%",
+    width: ({ child: { attrs, type, id }, isActive }) => {
+      if (type === "Row") {
+        return attrs && attrs.width;
+      }
+    },
     "&:hover": {
       boxShadow: "0px 0px 0px 2px rgba(0, 85, 172, 0.5)",
     },

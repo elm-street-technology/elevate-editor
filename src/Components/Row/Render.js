@@ -15,12 +15,25 @@ type $Props = {|
   internals: $Internals,
 |};
 
-const getItemStyle = (isDragging: boolean, draggableStyle: Object) => ({
+const getColor = (color) => {
+  switch (typeof color) {
+    case "object":
+      return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+    default:
+      return color || "transparent";
+  }
+};
+
+const getItemStyle = (
+  isDragging: boolean,
+  draggableStyle: Object,
+  child: Object
+) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   // change background colour if dragging
   background: isDragging ? "lightgreen" : "transparent",
-
+  width: child && child.attrs && child.attrs.width,
   // styles we need to apply on draggables
   ...draggableStyle,
 });
@@ -39,7 +52,7 @@ class RowPreview extends Component<$Props> {
 
     const isActive = internals.editingContentId === id;
     if (!(content && content.length)) {
-      if (!internals.isEditor) {
+      if (!(internals.isEditor || internals.previewPlaceholders)) {
         return null;
       }
 
@@ -74,7 +87,8 @@ class RowPreview extends Component<$Props> {
               {...provided.dragHandleProps}
               style={getItemStyle(
                 snapshot.isDragging,
-                provided.draggableProps.style
+                provided.draggableProps.style,
+                child
               )}
               className={classes.draggable}
             >
@@ -100,7 +114,7 @@ class RowPreview extends Component<$Props> {
       return row;
     }
     return (
-      <div className={classNames(classes && classes.root)}>
+      <div className={classNames(classes.root, classes.row)}>
         <Droppable droppableId={id} direction={attrs.direction || "vertical"}>
           {(provided, snapshot) => (
             <div
@@ -125,7 +139,8 @@ export default withStyles((theme) => ({
   },
   row: {
     display: "flex",
-    flexWrap: "wrap",
+    flexWrap: ({ content: { attrs } }) =>
+      attrs.direction === "horizontal" ? "wrap" : "nowrap",
     justifyContent: ({ content: { attrs } }) => {
       if (attrs && attrs.direction !== "horizontal") {
         return "";
@@ -143,8 +158,9 @@ export default withStyles((theme) => ({
       if (attrs && attrs.direction !== "vertical") {
         return "";
       }
-
-      if (!attrs.alignment || attrs.alignment === "left") {
+      if (!attrs.alignment) {
+        return "stretch";
+      } else if (attrs.alignment === "left") {
         return "flex-start";
       } else if (attrs.alignment === "center") {
         return "center";
@@ -152,7 +168,11 @@ export default withStyles((theme) => ({
         return "flex-end";
       }
     },
-    maxWidth: ({ content: { attrs } }) => attrs && attrs.width,
+    maxWidth: ({ content: { attrs }, internals: { isEditor } }) =>
+      !isEditor && attrs && attrs.width,
+    width: ({ content: { attrs }, internals: { isEditor } }) =>
+      !isEditor && attrs && (attrs.width || "") !== "" && "100%",
+    minWidth: "100%",
     minHeight: ({ content: { attrs } }) => attrs && attrs.height,
     flexDirection: ({ content: { attrs } }) =>
       attrs && attrs.direction === "horizontal" ? "row" : "column",
@@ -165,20 +185,41 @@ export default withStyles((theme) => ({
       attrs.paddingBottom ? `${attrs.paddingBottom}px` : "0",
     paddingLeft: ({ content: { attrs } }) =>
       attrs.paddingLeft ? `${attrs.paddingLeft}px` : "0",
-    backgroundColor: ({ content: { attrs } }) => attrs.backgroundColor,
+    backgroundColor: ({ content: { attrs } }) =>
+      getColor(attrs.backgroundColor),
     backgroundImage: ({ content: { attrs } }) =>
       attrs.backgroundImage ? `url(${attrs.backgroundImage})` : "",
     backgroundSize: ({ content: { attrs } }) => attrs.backgroundSize,
     backgroundRepeat: "no-repeat",
     border: ({ content: { attrs } }) =>
-      `${attrs.borderSize}px solid ${attrs.borderColor}`,
-
-    [theme.breakpoints[600]]: {
-      flexWrap: "no-wrap",
+      `${attrs.borderSize}px solid ${getColor(attrs.borderColor)}`,
+    [theme.breakpoints(768)]: {
+      minWidth: "auto",
+    },
+    [theme.breakpoints(992)]: {
+      minWidth: "auto",
+      // flexWrap: "nowrap",
     },
   },
   draggable: {
+    alignItems: ({ content: { attrs } }) => {
+      if (attrs && attrs.direction !== "vertical") {
+        return "";
+      }
+      if (!attrs.alignment) {
+        return "stretch";
+      } else if (attrs.alignment === "left") {
+        return "flex-start";
+      } else if (attrs.alignment === "center") {
+        return "center";
+      } else if (attrs.alignment === "right") {
+        return "flex-end";
+      }
+    },
     // border: `1px dashed ${theme.colors.secondary}`,
     // margin: "2px",
+    "& > *": {
+      width: "100% !important",
+    },
   },
 }))(RowPreview);

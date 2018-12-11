@@ -21,9 +21,30 @@ const Sidebar = ({ classes }) => {
         <NavLink
           activeClassName={classes.active}
           className={classes.item}
-          to="/editor"
+          to="/editor/email"
         >
-          Email Example 1
+          Email Example
+        </NavLink>
+        <NavLink
+          activeClassName={classes.active}
+          className={classes.item}
+          to="/editor/grid"
+        >
+          Grid Example
+        </NavLink>
+        <NavLink
+          activeClassName={classes.active}
+          className={classes.item}
+          to="/editor/listing-flyer"
+        >
+          Listing Flyer
+        </NavLink>
+        <NavLink
+          activeClassName={classes.active}
+          className={classes.item}
+          to="/editor/page-example-one"
+        >
+          Page Example
         </NavLink>
       </nav>
     </div>

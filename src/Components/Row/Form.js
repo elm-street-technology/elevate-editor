@@ -8,6 +8,7 @@ import Select from "elevate-ui/Select";
 import Padding from "../Common/Padding";
 import Uploader from "../Common/Uploader";
 import Alignment from "../Common/Alignment";
+import ColorPicker from "elevate-ui/ColorPicker";
 
 import type { $SidebarProps } from "types";
 
@@ -17,8 +18,8 @@ const RowForm = (props: $SidebarProps) => (
       id="backgroundColor"
       name="backgroundColor"
       label="Background Color"
-      component={Input}
-      type="color"
+      colorMode="rgb"
+      component={ColorPicker}
     />
     <Padding />
     <Alignment />
@@ -26,6 +27,13 @@ const RowForm = (props: $SidebarProps) => (
       id="width"
       name="width"
       label="Width"
+      component={Input}
+      type="text"
+    />
+    <FastField
+      id="height"
+      name="height"
+      label="Height"
       component={Input}
       type="text"
     />
@@ -40,8 +48,7 @@ const RowForm = (props: $SidebarProps) => (
       id="borderColor"
       name="borderColor"
       label="Border Color"
-      component={Input}
-      type="color"
+      component={ColorPicker}
     />
     <FastField
       id="backgroundImage"

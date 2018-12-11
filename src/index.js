@@ -5,6 +5,7 @@ import withStyles from "elevate-ui/withStyles";
 import { Formik, Form } from "formik";
 import { DragDropContext } from "react-beautiful-dnd";
 import find from "lodash/find";
+import reduce from "lodash/reduce";
 import values from "lodash/values";
 import transform from "lodash/transform";
 import ThemeProvider from "elevate-ui/ThemeProvider";
@@ -13,6 +14,7 @@ import noScroll from "no-scroll";
 
 import generateUUID from "./utils/generate-uuid";
 import Constants from "./utils/constants";
+import applyDefaults from "./utils/apply-defaults";
 
 import RenderContent from "./Internals/RenderContent";
 import SidebarForm from "./Internals/SidebarForm";
@@ -27,6 +29,7 @@ import Row from "./Components/Row";
 import TwoCol from "./Components/TwoCol";
 import ThreeCol from "./Components/ThreeCol";
 import FourCol from "./Components/FourCol";
+import FiveCol from "./Components/FiveCol";
 import Text from "./Components/Text";
 
 import type {
@@ -34,6 +37,7 @@ import type {
   $ContentBlocks,
   $Components,
   $Component,
+  $RenderReactProps,
 } from "types";
 
 const InternalComponents = [
@@ -45,6 +49,7 @@ const InternalComponents = [
   TwoCol,
   ThreeCol,
   FourCol,
+  FiveCol,
 ];
 
 type Props = {
@@ -55,6 +60,7 @@ type Props = {
 type State = {
   content: $ContentBlocks,
   editingContent: null | $ContentBlock,
+  editingPath: null | Array<{ type: string, id: string }>,
   components: $Components,
   toolboxModalId: null | string,
   unsavedChanges: null | string | Function, // id of component to edit after saving or discarding changes or a callback Fn
@@ -72,35 +78,27 @@ function reorderContent(components, startIndex, endIndex) {
   return result;
 }
 
-function renderReact(
-  content: $ContentBlocks = [],
-  components: $Components = []
-) {
-  const allComponents = combineComponents(components);
+function renderReact(options: $RenderReactProps) {
+  const allComponents = combineComponents(options.components || []);
   return (
     <ThemeProvider
       theme={{
         colors: {},
         overrides: {
-          EuiInput: {
-            root: {
-              background: "red",
-            },
-          },
           EuiScaffold: {
             root: {
               margin: "0 auto",
-              background: "red",
             },
           },
         },
       }}
     >
       <RenderContent
-        content={Editor.setDefaultProps(content, allComponents)}
+        content={Editor.setDefaultProps(options.content || [], allComponents)}
         internals={{
           isEditor: false, // an indicator to not show CSS related to editing content
           components: allComponents,
+          previewPlaceholders: options.previewPlaceholders || false,
           addChildToContent: () => {},
           deleteContent: () => {},
           showSidebar: (e, id) => {
@@ -135,6 +133,7 @@ class Editor extends Component<Props, State> {
     const components = combineComponents(props.components);
 
     this.state = {
+      editingPath: null,
       editingContent: null,
       content: Editor.setDefaultProps(
         props.content && props.content.length
@@ -221,7 +220,7 @@ class Editor extends Component<Props, State> {
     components: $Components = this.state.components
   ) => {
     return ReactDOMServer.renderToStaticMarkup(
-      renderReact(content, components)
+      renderReact({ content, components })
     );
   };
 
@@ -333,6 +332,33 @@ class Editor extends Component<Props, State> {
     });
   }
 
+  generatePathObject(
+    contents: $ContentBlocks,
+    path: Object[] = [],
+    base: Object = {}
+  ) {
+    return reduce(
+      contents,
+      (paths, content, index) => {
+        const rPath = [...path, { id: content.id, type: content.type, index }];
+        paths[content.id] = rPath;
+        if (content.content.length) {
+          return this.generatePathObject(content.content, rPath, paths);
+        }
+        return paths;
+      },
+      base
+    );
+  }
+
+  findContentPathById(
+    id,
+    content: $ContentBlocks = this.state.content
+  ): null | Object[] {
+    const paths = this.generatePathObject(content);
+    return paths[id];
+  }
+
   showSidebar = (
     e: null | Event,
     id: string,
@@ -358,6 +384,7 @@ class Editor extends Component<Props, State> {
 
     this.setState({
       editingContent: this.findContentById(id),
+      editingPath: this.findContentPathById(id),
       unsavedChanges: null,
     });
   };
@@ -423,16 +450,35 @@ class Editor extends Component<Props, State> {
     });
   }
 
+  getAttrsWithDefaults(content: $ContentBlock): Object {
+    const { components } = this.state;
+    const component = find(components, { type: content.type });
+    if (component && component.defaultAttrs) {
+      return component.defaultAttrs(content.attrs);
+    }
+    return content.attrs;
+  }
+
   render() {
     const { classes } = this.props;
-    const { toolboxModalId, content, editingContent, components } = this.state;
+    const {
+      toolboxModalId,
+      content,
+      editingContent,
+      editingPath,
+      components,
+    } = this.state;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Formik
           enableReinitialize={true}
           validateOnChange={false}
           validateOnBlur={false}
-          initialValues={editingContent ? { ...editingContent.attrs } : {}}
+          initialValues={
+            editingContent
+              ? { ...this.getAttrsWithDefaults(editingContent) }
+              : {}
+          }
           onSubmit={(values: Object) =>
             this.updateComponentAttrs(
               editingContent && editingContent.id,
@@ -456,7 +502,22 @@ class Editor extends Component<Props, State> {
                 }),
               editingContentFormAttrs: formProps.values,
               editingContentId: editingContent && editingContent.id,
-              addChildToContent: (id: string) => this.openToolboxModal(id),
+              addChildToContent: (id: string) => {
+                if (
+                  this.hasUnsavedChanges(() => {
+                    this.setState(
+                      {
+                        editingContent: null,
+                        unsavedChanges: null,
+                      },
+                      () => this.openToolboxModal(id)
+                    );
+                  })
+                ) {
+                  return;
+                }
+                this.openToolboxModal(id);
+              },
               components,
               deleteContent: (id) => this.deleteContent(id),
             };
@@ -477,6 +538,8 @@ class Editor extends Component<Props, State> {
                     <SidebarForm
                       type={editingContent.type}
                       cancelEdit={this.cancelEdit}
+                      breadcrumbs={editingPath}
+                      internals={internals}
                     >
                       {React.createElement(
                         find(components, { type: editingContent.type }).Form,
@@ -519,7 +582,7 @@ export default withStyles((theme) => ({
   },
   editingContent: {
     "& $preview": {
-      paddingRight: "360px", // Scoots the preview over to ensure it doesn't render under the sidebar nav, not sure if I like this
+      paddingRight: "382px", // Scoots the preview over to ensure it doesn't render under the sidebar nav, not sure if I like this
     },
   },
   preview: {
@@ -528,6 +591,7 @@ export default withStyles((theme) => ({
     height: "auto",
     overflowX: "hidden",
     overflowY: "auto",
+    padding: "20px",
   },
   sidebar: {
     position: "absolute",
@@ -553,4 +617,5 @@ export const Tools = {
   generateUUID,
   ToolboxItem,
   renderReact,
+  applyDefaults,
 };

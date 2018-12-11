@@ -4,6 +4,7 @@ import { FastField } from "formik";
 import Input from "elevate-ui/Input";
 import Typography from "elevate-ui/Typography";
 import NumberIncrement from "elevate-ui/NumberIncrement";
+import ColorPicker from "elevate-ui/ColorPicker";
 
 import type { $SidebarProps } from "types";
 
@@ -41,15 +42,13 @@ const ButtonForm = (props: $SidebarProps) => (
       id="backgroundColor"
       name="backgroundColor"
       label="Button Color"
-      component={Input}
-      type="color"
+      component={ColorPicker}
     />
     <FastField
       id="color"
       name="color"
       label="Text Color"
-      component={Input}
-      type="color"
+      component={ColorPicker}
     />
     <Typography type="heading6">Button Padding</Typography>
     <FastField

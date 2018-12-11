@@ -1,16 +1,14 @@
 // @flow
-import assign from "lodash/assign";
-
 import generateUUID from "../../utils/generate-uuid";
 import Render from "./Render";
 import Form from "./Form";
+import { Tools } from "../../";
 
 const defaultAttrs = (attrs: Object = {}) => {
-  return assign(
-    {},
+  return Tools.applyDefaults(
     {
       width: "100%",
-      height: "inherit",
+      height: "",
       borderSize: 0,
       borderColor: "#000000",
       backgroundColor: "transparent",
@@ -18,7 +16,7 @@ const defaultAttrs = (attrs: Object = {}) => {
       backgroundSize: "",
       upload: "",
       direction: "vertical",
-      alignment: "left",
+      alignment: "",
       paddingTop: 8,
       paddingRight: 8,
       paddingBottom: 8,

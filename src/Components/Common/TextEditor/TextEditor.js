@@ -68,13 +68,13 @@ class TextEditor extends Component {
         toolbar={{
           options: [
             "inline",
+            "fontFamily",
+            "fontSize",
             "blockType",
             "list",
             "textAlign",
             "link",
             "embedded",
-            "emoji",
-            "image",
             "remove",
             "history",
           ],

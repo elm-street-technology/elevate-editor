@@ -57,7 +57,8 @@ class Main extends Component {
           <div className={classes.children}>
             <Route exact path="/" component={EmailEditor} />
             <Route path="/new" component={BlankEditor} />
-            <Route path="/editor" component={EmailEditor} />
+            {/* <Route exact path="/editor" component={EmailEditor} /> */}
+            <Route path="/editor/:template" component={EmailEditor} />
           </div>
         </div>
       </RouteListener>

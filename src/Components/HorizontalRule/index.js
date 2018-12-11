@@ -1,13 +1,10 @@
 // @flow
-import assign from "lodash/assign";
-
 import Render from "./Render";
 import Form from "./Form";
 import { Tools } from "../..";
 
 const defaultAttrs = (attrs: Object = {}) =>
-  assign(
-    {},
+  Tools.applyDefaults(
     {
       color: "#000000",
       thickness: 1,
