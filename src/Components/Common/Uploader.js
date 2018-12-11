@@ -22,12 +22,9 @@ class Uploader extends Component<Props> {
       field: { onChange },
       form: { setFieldValue },
       fieldName,
-      UPLOADCARE_API_KEY,
     } = this.props;
 
-    const widget = uploadcare.Widget(this.uploader, {
-      publicKey: UPLOADCARE_API_KEY,
-    });
+    const widget = uploadcare.Widget(this.uploader);
     if (onChange && typeof onChange === "function") {
       widget.onChange((file) => {
         if (file) {
@@ -56,12 +53,14 @@ class Uploader extends Component<Props> {
   }
 
   render() {
+    const { UPLOADCARE_API_KEY } = this.props;
     return (
       <input
         type="hidden"
         ref={(input) => (this.uploader = input)}
         {...this.props.field}
         data-crop=""
+        data-public-key={UPLOADCARE_API_KEY}
         role="uploadcare-uploader" // eslint-disable-line
       />
     );

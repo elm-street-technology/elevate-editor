@@ -545,7 +545,7 @@ class Editor extends Component<$Props, $State> {
                     >
                       {React.createElement(
                         find(components, { type: editingContent.type }).Form,
-                        {}
+                        { UPLOADCARE_API_KEY: UPLOADCARE_API_KEY }
                       )}
                     </SidebarForm>
                   </div>

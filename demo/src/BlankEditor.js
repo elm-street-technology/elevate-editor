@@ -34,6 +34,7 @@ class BlankEditor extends Component<Props> {
             innerRef={(editor) => {
               this.editor = editor;
             }}
+            UPLOADCARE_API_KEY="demopublickey"
           />
         </Paper>
         <div className={classes.flex}>
