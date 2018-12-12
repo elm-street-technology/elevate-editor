@@ -1,6 +1,8 @@
 // @flow
+import * as React from "react";
 
 export type $ContentBlocks = $ContentBlock[];
+
 export type $ContentBlock = {|
   id: string,
   attrs: Object,
@@ -28,6 +30,7 @@ export type $Internals = {|
   components: $Components,
   deleteContent: Function,
   previewPlaceholders?: boolean,
+  updateComponentAttrs?: Function,
 |};
 
 export type $RenderReactProps = {
@@ -39,4 +42,11 @@ export type $RenderReactProps = {
 export type $SidebarProps = {
   cancelEdit: Function,
   UPLOADCARE_API_KEY: string,
+  editingContentId: string,
+};
+
+export type $ExportOptions = {
+  inlineCss: boolean,
+  content: $ContentBlocks,
+  components: $Components,
 };

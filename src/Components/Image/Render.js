@@ -7,26 +7,29 @@ type $Props = {
   content: $ContentBlock,
   internals: $Internals,
   classes: Object,
+  refCallback: () => void,
+  reCalculate: () => void,
 };
-
 const ImagePreview = ({
   classes,
   content: {
     attrs: { src, height, alt, width, title, url },
   },
   internals: { isEditor },
+  refCallback,
+  reCalculate,
 }: $Props) => {
   const img = (
-    <div style={{ width: "100%", display: "block", position: "relative" }}>
-      <img
-        className={classes.root}
-        src={src}
-        width={width}
-        height={height}
-        alt={alt}
-        title={title}
-      />
-    </div>
+    <img
+      className={classes.root}
+      src={src}
+      width={width}
+      height={height}
+      alt={alt}
+      title={title}
+      ref={refCallback}
+      onLoad={reCalculate}
+    />
   );
   if (!url) {
     return img;
@@ -49,5 +52,6 @@ const ImagePreview = ({
 export default withStyles((theme) => ({
   root: {
     maxWidth: "100%",
+    display: "block",
   },
 }))(ImagePreview);

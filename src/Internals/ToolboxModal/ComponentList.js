@@ -39,6 +39,9 @@ const Sidebar = ({
       <Search className={classes.inputIcon} size={32} />
     </label>
     {components.map((component) => {
+      if (component.toolbarDisabled) {
+        return null;
+      }
       return (
         <ToolboxItem
           active={

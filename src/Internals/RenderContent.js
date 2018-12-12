@@ -1,15 +1,19 @@
 // @flow
 
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 // import reduce from "lodash/reduce";
 import find from "lodash/find";
 import assign from "lodash/assign";
 
 import RenderEditableContent from "./RenderEditableContent";
-
 import type { $ContentBlock, $ContentBlocks, $Internals } from "types";
 
 type $Props = { content: $ContentBlocks, internals: $Internals };
+
+type $ChildProps = {
+  child: $ContentBlock,
+  idx: number,
+} & $Props;
 
 // function hasActiveDirectChild(
 //   content: $ContentBlocks,
@@ -24,46 +28,91 @@ type $Props = { content: $ContentBlocks, internals: $Internals };
 //   );
 // }
 
-function renderChild(origChild: $ContentBlock, idx: number, props: $Props) {
-  const internals = props.internals || {};
-  const components = internals.components;
-  const editingContentId = internals.editingContentId;
+class RenderChild extends Component<$ChildProps> {
+  elementRef;
+  reCalculate = (): void => {
+    const {
+      child: { id, attrs },
+      internals: { updateComponentAttrs, editingContentId, isEditor },
+    } = this.props;
+    if (
+      isEditor &&
+      updateComponentAttrs &&
+      this.elementRef &&
+      !editingContentId
+    ) {
+      const box = this.elementRef.getBoundingClientRect();
+      const width = Math.floor(box.width);
+      const height = Math.floor(box.height);
+      if (
+        attrs.calculatedWidth !== width ||
+        attrs.calculatedHeight !== height
+      ) {
+        updateComponentAttrs(
+          id,
+          assign({}, attrs, {
+            calculatedWidth: width,
+            calculatedHeight: height,
+          })
+        );
+      }
+    }
+  };
 
-  let child: $ContentBlock = { ...origChild };
-  const isActive = editingContentId === child.id;
-  // const childActive = isActive
-  //   ? false
-  //   : hasActiveDirectChild(child.content, editingContentId);
+  refCallback = (element) => {
+    this.elementRef = element;
+    this.reCalculate();
+  };
 
-  if (isActive && props.internals.editingContentFormAttrs) {
-    child.attrs = props.internals.editingContentFormAttrs;
+  componentDidUpdate() {
+    this.reCalculate();
   }
 
-  const Component = find(components, { type: child.type });
-  if (!(Component && Component.Render)) {
-    throw new Error(`Render function is undefined for ${child.type}`);
+  render() {
+    const internals = this.props.internals || {};
+    const components = internals.components;
+    const editingContentId = internals.editingContentId;
+
+    let child: $ContentBlock = { ...this.props.child };
+    const isActive = editingContentId === child.id;
+
+    if (isActive && this.props.internals.editingContentFormAttrs) {
+      child.attrs = this.props.internals.editingContentFormAttrs;
+    }
+
+    const Component = find(components, { type: child.type });
+    if (!(Component && Component.Render)) {
+      throw new Error(`Render function is undefined for ${child.type}`);
+    }
+
+    const element = React.createElement(
+      Component.Render,
+      assign({}, this.props, {
+        content: child,
+        onClick: () => null,
+        refCallback: this.refCallback,
+        reCalculate: this.reCalculate,
+      })
+    );
+
+    return !this.props.internals.isEditor ? (
+      <Fragment key={this.props.idx}>{element}</Fragment>
+    ) : (
+      <RenderEditableContent
+        key={this.props.idx}
+        child={child}
+        internals={internals}
+        isActive={isActive}
+      >
+        {element}
+      </RenderEditableContent>
+    );
   }
-
-  const element = React.createElement(
-    Component.Render,
-    assign({}, props, { content: child, onClick: () => null })
-  );
-
-  return !props.internals.isEditor ? (
-    <Fragment key={idx}>{element}</Fragment>
-  ) : (
-    <RenderEditableContent
-      key={idx}
-      child={child}
-      internals={internals}
-      isActive={isActive}
-    >
-      {element}
-    </RenderEditableContent>
-  );
 }
 
 const RenderContent = (props: $Props) => {
-  return props.content.map((child, idx) => renderChild(child, idx, props));
+  return props.content.map((child, idx) => (
+    <RenderChild child={child} key={idx} idx={idx} {...props} />
+  ));
 };
 export default RenderContent;

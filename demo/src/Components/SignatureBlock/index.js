@@ -6,7 +6,9 @@ export default {
   type: "SignatureBlock",
   description:
     "An email signature component that includes contact information, photo, and more...",
-
+  defaultAttrs({ attrs }: Object) {
+    return attrs;
+  },
   generateContent() {
     return [
       {

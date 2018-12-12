@@ -16,7 +16,12 @@ Yup.object().shape({
 const TextForm = (props: $SidebarProps) => {
   return (
     <Fragment>
-      <FastField id="value" name="value" component={TextEditor} />
+      <FastField
+        editingContentId={props.editingContentId}
+        id="value"
+        name="value"
+        component={TextEditor}
+      />
       <FastField
         id="color"
         name="color"
