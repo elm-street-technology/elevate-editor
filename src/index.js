@@ -9,9 +9,9 @@ import reduce from "lodash/reduce";
 import values from "lodash/values";
 import transform from "lodash/transform";
 import ThemeProvider from "elevate-ui/ThemeProvider";
-import ReactDOMServer from "react-dom/server";
 import noScroll from "no-scroll";
 
+import utilsExport from "./utils/export";
 import generateUUID from "./utils/generate-uuid";
 import Constants from "./utils/constants";
 import applyDefaults from "./utils/apply-defaults";
@@ -31,6 +31,11 @@ import ThreeCol from "./Components/ThreeCol";
 import FourCol from "./Components/FourCol";
 import FiveCol from "./Components/FiveCol";
 import Text from "./Components/Text";
+import EmailRow from "./Components/Email/Row";
+import EmailImage from "./Components/Email/Image";
+import EmailWrapper from "./Components/Email/Wrapper";
+import EmailHorizontalRule from "./Components/Email/HorizontalRule";
+import EmailButton from "./Components/Email/Button";
 
 import type {
   $ContentBlock,
@@ -38,6 +43,7 @@ import type {
   $Components,
   $Component,
   $RenderReactProps,
+  $ExportOptions,
 } from "types";
 
 const InternalComponents = [
@@ -217,12 +223,13 @@ class Editor extends Component<$Props, $State> {
   }
 
   exportHTML = (
-    content: $ContentBlocks = this.state.content,
-    components: $Components = this.state.components
+    options: $ExportOptions = {
+      content: this.state.content,
+      components: this.state.components,
+      inlineCss: false,
+    }
   ) => {
-    return ReactDOMServer.renderToStaticMarkup(
-      renderReact({ content, components })
-    );
+    return utilsExport(options);
   };
 
   exportJSON = () => {
@@ -501,6 +508,8 @@ class Editor extends Component<$Props, $State> {
                       : {},
                   next: formProps.values,
                 }),
+              updateComponentAttrs: (id, attrs) =>
+                this.updateComponentAttrs(id, attrs),
               editingContentFormAttrs: formProps.values,
               editingContentId: editingContent && editingContent.id,
               addChildToContent: (id: string) => {
@@ -545,7 +554,10 @@ class Editor extends Component<$Props, $State> {
                     >
                       {React.createElement(
                         find(components, { type: editingContent.type }).Form,
-                        { UPLOADCARE_API_KEY: UPLOADCARE_API_KEY }
+                        {
+                          UPLOADCARE_API_KEY: UPLOADCARE_API_KEY,
+                          editingContentId: editingContent.id,
+                        }
                       )}
                     </SidebarForm>
                   </div>
@@ -621,3 +633,29 @@ export const Tools = {
   renderReact,
   applyDefaults,
 };
+
+export const Components: Object = {
+  Row,
+  Button,
+  HorizontalRule,
+  Image,
+  Text,
+  TwoCol,
+  ThreeCol,
+  FourCol,
+  FiveCol,
+  Email: {
+    Row: EmailRow,
+    HorizontalRule: EmailHorizontalRule,
+    Image: EmailImage,
+    Wrapper: EmailWrapper,
+  },
+};
+
+export const EmailComponents: Object[] = combineComponents([
+  EmailRow,
+  EmailHorizontalRule,
+  EmailWrapper,
+  EmailImage,
+  EmailButton,
+]);

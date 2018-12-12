@@ -24,7 +24,7 @@ class TextEditor extends Component {
 
   componentDidUpdate(prevProps) {
     if (
-      !(prevProps.field && prevProps.field.value) &&
+      prevProps.editingContentId !== this.props.editingContentId &&
       this.props.field &&
       this.props.field.value
     ) {

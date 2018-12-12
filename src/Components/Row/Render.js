@@ -13,6 +13,7 @@ type $Props = {|
   classes: Object,
   content: $ContentBlock,
   internals: $Internals,
+  refCallback: () => void,
 |};
 
 const getColor = (color) => {
@@ -40,6 +41,7 @@ const getItemStyle = (
 
 const getHoverStyle = (isDraggingOver: boolean) => ({
   background: isDraggingOver ? "lightblue" : "transparent",
+  width: "100%",
 });
 
 class RowPreview extends Component<$Props> {
@@ -105,16 +107,19 @@ class RowPreview extends Component<$Props> {
       classes,
       content: { attrs, id },
       internals: { editingContentId },
+      refCallback,
     } = this.props;
     const isActive = editingContentId === id;
     const row = (
-      <div className={classes && classes.row}>{this.renderChildren()}</div>
+      <div className={classes && classes.row} ref={refCallback}>
+        {this.renderChildren()}
+      </div>
     );
     if (!isActive) {
       return row;
     }
     return (
-      <div className={classNames(classes.root, classes.row)}>
+      <div className={classNames(classes.root)}>
         <Droppable droppableId={id} direction={attrs.direction || "vertical"}>
           {(provided, snapshot) => (
             <div
@@ -132,10 +137,10 @@ class RowPreview extends Component<$Props> {
 
 export default withStyles((theme) => ({
   root: {
-    // width: "100%",
-    // margin: "0 auto",
-    // overflowY: "hidden",
-    // overflowX: "scroll",
+    display: "flex",
+    width: ({ content: { attrs }, internals: { isEditor } }) =>
+      !isEditor && attrs && (attrs.width || "") !== "" && "100%",
+    minHeight: ({ content: { attrs } }) => attrs && attrs.height,
   },
   row: {
     display: "flex",

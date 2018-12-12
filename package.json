@@ -16,16 +16,19 @@
     "test": "flow check",
     "flow": "flow",
     "lint": "eslint --ext .js .",
-    "reset": "rm -Rf dist/ node_modules dist/node_modules && yarn && cd dist && yarn"
+    "reset": "rm -Rf dist/ node_modules demo/node_modules && yarn && cd demo && yarn"
   },
   "dependencies": {
     "classnames": "^2.2.6",
     "draft-js": "^0.10.5",
     "draftjs-to-html": "^0.8.4",
-    "elevate-ui": "^0.29.3",
+    "elevate-ui": "^0.29.4",
     "elevate-ui-icons": "^0.1.0",
     "formik": "^1.2.0",
+    "juice": "^5.1.0",
     "no-scroll": "^2.1.1",
+    "postcss": "^7.0.7",
+    "postcss-js": "^2.0.0",
     "react": "^16.5.0",
     "react-beautiful-dnd": "^9.0.2",
     "react-dom": "=16.5.0",

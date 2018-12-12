@@ -3,6 +3,7 @@ import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 import Add from "elevate-ui-icons/Add";
 import Constants from "../utils/constants";
+import assign from "lodash/assign";
 
 import Delete from "../Components/Common/Delete";
 
