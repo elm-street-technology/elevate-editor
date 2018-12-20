@@ -19,6 +19,7 @@
     "reset": "rm -Rf dist/ node_modules demo/node_modules && yarn && cd demo && yarn"
   },
   "dependencies": {
+    "@babel/runtime": "^7.2.0",
     "classnames": "^2.2.6",
     "draft-js": "^0.10.5",
     "draftjs-to-html": "^0.8.4",
@@ -41,6 +42,7 @@
     "@babel/core": "^7.1.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-flow-strip-types": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "9.0.0",
