@@ -6,6 +6,7 @@ export default {
       type: "Wrapper",
       attrs: {
         width: "675",
+        footer: "[unsubscribe]",
       },
       content: [],
     },

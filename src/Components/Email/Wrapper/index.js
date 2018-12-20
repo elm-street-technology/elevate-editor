@@ -18,6 +18,7 @@ const defaultAttrs = (attrs: Object = {}) => {
       backgroundColor: "#E4E4E4",
       allowChildren: true,
       disableDelete: true,
+      footer: null,
     },
     attrs
   );

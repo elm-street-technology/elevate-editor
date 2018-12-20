@@ -632,6 +632,7 @@ export const Tools = {
   ToolboxItem,
   renderReact,
   applyDefaults,
+  utilsExport,
 };
 
 export const Components: Object = {
