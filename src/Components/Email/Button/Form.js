@@ -26,8 +26,8 @@ const fontFamilies = [
   },
   { label: "MS Sans Serif", value: "‘MS Sans Serif’, Geneva, sans-serif;" },
   {
-    label: "font-family: ‘MS Serif’",
-    value: "font-family: ‘MS Serif’, ‘New York’, sans-serif;",
+    label: "‘MS Serif’",
+    value: "‘MS Serif’, ‘New York’, sans-serif;",
   },
   {
     label: "Palatino Linotype",
