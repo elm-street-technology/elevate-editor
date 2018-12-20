@@ -16,6 +16,7 @@ export default {
         backgroundColor: "#E4E4E4",
         allowChildren: true,
         disableDelete: true,
+        footer: "[unsubscribe]",
         calculatedWidth: 1408,
         calculatedHeight: 1107,
       },

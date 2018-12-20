@@ -80,6 +80,7 @@ class EmailEditor extends Component<Props, State> {
 
   toggleJsonModel() {
     this.setState({
+      content: this.editor.exportJSON(),
       showJsonModel: !this.state.showJsonModel,
     });
   }
@@ -145,6 +146,7 @@ class EmailEditor extends Component<Props, State> {
       <Fragment>
         <Formik
           initialValues={{ content: JSON.stringify(content) }}
+          enableReinitialize={true}
           validate={(values) => {
             let errors = {};
             try {

@@ -113,6 +113,7 @@ class WrapperPreview extends Component<$Props> {
       const row = (
         <div className={classes.container} ref={refCallback}>
           <div className={classes.innerContainer}>{this.renderChildren()}</div>
+          {attrs.footer && <div className={classes.footer}>{attrs.footer}</div>}
         </div>
       );
       if (!isActive) {
@@ -147,6 +148,11 @@ class WrapperPreview extends Component<$Props> {
             </table>
           </td>
         </tr>
+        {attrs.footer && (
+          <tr>
+            <td className={classes.footer}>{attrs.footer}</td>
+          </tr>
+        )}
       </table>
     );
   }
@@ -202,6 +208,13 @@ export default withStyles((theme) => ({
       attrs.paddingBottom ? `${attrs.paddingBottom}px` : "0",
     paddingLeft: ({ content: { attrs } }) =>
       attrs.paddingLeft ? `${attrs.paddingLeft}px` : "0",
+  },
+  footer: {
+    textAlign: "center",
+    paddingTop: ({ content: { attrs }, internals: { isEditor } }) =>
+      isEditor && attrs.paddingBottom ? `${attrs.paddingBottom}px` : "0",
+    paddingBottom: ({ content: { attrs }, internals: { isEditor } }) =>
+      !isEditor && attrs.paddingBottom ? `${attrs.paddingBottom}px` : "0",
   },
   innerContainerTable: {
     margin: "0 auto",
