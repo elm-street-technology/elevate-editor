@@ -9,8 +9,7 @@ import Header from "./Header";
 import Sidebar from "./Sidebar";
 
 // import Home from "./Home";
-import BlankEditor from "./BlankEditor";
-import EmailEditor from "./EmailEditor";
+import DemoEditor from "./DemoEditor";
 
 class Main extends Component {
   state = {
@@ -55,10 +54,9 @@ class Main extends Component {
             className={classNames(isMenuOpen && classes.underlay)}
           />
           <div className={classes.children}>
-            <Route exact path="/" component={EmailEditor} />
-            <Route path="/new" component={BlankEditor} />
-            {/* <Route exact path="/editor" component={EmailEditor} /> */}
-            <Route path="/editor/:template" component={EmailEditor} />
+            <Route exact path="/" component={DemoEditor} />
+            <Route exact path="/editor" component={DemoEditor} />
+            <Route path="/editor/:template" component={DemoEditor} />
           </div>
         </div>
       </RouteListener>
