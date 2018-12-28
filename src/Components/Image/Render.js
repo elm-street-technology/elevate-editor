@@ -10,6 +10,26 @@ type $Props = {
   refCallback: () => void,
   reCalculate: () => void,
 };
+
+// used to convert numeric value to px value
+// used by the image & wrapper
+function convertDimensions(value) {
+  if (/^\d+$/.test(value)) {
+    return `${value}px`;
+  }
+  return value;
+}
+
+// used only by the image to convert the width/height value for the image
+function handleImageDimension(value) {
+  value = convertDimensions(value);
+  if (/%$/.test(value)) {
+    // make the image fill the wrapping element that contains the % width
+    return "100%";
+  }
+  return value;
+}
+
 const ImagePreview = ({
   classes,
   content: {
@@ -20,16 +40,16 @@ const ImagePreview = ({
   reCalculate,
 }: $Props) => {
   const img = (
-    <img
-      className={classes.root}
-      src={src}
-      width={width}
-      height={height}
-      alt={alt}
-      title={title}
-      ref={refCallback}
-      onLoad={reCalculate}
-    />
+    <div className={classes.imageWrapper}>
+      <img
+        className={classes.root}
+        src={src}
+        alt={alt}
+        title={title}
+        ref={refCallback}
+        onLoad={reCalculate}
+      />
+    </div>
   );
   if (!url) {
     return img;
@@ -50,8 +70,20 @@ const ImagePreview = ({
 };
 
 export default withStyles((theme) => ({
+  imageWrapper: {
+    display: "inline-block",
+    verticalAlign: "bottom",
+    width: ({ content: { attrs } }) => convertDimensions(attrs && attrs.width),
+    height: ({ content: { attrs } }) =>
+      convertDimensions(attrs && attrs.height),
+  },
   root: {
     maxWidth: "100%",
-    display: "block",
+    width: ({ content: { attrs } }) =>
+      handleImageDimension(attrs && attrs.width),
+    height: ({ content: { attrs } }) =>
+      handleImageDimension(attrs && attrs.height),
+    display: "inline-block",
+    verticalAlign: "bottom",
   },
 }))(ImagePreview);
