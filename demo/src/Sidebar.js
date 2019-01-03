@@ -60,6 +60,13 @@ const Sidebar = ({ classes }) => {
         >
           Page Example
         </NavLink>
+        <NavLink
+          activeClassName={classes.active}
+          className={classes.item}
+          to="/editor/page-example-two"
+        >
+          Page Example Two
+        </NavLink>
       </nav>
     </div>
   );

@@ -31,6 +31,7 @@ import ThreeCol from "./Components/ThreeCol";
 import FourCol from "./Components/FourCol";
 import FiveCol from "./Components/FiveCol";
 import Text from "./Components/Text";
+import HTML from "./Components/HTML";
 import EmailRow from "./Components/Email/Row";
 import EmailImage from "./Components/Email/Image";
 import EmailWrapper from "./Components/Email/Wrapper";
@@ -45,7 +46,6 @@ import type {
   $RenderReactProps,
   $ExportOptions,
 } from "types";
-
 const InternalComponents = [
   Button,
   HorizontalRule,
@@ -56,6 +56,7 @@ const InternalComponents = [
   ThreeCol,
   FourCol,
   FiveCol,
+  HTML,
 ];
 
 type $Props = {
@@ -199,16 +200,23 @@ class Editor extends Component<$Props, $State> {
   ): $ContentBlocks {
     return content.map((child: $ContentBlock) => {
       const component: $Component = find(components, { type: child.type });
-      if (
-        !(
-          component.defaultAttrs && typeof component.defaultAttrs === "function"
-        )
-      ) {
-        throw new Error(
-          `${
-            child.type
-          } must have Fn defaultAttrs({}) which returns default values for all form fields`
-        );
+      console.log(component);
+      try {
+        if (
+          !(
+            component.defaultAttrs &&
+            typeof component.defaultAttrs === "function"
+          )
+        ) {
+          throw new Error(
+            `${
+              child.type
+            } must have Fn defaultAttrs({}) which returns default values for all form fields`
+          );
+        }
+      } catch (err) {
+        console.log(child);
+        throw err;
       }
       return {
         id: child.id || generateUUID(),
@@ -641,6 +649,7 @@ export const Components: Object = {
   HorizontalRule,
   Image,
   Text,
+  HTML,
   TwoCol,
   ThreeCol,
   FourCol,
