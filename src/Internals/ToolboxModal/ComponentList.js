@@ -51,7 +51,7 @@ const Sidebar = ({
           }
           key={component.type}
           className={classes.toolboxItem}
-          label={component.type}
+          label={component.label || component.type}
           handleComponentClick={handleComponentClick}
           type={component.type}
         />

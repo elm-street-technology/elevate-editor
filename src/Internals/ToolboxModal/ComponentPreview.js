@@ -26,7 +26,7 @@ const ComponentPreview = ({ activeComponent, classes, internals }: $Props) => {
     return (
       <div className={classes.root}>
         <Typography type="heading6" gutterBottom>
-          {activeComponent.type} Preview
+          {activeComponent.label || activeComponent.type} Preview
         </Typography>
         <div className={classes.content}>
           {content

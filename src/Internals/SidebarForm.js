@@ -23,14 +23,17 @@ const SidebarForm = ({
         Editing {type}
       </Typography>
       <ul className={classes.breadcrumbs}>
-        {crumbs.map((crumb) => (
+        {crumbs.map((crumb, idx) => (
           <li key={`crumb-${crumb.id}`}>
             <a href="#" onClick={(e) => internals.showSidebar(e, crumb.id)}>
-              {crumb.type}
+              {crumb.label}
             </a>
+            <span className={classes.breadCrumbSeparator}>{" / "}</span>
           </li>
         ))}
-        {last && <li key={`crumb-${last.id}`}>{last.type}</li>}
+        {crumbs && !!crumbs.length && last && (
+          <li key={`crumb-${last.id}`}>{last.label}</li>
+        )}
       </ul>
       <div className={classes.grid}>{children}</div>
       <div className={classes.buttonGroup}>
@@ -62,18 +65,11 @@ const styles = (theme) => ({
     marginTop: "-10px",
     "& > li": {
       display: "inline",
-      marginRight: "10px",
-      position: "relative",
-      "&+li:before": {
-        content: '"/"',
-        position: "absolute",
-        bottom: "1px",
-        left: "-8px",
-        // width: "100%",
-        height: "1rem",
-        display: "block",
-      },
     },
+  },
+  breadCrumbSeparator: {
+    fontSize: "0.8rem",
+    color: "#111",
   },
 });
 

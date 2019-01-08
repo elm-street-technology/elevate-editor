@@ -7,6 +7,7 @@ export default {
   Render,
   Form,
   type: "Text",
+  label: "Rich Text",
   description:
     "The Text component allows you to add custom text to the page layout.",
 

@@ -348,7 +348,17 @@ class Editor extends Component<$Props, $State> {
     return reduce(
       contents,
       (paths, content, index) => {
-        const rPath = [...path, { id: content.id, type: content.type, index }];
+        const component = find(this.state.components, { type: content.type });
+        const rPath = [
+          ...path,
+          {
+            id: content.id,
+            label:
+              component && component.label ? component.label : content.type,
+            type: content.type,
+            index,
+          },
+        ];
         paths[content.id] = rPath;
         if (content.content.length) {
           return this.generatePathObject(content.content, rPath, paths);

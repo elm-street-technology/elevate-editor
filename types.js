@@ -12,10 +12,11 @@ export type $ContentBlock = {|
 
 export type $Component = {
   Render?: any,
-  Preview?: any,
   Form?: any,
   generateContent?: ({ parent?: $ContentBlock }) => $ContentBlocks,
   type: string,
+  label?: string,
+  description?: string,
   defaultAttrs?: (Object) => Object,
 };
 export type $Components = $Component[];

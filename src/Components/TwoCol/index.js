@@ -6,6 +6,7 @@ import Row from "../Row";
 
 export default {
   type: "TwoCol",
+  label: "Two Column Row",
   description: "Two columns in a single row",
   generateContent: () => [
     {
