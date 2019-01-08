@@ -15,6 +15,7 @@ import utilsExport from "./utils/export";
 import generateUUID from "./utils/generate-uuid";
 import Constants from "./utils/constants";
 import applyDefaults from "./utils/apply-defaults";
+import cloneContent from "./utils/clone-content";
 
 import RenderContent from "./Internals/RenderContent";
 import SidebarForm from "./Internals/SidebarForm";
@@ -633,6 +634,7 @@ export const Tools = {
   renderReact,
   applyDefaults,
   utilsExport,
+  cloneContent,
 };
 
 export const Components: Object = {
