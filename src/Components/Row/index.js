@@ -31,6 +31,7 @@ export default {
   Render,
   Form,
   type: "Row",
+  label: "Row", // cannot be called single column row because all multi-column rows become a Row after component selection
   description:
     "The row component allows you to group multiple components together. It can be used for vertically stacking components or positioning multiple components next to each other.",
 

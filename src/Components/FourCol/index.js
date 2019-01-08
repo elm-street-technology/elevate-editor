@@ -7,6 +7,7 @@ import Row from "../Row";
 export default {
   type: "FourCol",
   description: "Four columns in a single row",
+  label: "Four Column Row",
   generateContent: () => [
     {
       id: generateUUID(),

@@ -30,7 +30,7 @@ export default {
   Form,
   type: "Wrapper",
   description:
-    "The email wrapper component allows you to safley wrap content in standard email sizes.",
+    "The email wrapper component allows you to safely wrap content in standard email sizes.",
   defaultAttrs,
   generateContent: () => [
     {

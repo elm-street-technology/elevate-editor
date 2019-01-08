@@ -16,6 +16,7 @@ export default {
   Render,
   Form,
   type: "HorizontalRule",
+  label: "Separator",
   description:
     "Horizontal Rule component to create a clear separation of content.",
   defaultAttrs,

@@ -21,6 +21,7 @@ export default {
   Render,
   Form,
   type: "Image",
+  label: "Image",
   description:
     "Image component to display images or graphics in the page layout.",
   defaultAttrs,

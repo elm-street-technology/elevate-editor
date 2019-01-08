@@ -23,6 +23,7 @@ export default {
   Render,
   Form,
   type: "Button",
+  label: "Button",
   description: "Button component that can be used as a call to action.",
 
   // validation: Yup.object()
