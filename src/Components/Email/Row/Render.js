@@ -68,13 +68,17 @@ class RowPreview extends Component<$Props> {
       return (
         <div className={classes.inlineDiv}>
           <table className={classes.tableWrapper}>
-            <tr>
-              <td className={classes.tableWrapperTd}>
-                <table className={classes.tableRow}>
-                  <tr>{this.renderChildren()}</tr>
-                </table>
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td className={classes.tableWrapperTd}>
+                  <table className={classes.tableRow}>
+                    <tbody>
+                      <tr>{this.renderChildren()}</tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       );
@@ -84,15 +88,21 @@ class RowPreview extends Component<$Props> {
     return (
       <div className={classes.inlineDiv}>
         <table className={classes.tableWrapper}>
-          <tr>
-            <td className={classes.tableWrapperTd}>
-              <table className={classes.tableRow} {...this.tableAttrs()}>
-                <tr>
-                  <td className={classes.tdColumn}>{this.renderChildren()}</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td className={classes.tableWrapperTd}>
+                <table className={classes.tableRow} {...this.tableAttrs()}>
+                  <tbody>
+                    <tr>
+                      <td className={classes.tdColumn}>
+                        {this.renderChildren()}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     );
@@ -105,8 +115,8 @@ class RowPreview extends Component<$Props> {
       width: `100%`,
       bgcolor: attrs.backgroundColor,
       border: "0",
-      cellspacing: "0",
-      cellpadding: "0",
+      cellSpacing: "0",
+      cellPadding: "0",
     };
   }
 }

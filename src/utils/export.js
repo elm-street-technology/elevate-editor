@@ -67,7 +67,7 @@ function renderHtml(body: string, css: string): string {
       "head",
       null,
       createElement("meta", {
-        "http-equiv": "Content-Type",
+        httpEquiv: "Content-Type",
         content: "text/html; charset=UTF-8",
       }),
       createElement("style", {

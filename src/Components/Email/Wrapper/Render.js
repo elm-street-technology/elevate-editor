@@ -136,23 +136,27 @@ class WrapperPreview extends Component<$Props> {
     }
     return (
       <table className={classes.tableWrapper} {...this.wrapperAttrs()}>
-        <tr>
-          <td className={classes.tdWrapper}>
-            <table
-              {...this.innerAttrs()}
-              className={classes.innerContainerTable}
-            >
-              <tr>
-                <td>{this.renderChildren()}</td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        {attrs.footer && (
+        <tbody>
           <tr>
-            <td className={classes.footer}>{attrs.footer}</td>
+            <td className={classes.tdWrapper}>
+              <table
+                {...this.innerAttrs()}
+                className={classes.innerContainerTable}
+              >
+                <tbody>
+                  <tr>
+                    <td>{this.renderChildren()}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
           </tr>
-        )}
+          {attrs.footer && (
+            <tr>
+              <td className={classes.footer}>{attrs.footer}</td>
+            </tr>
+          )}
+        </tbody>
       </table>
     );
   }
@@ -165,8 +169,8 @@ class WrapperPreview extends Component<$Props> {
       width: `${attrs.width}px`,
       bgcolor: attrs.innerBackgroundColor,
       border: "0",
-      cellspacing: "0",
-      cellpadding: "0",
+      cellSpacing: "0",
+      cellPadding: "0",
     };
   }
 
@@ -178,8 +182,8 @@ class WrapperPreview extends Component<$Props> {
       width: `100%`,
       bgcolor: attrs.backgroundColor,
       border: "0",
-      cellspacing: "0",
-      cellpadding: "0",
+      cellSpacing: "0",
+      cellPadding: "0",
     };
   }
 }

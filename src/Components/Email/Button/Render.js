@@ -22,22 +22,24 @@ const ButtonRender = ({
     <div className={classes.buttonWrapper}>
       <table
         border="0"
-        cellpadding="0"
-        cellspacing="0"
+        cellPadding="0"
+        cellSpacing="0"
         className={classes.buttonTable}
       >
-        <tr>
-          <td className={classes.buttonTd} align="center" valign="middle">
-            <a
-              href={url}
-              onClick={(e) => isEditor && e.preventDefault()}
-              target="_blank"
-              className={classes.button}
-            >
-              {attrs.children}
-            </a>
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td className={classes.buttonTd} align="center" valign="middle">
+              <a
+                href={url}
+                onClick={(e) => isEditor && e.preventDefault()}
+                target="_blank"
+                className={classes.button}
+              >
+                {attrs.children}
+              </a>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );
