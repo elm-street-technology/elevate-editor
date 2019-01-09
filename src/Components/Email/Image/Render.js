@@ -9,10 +9,45 @@ type $Props = {
   classes: Object,
 };
 
+function isPreview(src) {
+  return !/^(?:http(s)?:\/\/)/.test(src);
+}
+
+// used only for placeholder calculations
+function handleImageDimension(value) {
+  if (/^\d+$/.test(value)) {
+    value = `${value}px`;
+  }
+  if (/%$/.test(value)) {
+    return "100%";
+  }
+  return value;
+}
+
+// used only for placeholder calculations
+function placeholderDimension(src, value, calculatedValue) {
+  if (isPreview(src)) {
+    if (!value || value === "" || /%$/.test(value)) {
+      return "";
+    }
+    return handleImageDimension(value);
+  }
+  return `${calculatedValue}px`;
+}
+
 const ImagePreview = ({
   classes,
   content: {
-    attrs: { src, height, alt, calculatedWidth, calculatedHeight, title, url },
+    attrs: {
+      src,
+      width,
+      height,
+      alt,
+      calculatedWidth,
+      calculatedHeight,
+      title,
+      url,
+    },
   },
   internals: { isEditor },
 }: $Props) => {
@@ -21,8 +56,8 @@ const ImagePreview = ({
       <img
         className={classes.root}
         src={src}
-        width={`${calculatedWidth}px`}
-        height={`${calculatedHeight}px`}
+        width={placeholderDimension(src, width, calculatedWidth)}
+        height={placeholderDimension(src, height, calculatedHeight)}
         alt={alt}
         title={title}
       />
@@ -58,8 +93,12 @@ export default withStyles((theme) => ({
   },
   root: {
     maxWidth: "100%",
-    width: ({ content: { attrs } }) => attrs && `${attrs.calculatedWidth}px`,
-    height: ({ content: { attrs } }) => attrs && `${attrs.calculatedHeight}px`,
+    width: ({ content: { attrs } }) =>
+      attrs &&
+      placeholderDimension(attrs.src, attrs.width, attrs.calculatedWidth),
+    height: ({ content: { attrs } }) =>
+      attrs &&
+      placeholderDimension(attrs.src, attrs.height, attrs.calculatedHeight),
     display: "block",
     "@media only screen and (max-width: 675px)": {
       width: "100% !important",
