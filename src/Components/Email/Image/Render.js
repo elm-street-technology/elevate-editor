@@ -86,9 +86,7 @@ export default withStyles((theme) => ({
     display: "inline-block",
     verticalAlign: "bottom",
     "@media only screen and (max-width: 675px)": {
-      width: "100% !important",
       height: "auto !important",
-      display: "block !important",
     },
   },
   root: {
@@ -101,9 +99,7 @@ export default withStyles((theme) => ({
       placeholderDimension(attrs.src, attrs.height, attrs.calculatedHeight),
     display: "block",
     "@media only screen and (max-width: 675px)": {
-      width: "100% !important",
       height: "auto !important",
-      display: "block !important",
     },
   },
 }))(ImagePreview);
