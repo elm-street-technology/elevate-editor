@@ -48,6 +48,7 @@ class WrapperPreview extends Component<$Props> {
   renderChildren() {
     const {
       classes,
+      content: parent,
       content: { content, id },
       internals,
     } = this.props;
@@ -72,7 +73,12 @@ class WrapperPreview extends Component<$Props> {
       }
 
       const renderedChild = (
-        <RenderContent key={idx} internals={internals} content={[child]} />
+        <RenderContent
+          key={idx}
+          internals={internals}
+          content={[child]}
+          parent={parent}
+        />
       );
       if (!isActive || content.length === 1) {
         // content === 1 check because we don't want to show something as draggable when there are no other siblings to sort against

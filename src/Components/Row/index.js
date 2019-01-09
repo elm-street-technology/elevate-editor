@@ -40,8 +40,15 @@ export default {
     {
       id: generateUUID(),
       type: "Row",
-      content: [],
-      attrs: defaultAttrs(),
+      content: [
+        {
+          id: generateUUID(),
+          type: "Row",
+          content: [],
+          attrs: defaultAttrs({ width: "100%", allowChildren: true }),
+        },
+      ],
+      attrs: defaultAttrs({ direction: "horizontal", allowChildren: false }),
     },
   ],
 };

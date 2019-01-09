@@ -30,21 +30,20 @@ export default {
       },
     ];
 
-    return parent && !parent.content.length
-      ? content
-      : [
-          {
-            id: Tools.generateUUID(),
-            type: "Row",
-            attrs: {
-              width: "100%",
-              paddingTop: 4,
-              paddingRight: 4,
-              paddingBottom: 4,
-              paddingLeft: 4,
-            },
-            content,
-          },
-        ];
+    return [
+      {
+        id: Tools.generateUUID(),
+        type: "Row",
+        attrs: {
+          allowChildren: false,
+          width: "100%",
+          paddingTop: 4,
+          paddingRight: 4,
+          paddingBottom: 4,
+          paddingLeft: 4,
+        },
+        content,
+      },
+    ];
   },
 };

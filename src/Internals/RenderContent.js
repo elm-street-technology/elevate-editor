@@ -8,7 +8,11 @@ import assign from "lodash/assign";
 import RenderEditableContent from "./RenderEditableContent";
 import type { $ContentBlock, $ContentBlocks, $Internals } from "types";
 
-type $Props = { content: $ContentBlocks, internals: $Internals };
+type $Props = {
+  content: $ContentBlocks,
+  internals: $Internals,
+  parent?: $ContentBlock,
+};
 
 type $ChildProps = {
   child: $ContentBlock,
@@ -101,6 +105,7 @@ class RenderChild extends Component<$ChildProps> {
       <RenderEditableContent
         key={this.props.idx}
         child={child}
+        parent={this.props.parent}
         internals={internals}
         isActive={isActive}
       >
