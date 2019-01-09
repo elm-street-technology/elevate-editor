@@ -30,20 +30,35 @@ function handleImageDimension(value) {
   return value;
 }
 
+function placeholderDimension(value, calculatedValue: number): number {
+  let dim = value;
+  if (!value || value === "" || /%$/.test(value)) {
+    dim = calculatedValue && calculatedValue > 0 ? calculatedValue : "125";
+  }
+  return parseInt(dim.toString().replace(/\D+/g, ""));
+}
+
 const ImagePreview = ({
   classes,
   content: {
-    attrs: { src, height, alt, width, title, url },
+    attrs: { src, height, alt, width, title, url, calculatedWidth },
   },
   internals: { isEditor },
   refCallback,
   reCalculate,
 }: $Props) => {
+  const isPlaceholder = !/^(?:http(s)?:\/\/)/.test(src);
+  let imgSrc = src;
+  if (isPlaceholder) {
+    const w = placeholderDimension(width, calculatedWidth);
+    const h = placeholderDimension(height, w);
+    imgSrc = `https://via.placeholder.com/${w}x${h}`;
+  }
   const img = (
     <div className={classes.imageWrapper}>
       <img
         className={classes.root}
-        src={src}
+        src={imgSrc}
         alt={alt}
         title={title}
         ref={refCallback}
