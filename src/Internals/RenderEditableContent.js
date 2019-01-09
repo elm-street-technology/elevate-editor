@@ -3,12 +3,12 @@ import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 import Add from "elevate-ui-icons/Add";
 import Constants from "../utils/constants";
-import assign from "lodash/assign";
 
 import Delete from "../Components/Common/Delete";
 
 type Props = {
   child: Object,
+  parent: Object,
   childActive: boolean,
   children: any,
   classes: Object,
@@ -21,6 +21,7 @@ class RenderEditableContent extends Component<Props> {
   render() {
     const {
       child,
+      parent,
       children,
       classes,
       className,
@@ -28,9 +29,12 @@ class RenderEditableContent extends Component<Props> {
       internals: { editingContentId },
       isActive,
     } = this.props;
+
     const activeAllowChildren =
-      (editingContentId === child.id || !editingContentId) &&
-      child.attrs.allowChildren;
+      editingContentId === child.id && child.attrs.allowChildren;
+    const inactiveRootAllowChildren =
+      !editingContentId && !parent && child.attrs.allowChildren;
+
     return (
       <div
         className={classNames(
@@ -44,10 +48,7 @@ class RenderEditableContent extends Component<Props> {
       >
         {children}
 
-        {activeAllowChildren ||
-        (isActive &&
-          child.type === "Row" &&
-          child.attrs.direction === "vertical") ? (
+        {activeAllowChildren || inactiveRootAllowChildren ? (
           <button
             type="button"
             className={classes.add}

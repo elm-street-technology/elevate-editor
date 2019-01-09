@@ -41,15 +41,13 @@ export default {
       },
     ];
 
-    return parent && !parent.content.length
-      ? content
-      : [
-          {
-            id: Tools.generateUUID(),
-            type: "Row",
-            attrs: {},
-            content,
-          },
-        ];
+    return [
+      {
+        id: Tools.generateUUID(),
+        type: "Row",
+        attrs: { allowChildren: false },
+        content,
+      },
+    ];
   },
 };

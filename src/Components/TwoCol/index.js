@@ -16,9 +16,12 @@ export default {
         id: generateUUID(),
         type: "Row",
         content: [],
-        attrs: Row.defaultAttrs({ width: `${100 / 2}%` }),
+        attrs: Row.defaultAttrs({ width: `${100 / 2}%`, allowChildren: true }),
       })),
-      attrs: Row.defaultAttrs({ direction: "horizontal" }),
+      attrs: Row.defaultAttrs({
+        direction: "horizontal",
+        allowChildren: false,
+      }),
     },
   ],
 };
