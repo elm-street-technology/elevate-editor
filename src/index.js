@@ -607,26 +607,26 @@ export default withStyles((theme) => ({
   },
   editingContent: {
     "& $preview": {
-      paddingRight: "382px", // Scoots the preview over to ensure it doesn't render under the sidebar nav, not sure if I like this
+      // paddingRight: "382px", // Scoots the preview over to ensure it doesn't render under the sidebar nav, not sure if I like this
+      display: "none",
+      [theme.breakpoints(768)]: {
+        display: "block",
+      },
     },
   },
   preview: {
     flex: "1",
     width: "100%",
     height: "auto",
-    overflowX: "hidden",
+    overflowX: "auto",
     overflowY: "auto",
     padding: "20px",
   },
   sidebar: {
-    position: "absolute",
-    top: "0",
-    right: "0",
-    bottom: "0",
     display: "flex",
     flexDirection: "column",
     flexShrink: "0",
-    width: "360px",
+    width: "100%",
     height: "100%",
     overflowX: "hidden",
     overflowY: "auto",
@@ -634,6 +634,9 @@ export default withStyles((theme) => ({
     padding: "8px",
     zIndex: Constants.zIndex.sidebar,
     boxShadow: theme.globalBoxShadow,
+    [theme.breakpoints(768)]: {
+      width: "360px",
+    },
   },
 }))(Editor);
 

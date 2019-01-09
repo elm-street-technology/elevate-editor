@@ -256,6 +256,8 @@ export default withStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    minWidth: ({ content: { attrs } }) =>
+      `${675 + attrs.paddingLeft + attrs.paddingRight}px`,
     flexDirection: "column",
     backgroundColor: ({ content: { attrs } }) =>
       getColor(attrs.backgroundColor),
