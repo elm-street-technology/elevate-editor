@@ -23,6 +23,7 @@ const ToolboxItem = ({
 
 export default withStyles((theme) => ({
   root: {
+    flexShrink: "0",
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "center",

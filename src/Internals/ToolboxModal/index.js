@@ -1,14 +1,11 @@
 // @flow
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import withStyles from "elevate-ui/withStyles";
-import classNames from "classnames";
+import Modal from "elevate-ui/Modal";
 import find from "lodash/find";
-import noScroll from "no-scroll";
-
-import Button from "elevate-ui/Button";
 import Add from "elevate-ui-icons/Add";
 
-import Sidebar from "./ComponentList";
+import ComponentList from "./ComponentList";
 import ComponentPreview from "./ComponentPreview";
 
 import type { $Internals } from "types";
@@ -17,6 +14,7 @@ type $Props = {
   classes: Object,
   className?: string,
   id?: string,
+  onCancel: Function,
   onSelect: Function,
   theme: Object,
   internals: $Internals,
@@ -79,7 +77,7 @@ class ToolboxModal extends Component<$Props, $State> {
   };
 
   render() {
-    const { classes, className, onSelect, theme, internals } = this.props;
+    const { classes, onCancel, onSelect, internals } = this.props;
     const {
       activeComponent,
       filteredComponents,
@@ -90,51 +88,31 @@ class ToolboxModal extends Component<$Props, $State> {
       return null;
     }
     return (
-      <Fragment>
-        <div className={classes.mask} />
-        <div className={classNames(classes.root, className)}>
-          <div className={classes.top}>
-            <Sidebar
-              activeComponent={activeComponent}
-              components={filteredComponents}
-              filterComponents={this.filterComponents}
-              filterInput={filterInput}
-              handleComponentClick={this.handleComponentClick}
-            />
-            <ComponentPreview
-              key={activeComponent && activeComponent.type}
-              internals={internals}
-              activeComponent={activeComponent}
-            />
-          </div>
-          <div className={classes.bottom}>
-            <Button
-              onClick={() => {
-                noScroll.off();
-                return onSelect(null, null);
-              }}
-              color={theme.colors.gray200 || "#EEEEEE"}
-              isOutlined
-            >
-              Cancel
-            </Button>
-            <Button
-              icon={<Add />}
-              disabled={!activeComponent ? true : false}
-              color="secondary"
-              onClick={() => {
-                noScroll.off();
-                return onSelect(
-                  parentId,
-                  activeComponent && activeComponent.type
-                );
-              }}
-            >
-              Add Component
-            </Button>
-          </div>
-        </div>
-      </Fragment>
+      <Modal
+        classes={{ root: classes.root, body: classes.body }}
+        cancelText="Cancel"
+        confirmAction={() =>
+          onSelect(parentId, activeComponent && activeComponent.type)
+        }
+        confirmIcon={<Add />}
+        confirmText="Add Component"
+        toggleModal={onCancel}
+        title="Select a component"
+        visible
+      >
+        <ComponentList
+          activeComponent={activeComponent}
+          components={filteredComponents}
+          filterComponents={this.filterComponents}
+          filterInput={filterInput}
+          handleComponentClick={this.handleComponentClick}
+        />
+        <ComponentPreview
+          key={activeComponent && activeComponent.type}
+          internals={internals}
+          activeComponent={activeComponent}
+        />
+      </Modal>
     );
   }
 }
@@ -142,56 +120,28 @@ class ToolboxModal extends Component<$Props, $State> {
 const styles = (theme) => ({
   root: {
     display: "flex",
-    position: "fixed",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
-    top: 100,
-    left: "calc(50% - 450px)",
-    width: 900,
-    maxWidth: "100%",
-    height: "calc(85vh - 100px)",
-    borderRadius: theme.globalBorderRadius,
-    backgroundColor: theme.colors["white"],
-    boxShadow: theme.globalBoxShadow,
-    zIndex: 999,
-    overflow: "hidden",
-  },
-  mask: {
-    display: "block",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100vh",
-    backgroundColor: "#000000",
-    opacity: 0.25,
-    zIndex: 99,
-  },
-  top: {
-    flex: "0 1 100%",
-    display: "flex",
     position: "relative",
-    flexFlow: "row nowrap",
-    justifyContent: "space-between",
-    alignItems: "stretch",
-    overflowY: "scroll",
-    overflowX: "visible",
-    width: "100%",
-  },
-  bottom: {
-    flex: "0 0 auto",
-    display: "flex",
-    width: "100%",
-    flexFlow: "row nowrap",
-    justifyContent: "flex-end",
+    flexDirection: "column",
+    justifyContent: "flex-start",
     alignItems: "center",
-    borderTop: `1px solid ${theme.colors["gray200"]}`,
-    backgroundColor: theme.colors.gray050,
-    padding: "12px",
-    "& * + *": {
-      marginLeft: "12px",
+    margin: "0 auto",
+    maxHeight: "70vh",
+    border: "none",
+    boxShadow:
+      "0px 1px 5px 0px rgba(0, 0, 0, 0.2),0px 2px 2px 0px rgba(0, 0, 0, 0.14),0px 3px 1px -2px rgba(0, 0, 0, 0.12)",
+    overflow: "hidden",
+    "@media (min-width: 450px)": {
+      minWidth: "450px",
     },
+    [theme.breakpoints(900)]: {
+      maxHeight: "90vh",
+    },
+  },
+  body: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
   },
 });
 

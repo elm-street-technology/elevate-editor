@@ -15,7 +15,7 @@ type $Props = {
   handleComponentClick: Function,
 };
 
-const Sidebar = ({
+const ComponentList = ({
   activeComponent,
   classes,
   components,
@@ -24,9 +24,6 @@ const Sidebar = ({
   handleComponentClick,
 }: $Props) => (
   <div className={classes.root}>
-    <Typography type="heading4" gutterBottom>
-      Select a component:
-    </Typography>
     <label className={classes.inputWrapper}>
       <input
         className={classes.input}
@@ -62,16 +59,20 @@ const Sidebar = ({
 
 const styles = (theme) => ({
   root: {
-    display: "flex",
     position: "relative",
+    display: "flex",
     flexDirection: "column",
-    flex: "0 0 375px",
     justifyContent: "flex-start",
     alignItems: "flex-start",
+    width: "100%",
     padding: "20px",
     overflowY: "scroll",
     overflowX: "visible",
     borderRight: `1px solid ${theme.colors["gray200"]}`,
+
+    [theme.breakpoints(900)]: {
+      flex: "0 0 300px",
+    },
   },
   toolboxItem: {
     marginBottom: 10,
@@ -121,4 +122,4 @@ const styles = (theme) => ({
   },
 });
 
-export default withStyles(styles, { name: "Sidebar" })(Sidebar);
+export default withStyles(styles)(ComponentList);

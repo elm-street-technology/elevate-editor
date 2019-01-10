@@ -16,7 +16,7 @@
     "test": "flow check",
     "flow": "flow",
     "lint": "eslint --ext .js .",
-    "reset": "rm -Rf dist/ node_modules demo/node_modules && yarn && cd demo && yarn"
+    "reset": "rm -Rf dist/ node_modules demo/node_modules && yarn && cd demo && yarn && cd .."
   },
   "dependencies": {
     "@babel/runtime": "^7.2.0",
