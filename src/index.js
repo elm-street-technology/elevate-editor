@@ -38,6 +38,10 @@ import EmailWrapper from "./Components/Email/Wrapper";
 import EmailHorizontalRule from "./Components/Email/HorizontalRule";
 import EmailButton from "./Components/Email/Button";
 
+import Video from "./CustomComponents/Video";
+import Gallery from "./CustomComponents/Gallery";
+import SignatureBlock from "./CustomComponents/SignatureBlock";
+
 import type {
   $ContentBlock,
   $ContentBlocks,
@@ -211,6 +215,7 @@ class Editor extends Component<$Props, $State> {
           } must have Fn defaultAttrs({}) which returns default values for all form fields`
         );
       }
+
       return {
         id: child.id || generateUUID(),
         type: child.type,
@@ -568,6 +573,7 @@ class Editor extends Component<$Props, $State> {
                         {
                           UPLOADCARE_API_KEY: UPLOADCARE_API_KEY,
                           editingContentId: editingContent.id,
+                          form: formProps,
                         }
                       )}
                     </SidebarForm>
@@ -676,3 +682,5 @@ export const EmailComponents: Object[] = combineComponents([
   EmailImage,
   EmailButton,
 ]);
+
+export const CustomComponents = { Video, Gallery, SignatureBlock };

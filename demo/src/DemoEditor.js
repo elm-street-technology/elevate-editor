@@ -4,9 +4,8 @@ import withStyles from "elevate-ui/withStyles";
 import Button from "elevate-ui/Button";
 import Textarea from "elevate-ui/Textarea";
 import Editor from "elevate-editor";
-import { Tools, EmailComponents } from "elevate-editor";
+import { Tools, EmailComponents, CustomComponents } from "elevate-editor";
 import { Formik, FastField } from "formik";
-import SignatureBlock from "./Components/SignatureBlock";
 import templates from "./templates";
 import Modal from "elevate-ui/Modal";
 import Typography from "elevate-ui/Typography";
@@ -26,7 +25,7 @@ type State = {
   showHtmlModel: boolean,
 };
 
-class EmailEditor extends Component<Props, State> {
+class DemoEditor extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const template = props.match.params.template || "email";
@@ -67,9 +66,9 @@ class EmailEditor extends Component<Props, State> {
   getComponents() {
     const { editorMode } = this.state;
     if (editorMode === "email") {
-      return [...EmailComponents, SignatureBlock];
+      return [...EmailComponents].concat(CustomComponents.SignatureBlock);
     }
-    return [SignatureBlock];
+    return [CustomComponents.Video, CustomComponents.Gallery];
   }
 
   toggleHtmlModel() {
@@ -229,7 +228,27 @@ class EmailEditor extends Component<Props, State> {
     const { classes } = this.props;
     const { step } = this.state;
     return (
-      <Fragment>
+      <CustomComponents.Gallery.Context.Provider
+        value={{
+          images: [
+            {
+              src: "https://picsum.photos/125/125/?random",
+              width: "125",
+              height: "125",
+            },
+            {
+              src: "https://picsum.photos/125/120/?random",
+              width: "125",
+              height: "120",
+            },
+            {
+              src: "https://picsum.photos/125/115/?random",
+              width: "125",
+              height: "115",
+            },
+          ],
+        }}
+      >
         {step === "editor" && this.renderEditor()}
         {step === "preview" && this.renderPreview()}
         <div className={classes.flex}>
@@ -255,7 +274,7 @@ class EmailEditor extends Component<Props, State> {
         </div>
         {this.renderHtmlExport()}
         {this.renderImportExport()}
-      </Fragment>
+      </CustomComponents.Gallery.Context.Provider>
     );
   }
 }
@@ -287,4 +306,4 @@ const styles = (theme) => ({
   },
 });
 
-export default withStyles(styles)(EmailEditor);
+export default withStyles(styles)(DemoEditor);

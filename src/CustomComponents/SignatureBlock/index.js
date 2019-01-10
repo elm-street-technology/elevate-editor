@@ -1,12 +1,12 @@
 // @flow
 
-import { Tools } from "elevate-editor";
+import { Tools } from "../../index.js";
 
 export default {
   type: "SignatureBlock",
   description:
     "An email signature component that includes contact information, photo, and more...",
-  defaultAttrs({ attrs }: Object) {
+  defaultAttrs(attrs: Object = {}) {
     return attrs;
   },
   generateContent() {

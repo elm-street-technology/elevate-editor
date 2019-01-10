@@ -1,7 +1,6 @@
 // @flow
 import React, { Fragment } from "react";
 import { FastField } from "formik";
-import Input from "elevate-ui/Input";
 import NumberIncrement from "elevate-ui/NumberIncrement";
 import ColorPicker from "elevate-ui/ColorPicker";
 

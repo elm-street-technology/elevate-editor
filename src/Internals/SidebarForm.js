@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from "react";
+import React from "react";
 import withStyles from "elevate-ui/withStyles";
 import Typography from "elevate-ui/Typography";
 
