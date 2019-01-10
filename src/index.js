@@ -270,7 +270,7 @@ class Editor extends Component<$Props, $State> {
     );
   };
 
-  openToolboxModal = (toolboxModalId: string) => {
+  openToolboxModal = (toolboxModalId: string | null) => {
     this.setState({ toolboxModalId }, () => noScroll.on());
   };
 
@@ -582,6 +582,7 @@ class Editor extends Component<$Props, $State> {
                 <ToolboxModal
                   id={toolboxModalId}
                   components={components}
+                  onCancel={() => this.openToolboxModal(null)}
                   onSelect={(id: string, type: string) =>
                     this.addChildToContent(id, type)
                   }

@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 import Typography from "elevate-ui/Typography";
 import { Tools } from "../..";
@@ -44,7 +45,7 @@ const ComponentPreview = ({ activeComponent, classes, internals }: $Props) => {
     );
   } else {
     return (
-      <div className={classes.noSelection}>
+      <div className={classNames(classes.root, classes.noSelection)}>
         <Typography type="body">
           Select a component you would like to add from the sidebar.
         </Typography>
@@ -55,10 +56,18 @@ const ComponentPreview = ({ activeComponent, classes, internals }: $Props) => {
 
 const styles = (theme) => ({
   root: {
-    flex: "1 1 auto",
     position: "relative",
+    display: "none",
+    flexDirection: "column",
+    alignItems: "center",
     overflowY: "scroll",
     padding: "20px",
+
+    [theme.breakpoints(900)]: {
+      display: "flex",
+      minWidth: "460px",
+      flex: "0 0 460px",
+    },
   },
   preview: {
     width: "100%",
@@ -72,14 +81,9 @@ const styles = (theme) => ({
     height: "auto",
   },
   noSelection: {
-    flex: "1 1 auto",
-    display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
     textAlign: "center",
     minHeight: "100%",
-    padding: "20px",
   },
 });
 
