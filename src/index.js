@@ -37,6 +37,7 @@ import EmailImage from "./Components/Email/Image";
 import EmailWrapper from "./Components/Email/Wrapper";
 import EmailHorizontalRule from "./Components/Email/HorizontalRule";
 import EmailButton from "./Components/Email/Button";
+import Iframe from "./Components/Iframe";
 
 import type {
   $ContentBlock,
@@ -57,6 +58,7 @@ const InternalComponents = [
   ThreeCol,
   FourCol,
   FiveCol,
+  Iframe,
 ];
 
 type $Props = {
