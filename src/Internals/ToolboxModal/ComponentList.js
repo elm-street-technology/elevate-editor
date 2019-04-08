@@ -1,7 +1,6 @@
 // @flow
 import React from "react";
 import withStyles from "elevate-ui/withStyles";
-import Typography from "elevate-ui/Typography";
 import Search from "elevate-ui-icons/Search";
 
 import ToolboxItem from "./ToolboxItem";
@@ -65,6 +64,7 @@ const styles = (theme) => ({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     width: "100%",
+    height: "100%",
     padding: "20px",
     overflowY: "scroll",
     overflowX: "visible",
