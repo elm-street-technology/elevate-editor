@@ -62,6 +62,7 @@ const styles = (theme) => ({
     alignItems: "center",
     overflowY: "scroll",
     padding: "20px",
+    maxHeight: "100%",
 
     [theme.breakpoints(900)]: {
       display: "flex",
