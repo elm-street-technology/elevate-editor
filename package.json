@@ -23,7 +23,7 @@
     "classnames": "^2.2.6",
     "draft-js": "^0.10.5",
     "draftjs-to-html": "^0.8.4",
-    "elevate-ui": "^0.29.4",
+    "elevate-ui": "^1.0.1",
     "elevate-ui-icons": "^0.1.0",
     "formik": "^1.2.0",
     "juice": "^5.1.0",
