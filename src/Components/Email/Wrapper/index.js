@@ -8,6 +8,9 @@ const defaultAttrs = (attrs: Object = {}) => {
   return Tools.applyDefaults(
     {
       width: "675",
+      fontFamily:
+        "'Open Sans', 'Helvetica Neue', 'Helvetica', Arial, sans-serif",
+      fontWeight: "500",
       borderSize: 1,
       borderColor: "#a9aaab",
       innerBackgroundColor: "#ffffff",

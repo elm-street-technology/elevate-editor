@@ -208,6 +208,8 @@ export default withStyles((theme) => ({
       width: "100% !important",
       tableLayout: "auto !important",
     },
+    fontFamily: "'Open Sans', 'Helvetica Neue', 'Helvetica', Arial, sans-serif",
+    fontWeight: "400",
   },
   tdWrapper: {
     paddingTop: ({ content: { attrs } }) =>
@@ -256,6 +258,8 @@ export default withStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    fontFamily: "'Open Sans', 'Helvetica Neue', 'Helvetica', Arial, sans-serif",
+    fontWeight: "500",
     minWidth: ({ content: { attrs } }) =>
       `${675 + attrs.paddingLeft + attrs.paddingRight}px`,
     flexDirection: "column",
