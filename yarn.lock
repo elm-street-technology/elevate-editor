@@ -1717,10 +1717,10 @@ elevate-ui-icons@^0.2.0:
   dependencies:
     react "^16.5.0"
 
-elevate-ui@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-1.0.1.tgz#914f80c8f3e19ee11afd6007e0776058c3e8697d"
-  integrity sha512-DoequYoEz/h1AJCI7jlcDZEvED6DWtStkTbzkU0xxEdw+ULxzwYpduU99htEXDhsw2kNtgBevS/iegCosIRX9A==
+elevate-ui@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/elevate-ui/-/elevate-ui-1.1.2.tgz#7b5a31e4d6e042519fd367f5ea730d5e1f0f3311"
+  integrity sha512-CvDCAIgPwdrohVztBcCxc+u0CZhVMGGg8EJvng/4mTH6c3Yh3yVyxWCMdRXvxNNORPTVamAVhpjop+upBT5ZJg==
   dependencies:
     axios "^0.18.0"
     classnames "^2.2.6"
