@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+yarn.lock
 
 # production
 dist/*
@@ -13,6 +14,10 @@ dist/*
 .env.test.local
 .env.production.local
 
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# editors
+.idea/

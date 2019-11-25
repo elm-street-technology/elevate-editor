@@ -1,8 +1,36 @@
 import React, { Component } from "react";
 import { EditorState, RichUtils, convertToRaw, convertFromRaw } from "draft-js";
+import _ from "lodash";
 import { Editor } from "react-draft-wysiwyg";
 import withStyles from "elevate-ui/withStyles";
 import editorStyles from "./react-draft-wysiwyg-styles";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+import linkifyIt from "linkify-it";
+
+import flattenObject from "../../../utils/flatten-object";
+import Placeholders from "../../../controls/Placeholders";
+
+const linkify = linkifyIt();
+linkify.add("tel:", {
+  validate: function(text, pos, self) {
+    const tail = text.slice(pos);
+
+    const phoneNumber = parsePhoneNumberFromString(tail, "US");
+
+    if (phoneNumber) {
+      return phoneNumber.number.length;
+    }
+
+    return 0;
+  },
+});
+const linkCallback = (params) => {
+  const links = linkify.match(params.target);
+  return {
+    ...params,
+    target: (links && links[0] && links[0].url) || params.target,
+  };
+};
 
 class TextEditor extends Component {
   constructor(props) {
@@ -59,8 +87,14 @@ class TextEditor extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, placeholders } = this.props;
     const { editorState } = this.state;
+
+    const options = _.map(flattenObject(placeholders), (label, key) => ({
+      key,
+      label,
+    }));
+
     return (
       <Editor
         editorState={editorState}
@@ -75,6 +109,7 @@ class TextEditor extends Component {
             "textAlign",
             "link",
             "embedded",
+            "emoji",
             "remove",
             "history",
           ],
@@ -97,9 +132,12 @@ class TextEditor extends Component {
             popupClassName: classes.optionModal,
           },
           link: {
-            popupClassName: classes.optionModal,
+            linkCallback,
           },
         }}
+        toolbarCustomButtons={
+          options.length ? [<Placeholders options={options} />] : undefined
+        }
       />
     );
   }

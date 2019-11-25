@@ -1,15 +1,17 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom/server";
+import { Formik, FastField } from "formik";
+import Editor, { Tools, EmailComponents } from "elevate-editor";
 import withStyles from "elevate-ui/withStyles";
 import Button from "elevate-ui/Button";
 import Textarea from "elevate-ui/Textarea";
-import Editor from "elevate-editor";
-import { Tools, EmailComponents } from "elevate-editor";
-import { Formik, FastField } from "formik";
-import SignatureBlock from "./Components/SignatureBlock";
-import templates from "./templates";
 import Modal from "elevate-ui/Modal";
 import Typography from "elevate-ui/Typography";
+
+import SignatureBlock from "./Components/SignatureBlock";
+import placeholders from "./placeholders";
+import replacements from "./replacements";
+import templates from "./templates";
 
 type Props = {
   classes: Object,
@@ -116,7 +118,7 @@ class EmailEditor extends Component<Props, State> {
       <div
         className={classes.preview}
         dangerouslySetInnerHTML={{
-          __html: html,
+          __html: Tools.stringReplace(html, replacements),
         }}
       />
     );
@@ -124,12 +126,15 @@ class EmailEditor extends Component<Props, State> {
   renderEditor() {
     const { classes } = this.props;
     const { content, template } = this.state;
+
     return (
       <div className={classes.preview}>
         <Editor
           key={template}
           components={this.getComponents()}
           content={content}
+          placeholders={placeholders}
+          replacements={replacements}
           UPLOADCARE_API_KEY="demopublickey"
           innerRef={(editor) => {
             this.editor = editor;
