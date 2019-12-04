@@ -140,7 +140,7 @@ export default {
                       blocks: [
                         {
                           key: "2rols",
-                          text: "Hello friend,",
+                          text: "Hello [user.name],",
                           type: "unstyled",
                           depth: 0,
                           inlineStyleRanges: [],
@@ -178,7 +178,7 @@ export default {
                         },
                         {
                           key: "1dqcp",
-                          text: "- Elm Street Engineering",
+                          text: "- [company.name]",
                           type: "unstyled",
                           depth: 0,
                           inlineStyleRanges: [],

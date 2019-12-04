@@ -116,7 +116,9 @@ class RenderChild extends Component<$ChildProps> {
 }
 
 const RenderContent = (props: $Props) => {
+  //$FlowIgnore
   return props.content.map((child, idx) => (
+    //$FlowIgnore
     <RenderChild child={child} key={idx} idx={idx} {...props} />
   ));
 };

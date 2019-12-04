@@ -1,7 +1,7 @@
 [ignore]
-dist/**
-./node_modules/draft-js*
-
+.*/node_modules/draft-js/*
+.*/node_modules/jss/*
+.*/node_modules/react-beautiful-dnd/*
 
 [include]
 ./node_modules/react
@@ -9,11 +9,10 @@ dist/**
 ./node_modules/immutable
 
 [options]
-module.system.node.resolve_dirname=.
-module.system.node.resolve_dirname=node_modules
+module.system.node.allow_root_relative=true
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 suppress_comment=\\(.\\|\n\\)*\\$FlowIgnore
 suppress_comment=\\(.\\|\n\\)*\\$FlowBug
 
 [version]
-^0.80.0
+^0.112.0

@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import withStyles from "elevate-ui/withStyles";
+//$FlowIgnore
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import classNames from "classnames";
 

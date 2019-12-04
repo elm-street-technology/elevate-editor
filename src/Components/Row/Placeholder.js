@@ -10,6 +10,7 @@ type Props = {
   theme: Object,
 };
 
+//$FlowIgnore
 const Placeholder = ({ classes, className, theme, ...rest }: Props) => (
   <div className={classNames(classes.root, className)} {...rest}>
     <AddCircleOutline color={theme.colors.gray800} size={20} />

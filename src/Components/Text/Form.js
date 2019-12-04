@@ -14,6 +14,7 @@ Yup.object().shape({
 })
 */
 const TextForm = (props: $SidebarProps) => {
+  const { placeholders, replacements } = props;
   return (
     <Fragment>
       <FastField
@@ -21,6 +22,8 @@ const TextForm = (props: $SidebarProps) => {
         id="value"
         name="value"
         component={TextEditor}
+        placeholders={placeholders || {}}
+        replacements={replacements || {}}
       />
       <FastField
         id="color"

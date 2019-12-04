@@ -1,10 +1,10 @@
 // @flow
-import React, { Component } from "react";
-import withStyles from "elevate-ui/withStyles";
+import React from "react";
 import Typography from "elevate-ui/Typography";
+import withStyles from "elevate-ui/withStyles";
 
-import Submit from "../Components/Common/Submit";
 import Cancel from "../Components/Common/Cancel";
+import Submit from "../Components/Common/Submit";
 
 const SidebarForm = ({
   onSave,

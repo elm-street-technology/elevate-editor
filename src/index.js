@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import withStyles from "elevate-ui/withStyles";
 import { Formik, Form } from "formik";
+//$FlowIgnore
 import { DragDropContext } from "react-beautiful-dnd";
 import find from "lodash/find";
 import reduce from "lodash/reduce";
@@ -16,6 +17,7 @@ import generateUUID from "./utils/generate-uuid";
 import Constants from "./utils/constants";
 import applyDefaults from "./utils/apply-defaults";
 import cloneContent from "./utils/clone-content";
+import stringReplace from "./utils/string-replace";
 
 import RenderContent from "./Internals/RenderContent";
 import SidebarForm from "./Internals/SidebarForm";
@@ -64,6 +66,8 @@ type $Props = {
   components?: $Components,
   content: $ContentBlocks,
   UPLOADCARE_API_KEY: string,
+  placeholders?: { [string]: string },
+  replacements?: { [string]: string },
 };
 type $State = {
   content: $ContentBlocks,
@@ -206,9 +210,7 @@ class Editor extends Component<$Props, $State> {
         )
       ) {
         throw new Error(
-          `${
-            child.type
-          } must have Fn defaultAttrs({}) which returns default values for all form fields`
+          `${child.type} must have Fn defaultAttrs({}) which returns default values for all form fields`
         );
       }
       return {
@@ -238,7 +240,7 @@ class Editor extends Component<$Props, $State> {
   };
 
   /**
-   * Used by parent before exporting json/html to make sure the last editted content block is fully saved
+   * Used by parent before exporting json/html to make sure the last edited content block is fully saved
    * Returns boolean, but has side effect of triggering unsaved changes modal
    */
   hasUnsavedChanges(cb: Function): boolean {
@@ -479,7 +481,12 @@ class Editor extends Component<$Props, $State> {
   }
 
   render() {
-    const { classes, UPLOADCARE_API_KEY } = this.props;
+    const {
+      classes,
+      UPLOADCARE_API_KEY,
+      placeholders,
+      replacements,
+    } = this.props;
     const {
       toolboxModalId,
       content,
@@ -541,6 +548,8 @@ class Editor extends Component<$Props, $State> {
               },
               components,
               deleteContent: (id) => this.deleteContent(id),
+              placeholders,
+              replacements: replacements || {},
             };
             return (
               <Form
@@ -568,6 +577,8 @@ class Editor extends Component<$Props, $State> {
                         {
                           UPLOADCARE_API_KEY: UPLOADCARE_API_KEY,
                           editingContentId: editingContent.id,
+                          placeholders,
+                          replacements,
                         }
                       )}
                     </SidebarForm>
@@ -649,6 +660,7 @@ export const Tools = {
   applyDefaults,
   utilsExport,
   cloneContent,
+  stringReplace,
 };
 
 export const Components: Object = {

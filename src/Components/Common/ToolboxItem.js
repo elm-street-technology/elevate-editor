@@ -10,7 +10,7 @@ type $Props = {
   label: string,
 };
 
-const ToolboxItem = ({ classes, className, icon, label, type }: $Props) => (
+const ToolboxItem = ({ classes, className, icon, label }: $Props) => (
   <div className={classNames(classes.root, className)}>
     {icon ? <div className={classes.icon}>{icon}</div> : null}
     <div className={classes.label}>{label}</div>
