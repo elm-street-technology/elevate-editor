@@ -1,5 +1,6 @@
 // @flow
 
+//$FlowIgnore
 import { Tools } from "elevate-editor";
 
 export default {
