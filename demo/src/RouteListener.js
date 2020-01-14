@@ -1,6 +1,8 @@
 // @flow
 import { Component } from "react";
+//$FlowIgnore
 import { withRouter } from "react-router-dom";
+//$FlowIgnore
 import type { ContextRouter } from "react-router-dom";
 
 type Props = {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { EditorState, RichUtils, convertToRaw, convertFromRaw } from "draft-js";
 import _ from "lodash";
-import { Editor } from "react-draft-wysiwyg";
+
 import withStyles from "elevate-ui/withStyles";
 import editorStyles from "./react-draft-wysiwyg-styles";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
@@ -9,6 +9,8 @@ import linkifyIt from "linkify-it";
 
 import flattenObject from "../../../utils/flatten-object";
 import Placeholders from "../../../controls/Placeholders";
+
+let Editor;
 
 const linkify = linkifyIt();
 linkify.add("tel:", {
@@ -86,7 +88,18 @@ class TextEditor extends Component {
     return this.props.form.setFieldValue(this.props.field.name, value);
   }
 
+  componentDidMount() {
+    if (typeof window === "undefined") return;
+    import("react-draft-wysiwyg").then((module) => {
+      Editor = module.Editor;
+    });
+  }
+
   render() {
+    if (typeof window === "undefined") {
+      throw new Error("window not defined!");
+    }
+
     const { classes, placeholders } = this.props;
     const { editorState } = this.state;
 
