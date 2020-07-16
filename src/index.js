@@ -639,13 +639,10 @@ export default withStyles((theme) => ({
     flexDirection: "column",
     flexShrink: "0",
     width: "100%",
-    height: "100%",
     overflowX: "hidden",
     overflowY: "auto",
-    background: theme.colors.gray050,
     padding: "8px",
     zIndex: Constants.zIndex.sidebar,
-    boxShadow: theme.globalBoxShadow,
     [theme.breakpoints(768)]: {
       width: "360px",
     },
