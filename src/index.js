@@ -29,6 +29,7 @@ import Button from "./Components/Button";
 import HorizontalRule from "./Components/HorizontalRule";
 import Image from "./Components/Image";
 import Row from "./Components/Row";
+import Script from "./Components/Script";
 import TwoCol from "./Components/TwoCol";
 import ThreeCol from "./Components/ThreeCol";
 import FourCol from "./Components/FourCol";
@@ -51,6 +52,7 @@ import type {
 
 const InternalComponents = [
   Button,
+  Script,
   HorizontalRule,
   Image,
   Text,
@@ -665,6 +667,7 @@ export const Tools = {
 
 export const Components: Object = {
   Row,
+  Script,
   Button,
   HorizontalRule,
   Image,
