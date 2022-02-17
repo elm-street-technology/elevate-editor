@@ -2,6 +2,7 @@
 .*/node_modules/draft-js/*
 .*/node_modules/jss/*
 .*/node_modules/react-beautiful-dnd/*
+.*/node_modules/resolve/test/*
 
 [include]
 ./node_modules/react
