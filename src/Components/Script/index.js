@@ -8,6 +8,10 @@ const defaultAttrs = (attrs: Object = {}) =>
     {
       url: "",
       width: "33%",
+      paddingTop: 4,
+      paddingRight: 4,
+      paddingBottom: 4,
+      paddingLeft: 4,
     },
     attrs
   );
@@ -17,7 +21,7 @@ export default {
   Form,
   type: "Embed",
   label: "Embed",
-  description: "Embed custom 3rd party scripts and content.",
+  description: "Embed custom third party widgets, scripts and content.",
 
   // validation: Yup.object()
   defaultAttrs,
@@ -35,7 +39,14 @@ export default {
       {
         id: Tools.generateUUID(),
         type: "Row",
-        attrs: { height: "100%", allowChildren: false },
+        attrs: {
+          width: "100%",
+          paddingTop: 4,
+          paddingRight: 4,
+          paddingBottom: 4,
+          paddingLeft: 4,
+          allowChildren: false,
+        },
         content,
       },
     ];

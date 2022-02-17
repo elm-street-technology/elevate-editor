@@ -45,11 +45,16 @@ const ScriptRender = ({
           title={"Embed Editor"}
           src={url}
           style={{
-            left: 0,
+            left: "5%",
             top: 0,
             position: "absolute",
           }}
-          width="100%"
+          width="90%"
+          onClick={(e) => {
+            if (isEditor) {
+              e.preventDefault();
+            }
+          }}
           height="100%"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -61,11 +66,16 @@ const ScriptRender = ({
           title={"Embed Editor"}
           srcDoc={html}
           style={{
-            left: 0,
+            left: "5%",
             top: 0,
             position: "absolute",
           }}
-          width="100%"
+          width="90%"
+          onClick={(e) => {
+            if (isEditor) {
+              e.preventDefault();
+            }
+          }}
           height="100%"
           frameBorder="0"
           scrolling="no"
