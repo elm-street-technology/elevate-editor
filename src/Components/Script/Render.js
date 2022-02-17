@@ -34,21 +34,16 @@ const ScriptRender = ({
       style={{
         overflow: "hidden",
         paddingBottom:
-          url === "" || url === undefined ? "10%" : isVideo ? "56.25%" : "125%",
-        height: 0,
+          url === "" || url === undefined ? "10%" : isVideo ? 0 : "100%",
+        height: isVideo ? "480px" : 0,
       }}
     >
       {url === "" || url === undefined ? (
         "<Insert script here />"
       ) : isVideo ? (
         <iframe
-          title={"Embed Editor"}
+          title={"Embed Video"}
           src={url}
-          style={{
-            left: "5%",
-            top: 0,
-            position: "absolute",
-          }}
           width="90%"
           onClick={(e) => {
             if (isEditor) {
@@ -63,7 +58,7 @@ const ScriptRender = ({
         />
       ) : (
         <iframe
-          title={"Embed Editor"}
+          title={"Embed Script"}
           srcDoc={html}
           style={{
             left: "5%",
