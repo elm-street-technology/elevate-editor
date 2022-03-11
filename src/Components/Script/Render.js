@@ -34,7 +34,7 @@ const ScriptRender = ({
       style={{
         overflow: "hidden",
         paddingBottom:
-          url === "" || url === undefined ? "10%" : isVideo ? 0 : "100%",
+          url === "" || url === undefined ? "10%" : isVideo ? 0 : "115%",
         height: isVideo ? "25vh" : "200vh",
       }}
     >
@@ -62,7 +62,6 @@ const ScriptRender = ({
           srcDoc={html}
           style={{
             left: "5%",
-            top: 0,
             position: "absolute",
           }}
           width="90%"
