@@ -45,6 +45,12 @@ export default {
         },
       ],
     },
+    ".Label-root-1-1-147": {
+      marginLeft: 4,
+    },
+    ".rdw-fontsize-dropdown": {
+      minWidth: "115px",
+    },
     ".rdw-dropdown-wrapper:focus": {
       outline: "none",
     },
@@ -139,9 +145,6 @@ export default {
       display: "flex",
       alignItems: "center",
       marginBottom: 6,
-    },
-    ".rdw-fontsize-dropdown": {
-      minWidth: 40,
     },
     ".rdw-fontsize-option": {
       display: "flex",

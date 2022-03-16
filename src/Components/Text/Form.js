@@ -31,6 +31,7 @@ const TextForm = (props: $SidebarProps) => {
         label="Text Color"
         colorMode="hex"
         component={ColorPicker}
+        style={{ marginLeft: 4 }}
       />
     </Fragment>
   );

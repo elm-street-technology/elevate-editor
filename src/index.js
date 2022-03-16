@@ -496,6 +496,7 @@ class Editor extends Component<$Props, $State> {
       editingPath,
       components,
     } = this.state;
+    let formElement;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Formik
@@ -553,6 +554,20 @@ class Editor extends Component<$Props, $State> {
               placeholders,
               replacements: replacements || {},
             };
+            if (editingContent) {
+              const _form = find(components, { type: editingContent.type })
+                .Form;
+              formElement = React.createElement(
+                _form,
+                {
+                  UPLOADCARE_API_KEY: UPLOADCARE_API_KEY,
+                  editingContentId: editingContent.id,
+                  placeholders,
+                  replacements,
+                },
+                null
+              );
+            }
             return (
               <Form
                 className={classNames(
@@ -574,15 +589,7 @@ class Editor extends Component<$Props, $State> {
                       internals={internals}
                       UPLOADCARE_API_KEY={UPLOADCARE_API_KEY}
                     >
-                      {React.createElement(
-                        find(components, { type: editingContent.type }).Form,
-                        {
-                          UPLOADCARE_API_KEY: UPLOADCARE_API_KEY,
-                          editingContentId: editingContent.id,
-                          placeholders,
-                          replacements,
-                        }
-                      )}
+                      {formElement}
                     </SidebarForm>
                   </div>
                 ) : null}

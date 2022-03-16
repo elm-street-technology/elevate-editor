@@ -34,7 +34,7 @@ const ScriptRender = ({
       style={{
         overflow: "hidden",
         paddingBottom:
-          url === "" || url === undefined ? "10%" : isVideo ? 0 : "115%",
+          url === "" || url === undefined ? "10%" : isVideo ? 0 : "125%",
         height: isVideo ? "25vh" : "200vh",
       }}
     >
@@ -70,7 +70,7 @@ const ScriptRender = ({
               e.preventDefault();
             }
           }}
-          height="100%"
+          height="40%"
           frameBorder="0"
           scrolling="no"
         />

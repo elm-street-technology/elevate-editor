@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Editor } from "react-draft-wysiwyg";
 import { EditorState, RichUtils, convertToRaw, convertFromRaw } from "draft-js";
 import _ from "lodash";
 
@@ -9,8 +10,6 @@ import linkifyIt from "linkify-it";
 
 import flattenObject from "../../../utils/flatten-object";
 import Placeholders from "../../../controls/Placeholders";
-
-let Editor;
 
 const linkify = linkifyIt();
 linkify.add("tel:", {
@@ -88,18 +87,7 @@ class TextEditor extends Component {
     return this.props.form.setFieldValue(this.props.field.name, value);
   }
 
-  componentDidMount() {
-    if (typeof window === "undefined") return;
-    import("react-draft-wysiwyg").then((module) => {
-      Editor = module.Editor;
-    });
-  }
-
   render() {
-    if (typeof window === "undefined") {
-      throw new Error("window not defined!");
-    }
-
     const { classes, placeholders } = this.props;
     const { editorState } = this.state;
 
