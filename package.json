@@ -1,6 +1,6 @@
 {
   "name": "elevate-editor",
-  "version": "0.5.9",
+  "version": "0.5.10",
   "private": false,
   "main": "dist/index.js",
   "files": [
@@ -22,11 +22,12 @@
   "dependencies": {
     "@babel/runtime": "^7.2.0",
     "classnames": "^2.2.6",
-    "draft-js": "^0.11.3",
-    "draftjs-to-html": "^0.8.4",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
     "elevate-ui": "^1.2.1",
     "elevate-ui-icons": "^0.1.0",
     "formik": "^1.2.0",
+    "immutable": "^4.0.0",
     "juice": "^5.1.0",
     "libphonenumber-js": "^1.7.26",
     "linkify-it": "^2.0.3",
@@ -36,7 +37,7 @@
     "react": "^16.5.0",
     "react-beautiful-dnd": "^9.0.2",
     "react-dom": "^16.5.0",
-    "react-draft-wysiwyg": "^1.13.2",
+    "react-draft-wysiwyg": "^1.14.7",
     "react-srcdoc-iframe": "^1.0.3",
     "uploadcare-widget": "^3.6.1",
     "yup": "^0.26.3"

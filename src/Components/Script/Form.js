@@ -14,6 +14,13 @@ const ScriptForm = (props: $SidebarProps) => (
       component={Input}
       type="text"
     />
+    <FastField
+      id="height"
+      name="height"
+      label="Height"
+      component={Input}
+      type="text"
+    />
   </Fragment>
 );
 export default ScriptForm;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Editor } from "react-draft-wysiwyg";
+import { Editor as DraftEditor } from "react-draft-wysiwyg";
 import { EditorState, RichUtils, convertToRaw, convertFromRaw } from "draft-js";
 import _ from "lodash";
 
@@ -11,6 +11,7 @@ import linkifyIt from "linkify-it";
 import flattenObject from "../../../utils/flatten-object";
 import Placeholders from "../../../controls/Placeholders";
 
+let Editor;
 const linkify = linkifyIt();
 linkify.add("tel:", {
   validate: function(text, pos, self) {
@@ -49,6 +50,13 @@ class TextEditor extends Component {
       this.updateFormValue(editorState);
     };
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
+  }
+
+  componentDidMount() {
+    if (typeof window === "undefined") return;
+    import("react-draft-wysiwyg").then((module) => {
+      Editor = module.Editor;
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -97,7 +105,7 @@ class TextEditor extends Component {
     }));
 
     return (
-      <Editor
+      <DraftEditor
         editorState={editorState}
         onEditorStateChange={this.onEditorStateChange}
         toolbar={{

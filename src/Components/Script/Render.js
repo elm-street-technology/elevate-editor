@@ -12,8 +12,7 @@ type $Props = {
 const ScriptRender = ({
   classes,
   content: {
-    attrs,
-    attrs: { url },
+    attrs: { url, height },
   },
   internals: { isEditor },
 }: $Props) => {
@@ -33,9 +32,7 @@ const ScriptRender = ({
     <div
       style={{
         overflow: "hidden",
-        paddingBottom:
-          url === "" || url === undefined ? "10%" : isVideo ? 0 : "125%",
-        height: isVideo ? "25vh" : "200vh",
+        height: height !== undefined ? height : "25vh",
       }}
     >
       {url === "" || url === undefined ? (
@@ -45,11 +42,6 @@ const ScriptRender = ({
           title={"Embed Video"}
           src={url}
           width="90%"
-          onClick={(e) => {
-            if (isEditor) {
-              e.preventDefault();
-            }
-          }}
           height="100%"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -60,17 +52,9 @@ const ScriptRender = ({
         <iframe
           title={"Embed Script"}
           srcDoc={html}
-          style={{
-            left: "5%",
-            position: "absolute",
-          }}
           width="90%"
-          onClick={(e) => {
-            if (isEditor) {
-              e.preventDefault();
-            }
-          }}
-          height="40%"
+          style={{ left: "5%", position: "absolute" }}
+          height="100%"
           frameBorder="0"
           scrolling="no"
         />
