@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Editor as DraftEditor } from "react-draft-wysiwyg";
 import { EditorState, RichUtils, convertToRaw, convertFromRaw } from "draft-js";
 import _ from "lodash";
 
@@ -38,6 +37,7 @@ class TextEditor extends Component {
     super(props);
 
     this.state = {
+      Editor: null,
       editorState:
         props.field && props.field.value
           ? EditorState.createWithContent(convertFromRaw(props.field.value))
@@ -87,60 +87,74 @@ class TextEditor extends Component {
     return this.props.form.setFieldValue(this.props.field.name, value);
   }
 
+  loadDynamic = async () => {
+    if (this.state.Editor === null) {
+      return await import("react-draft-wysiwyg");
+    }
+    return null;
+  };
+
   render() {
     const { classes, placeholders } = this.props;
-    const { editorState } = this.state;
+    const { editorState, Editor } = this.state;
+    this.loadDynamic().then((module) => {
+      if (module !== null) {
+        this.setState({ Editor: module.Editor });
+      }
+    });
 
     const options = _.map(flattenObject(placeholders), (label, key) => ({
       key,
       label,
     }));
-
-    return (
-      <DraftEditor
-        editorState={editorState}
-        onEditorStateChange={this.onEditorStateChange}
-        toolbar={{
-          options: [
-            "inline",
-            "fontFamily",
-            "fontSize",
-            "blockType",
-            "list",
-            "textAlign",
-            "link",
-            "embedded",
-            "emoji",
-            "remove",
-            "history",
-          ],
-          inline: {
-            options: ["bold", "italic", "underline", "strikethrough"],
-          },
-          blockType: {
+    if (Editor) {
+      return (
+        <Editor
+          editorState={editorState}
+          onEditorStateChange={this.onEditorStateChange}
+          toolbar={{
             options: [
-              "Normal",
-              "H1",
-              "H2",
-              "H3",
-              "H4",
-              "H5",
-              "H6",
-              "Blockquote",
+              "inline",
+              "fontFamily",
+              "fontSize",
+              "blockType",
+              "list",
+              "textAlign",
+              "link",
+              "embedded",
+              "emoji",
+              "remove",
+              "history",
             ],
-          },
-          embedded: {
-            popupClassName: classes.optionModal,
-          },
-          link: {
-            linkCallback,
-          },
-        }}
-        toolbarCustomButtons={
-          options.length ? [<Placeholders options={options} />] : undefined
-        }
-      />
-    );
+            inline: {
+              options: ["bold", "italic", "underline", "strikethrough"],
+            },
+            blockType: {
+              options: [
+                "Normal",
+                "H1",
+                "H2",
+                "H3",
+                "H4",
+                "H5",
+                "H6",
+                "Blockquote",
+              ],
+            },
+            embedded: {
+              popupClassName: classes.optionModal,
+            },
+            link: {
+              linkCallback,
+            },
+          }}
+          toolbarCustomButtons={
+            options.length ? [<Placeholders options={options} />] : undefined
+          }
+        />
+      );
+    }
+    return <>Loading...</>;
   }
 }
 
