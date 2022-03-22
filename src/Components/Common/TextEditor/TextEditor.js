@@ -11,7 +11,6 @@ import linkifyIt from "linkify-it";
 import flattenObject from "../../../utils/flatten-object";
 import Placeholders from "../../../controls/Placeholders";
 
-let Editor;
 const linkify = linkifyIt();
 linkify.add("tel:", {
   validate: function(text, pos, self) {
@@ -50,13 +49,6 @@ class TextEditor extends Component {
       this.updateFormValue(editorState);
     };
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
-  }
-
-  componentDidMount() {
-    if (typeof window === "undefined") return;
-    import("react-draft-wysiwyg").then((module) => {
-      Editor = module.Editor;
-    });
   }
 
   componentDidUpdate(prevProps) {
