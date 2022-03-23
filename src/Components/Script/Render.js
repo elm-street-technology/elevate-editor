@@ -32,6 +32,7 @@ const ScriptRender = ({
     <div
       style={{
         overflow: "hidden",
+        position: "relative",
         height: height !== undefined ? height : "25vh",
       }}
     >
